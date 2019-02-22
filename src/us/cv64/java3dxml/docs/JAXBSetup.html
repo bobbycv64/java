@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>JAXB Setup</title>
+</head>
+<body>
+Unmarshaller XML -&gt; Java<br>
+Marshaller Java -&gt; XML<br>
+<br>
+set JAVA_HOME = &lt;J2SE Installation Directory&gt;<br>
+set JWSDP_HOME = &lt;JWSDP_HOME Installation Directory&gt;<br>
+set PATH=%PATH%;%JAVA_HOME%\bin;%JWSDP_HOME%\jaxb\bin<br>
+<br>
+xjc.bat sourceXMLSchemaFile.xsd -p cv64.java3dxml<br>
+<br>
+javadoc -package cv64.java3dxml - sourcepath . -d docs\api -windowtitle
+"Generated Interfaces for Java3DXML.xsd"<br>
+<br>
+javac Java3DXML cv64\java3dxml\*.java cv64\java3dxml\impl\*.java<br>
+<br>
+java Java3DXML<br>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+/** ====================================================================
+ * cv64 Software License, Version 1.3
+ *
+ * Copyright (c) 2000-2004 cv64.  All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *    "This product includes software developed by cv64 (http://cv64.us/)."
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The name "cv64" must not be used to endorse or promote products 
+ *    derived from this software without prior written permission. 
+ *    For written permission, please contact information@cv64.us.
+ *
+ * 5. Products derived from this software may not be called "cv64",
+ *    nor may "cv64" appear in their name, without prior written
+ *    permission of cv64.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL cv64 OR ITS CONTRIBUTORS BE LIABLE 
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+ * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of cv64.  For more information on cv64, 
+ * please see http://cv64.us
+ *
+ * Portions of this software are based upon public domain software.
+ */
+-->
+
+<universe>
+  	<camera>
+		<translate x="0" y="0" z="10" />
+	</camera>
+
+	<lights>
+		<light name="light0">
+			<color red="255" green="255" blue="255" />
+			<translate x="0" y="0" z="10" />
+		</light>
+
+		<light name="light1">
+			<color red="0" green="0" blue="255" />
+			<translate x="0" y="10" z="0" />
+		</light>
+	</lights>
+
+	<scene>
+		<xyz name="coordinateSystem0">
+			<translate x="50" y="0" z="0" />
+
+			<object name="sphere0">
+				<sphere diameter="1">
+					<color red="255" green="255" blue="255" />
+					<translate x="0" y="0" z="0" />
+				</sphere>
+			</object>
+
+			<object name="cube0">
+				<cube length="1" width="1" height="1">
+					<color red="255" green="255" blue="255" />
+					<translate x="5" y="5" z="0" />
+					<scale x="0.5" y="0.5" z="0" />
+					<rotate x="45" y="0" z="0" />
+					<shere x="0" y="10" z="0" />
+				</cube>
+			</object>
+		</xyz>
+
+		<coordinateSystem name="coordinateSystem1">
+			<translate x="50" y="0" z="0" />
+
+			<object name="sphere0">
+				<sphere diameter="10">
+					<color red="0" green="255" blue="0" />
+					<translate x="0" y="0" z="0" />
+				</sphere>
+			</object>
+
+			<object name="cube0">
+				<cube length="10" width="10" height="10">
+					<color red="255" green="255" blue="255" />
+					<translate x="5" y="5" z="0" />
+					<scale x="0.5" y="0.5" z="0" />
+					<rotate x="45" y="0" z="0" />
+					<shere x="0" y="10" z="0" />
+				</cube>
+			</object>
+		</coordinateSystem>
+	</scene>
+</universe>
