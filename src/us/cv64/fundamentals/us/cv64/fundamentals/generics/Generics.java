@@ -1,4 +1,4 @@
-package java18w.generics;
+package us.cv64.fundamentals.generics;
 
 /**
  * https://docs.oracle.com/javase/tutorial/java/generics/types.html

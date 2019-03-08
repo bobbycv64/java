@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=rWlHQnvrZcw
-package java18w.annotation;
+package us.cv64.fundamentals.annontation;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;

@@ -1,4 +1,4 @@
-package java18w.generics;
+package us.cv64.fundamentals.interfce;
 
 public class GenericsPair<K, V> implements IGenericsPair<K, V> {
 

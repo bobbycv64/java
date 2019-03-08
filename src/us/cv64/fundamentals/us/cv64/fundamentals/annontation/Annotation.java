@@ -1,4 +1,4 @@
-package us.cv64.annontation;
+package us.cv64.fundamentals.annontation;
 
 class A {
     public void show() {

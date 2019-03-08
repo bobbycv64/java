@@ -1,4 +1,4 @@
-package us.cv64.ooo;
+package us.cv64.fundamentals.ooo;
 
 public class Hello {
   public static void main( String[] args ) {
