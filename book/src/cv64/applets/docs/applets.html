@@ -1,0 +1,871 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body>
+<div class="chapter" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div>
+<center><b><font color="#000000">Applets (Applications on the Network)<br>
+</font></b>
+</center>
+<h2 class="title" style="font-weight: normal;"><small><small>Java is an
+improved syntactical C++
+programming
+language.&nbsp; Many of the features were to simplify programming while
+at
+the same time produce portable code.&nbsp; Java initial popularity was
+due to the Applet.&nbsp; Applets are Java Application programs that
+could be
+downloaded from a Server and executed on a Client system.&nbsp; Since
+Java is
+flexible and portable on any system executing the Java Virtual Machine
+(JVM),
+most browsers, have the JVM executables installed so that
+they can execute the Java Application as an Applet.&nbsp; Java applets
+can
+perform interactive animations, immediate calculations or other simple
+tasks without having to send a user request back to the server.</small></small></h2>
+This Lecture has <a href="#supplement">supplemental</a> information
+and is located at the bottom.&nbsp; <a href="#plugIn">Java Plug-In</a>,
+<a href="#appletViewer">Appletviewer</a>, <a href="#jar">Java ARchive
+(JAR)</a> and <a href="#policyTool">Policy Tool</a> are the current
+items in the supplemental area.<br>
+<br>
+<hr style="width: 100%; height: 2px;"><br>
+Figure 1 shows a high level view
+of an Applet's process.&nbsp; A Client has a Browser executing and
+connects to a Web Server, e.g. Webpage.&nbsp; The Web Server contains
+several applications, Java applications are classes.&nbsp; The Webpage
+contains Java Classes or <a href="#jar">Java ARchive (JAR)</a> files
+(containers of classes).&nbsp; These files (classes or JARs) are
+downloaded to the Client.&nbsp; Once the file has been downloaded to
+the Client the Server is now out of the picture.&nbsp; The Client now
+has an application and executes the application locally on the Client
+system.<br>
+<br>
+</div>
+</div>
+<div>
+<div class="figure">
+<table
+ style="text-align: left; width: 526px; height: 456px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="applet.jpg" alt=""
+ style="width: 513px; height: 417px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 1 - Applet
+Process</b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>The Java Plug-in software provides client
+browsers with a Java 2 Runtime Environment (JRE) instead of the web
+browser's default virtual machine. There is an example of viewing <a
+ href="#plugIn">Plugin</a> values in a Browser in the Supplemental
+Materials.&nbsp; <br>
+</p>
+<p>The
+following link is how to set up your HTML file for Java Applets:&nbsp;
+<a href="http://java.sun.com/products/plugin/1.3/docs/tags.html">http://java.sun.com/products/plugin/1.3/docs/tags.html</a></p>
+</div>
+<p> </p>
+<p> There are four main methods in an Applet's
+lifecycle, init(), start(), stop() and destroy():<br>
+</p>
+<ul>
+  <li>The init() method is
+executed only once when an applet is initialized.&nbsp; If you wish
+initialization or Java statements to execute only once then place all
+this information in the init() method. <br>
+  </li>
+  <li>The start() method is executed
+immediately after the init() method.&nbsp; The start() method is then
+only
+executed when brought back into focus when focus has been lost. <br>
+  </li>
+  <li>The
+stop() method is executed when a client moves off the Applet page (out
+of focus). <br>
+  </li>
+  <li>The destroy() method is called when the Applet should be
+garbage collected.&nbsp; This occurs when the browser shuts down.&nbsp;
+The stop()
+method is called immediately before the destroy() method is called.</li>
+</ul>
+<table
+ style="text-align: left; height: 176px; width: 560px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="appletStateDiagram.jpg"
+ alt="" style="width: 557px; height: 140px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 2 - Applet
+Lifecycle</b></small></td>
+    </tr>
+  </tbody>
+</table>
+<div class="figure">
+</div>
+<p> Security, Applets are designed to be loaded from
+a remote server and then executed on a local client system.&nbsp; With
+this
+architecture security is a major concern.&nbsp; Prior to Java 2, all
+Applets
+followed the sandbox philosophy.&nbsp; This meant that when an Applet
+was
+loaded on your system, only a portion of memory was accessible to
+perform work. </p>
+<p> The following are a short list of how Applets
+execute in the sandbox model:<br>
+</p>
+<ul>
+  <li>Applets can't execute local
+programs</li>
+  <li>Applets can't communicate with other systems than the
+originating host, the system who supplied the Applet</li>
+  <li>Applets can't
+do I/O with the local system</li>
+  <li>Applets can only retrieve basic information from your system</li>
+</ul>
+With the emergence of Java 2, Java Development
+Kit (JDK 1.2), Applets have policies that allow trusted hosts to
+perform more operations than the sandbox Applet.&nbsp; Policies and the
+policy tool are out of the scope of this chapter.&nbsp; There is an
+example of the <a href="#policyTool">Policy Tool</a> in the
+Supplemental
+Materials. <br>
+<br>
+<hr style="width: 100%; height: 2px;"><br>
+Figure 3, shows the code for our first Applet.&nbsp; Our class is
+called HelloWorldApplet which extends the JApplet class.&nbsp; There
+are two methods being used, init() and paint().&nbsp; The init() method
+adds a JPanel the the JApplet.&nbsp; The paint() method is used for
+drawing on an Applet and the play method is showing and example of a
+sound file being played. <br>
+<br>
+<table
+ style="text-align: left; width: 409px; height: 308px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <pre class="programlisting">import java.awt.Graphics;<br>import java.awt.Graphics2D;<br>import javax.swing.JApplet;<br><br>public class HelloWorldApplet extends JApplet {<br><br>  public void init() {}<br>  public void start() {}<br>  public void stop() {}<br>  public void destroy() {}<br><br>  public void paint(Graphics graphics) {<br>    Graphics2D graphics2D = (Graphics2D)graphics;<br>    graphics2D.drawString("Sound Example", 25, 25);<br>    play(getDocumentBase(), "soundExample.au");<br>  }<br>}</pre>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 3 - First
+Applet - HelloWorldApplet.java<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<pre class="programlisting"><big><br>To execute the Applet you can display in a <a
+ href="#advancedAppletCode">JVM enabled Browser</a> or use the <a
+ href="#appletViewer">Appletviewer</a>.  See the notes in the Supplemental reading materials.  <br>Figure 4 has a simple version of the HTML code for our first example<br><br></big></pre>
+<table
+ style="text-align: left; width: 488px; height: 180px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>&lt;html&gt;<br>
+&nbsp; &lt;head&gt;&lt;title&gt;Hello World
+Applet&lt;/title&gt;&lt;/head&gt;<br>
+      <br>
+&nbsp; &lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;applet code="HelloWorldApplet.class"
+codebase="." height=150 width=300&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You need a Java-enabled
+browser to see this Applet.<br>
+&nbsp;&nbsp;&nbsp; &lt;/applet&gt;<br>
+&nbsp; &lt;/body&gt;<br>
+&lt;/html&gt;</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 4 - HTML Applet
+Code<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<pre class="programlisting"><big><br>Applets can also be displayed as an Application.  This is known as a hybrid program, both Applet and Application.  To execute as an Applet<br>use the Appletviewer or open up the HTML file.  To execute as an application execute with the java command.   Figure 5, shows an example<br>of the AppletApplication </big><big>class.<br></big>
+</pre>
+<table
+ style="text-align: left; width: 519px; height: 628px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <pre class="programlisting">import java.awt.Graphics;<br>import java.awt.Graphics2D;<br>import java.awt.event.WindowAdapter;<br>import java.awt.event.WindowEvent;<br>import javax.swing.JApplet;<br>import javax.swing.JFrame;<br><br>public class AppletApplication extends JApplet {<br><br>  public void init() {}<br>  public void start() {}<br>  public void stop() {}<br>  public void destroy() {}<br><br>  public void paint(Graphics graphics) {<br>    Graphics2D graphics2D = (Graphics2D)graphics;<br>    graphics2D.drawString("Sound Example", 25, 25);<br>    play(getDocumentBase(), "soundExample.au");<br>  }<br><br>  public static void main(String[] args) {<br>    JFrame frame = new JFrame("Applet / Application");<br>    AppletApplication appletApplication = new AppletApplication();<br><br>    frame.getContentPane().add(appletApplication);<br>    frame.setSize(200, 100);<br>    frame.setVisible(true);<br>    frame.validate();<br><br>    frame.addWindowListener(new WindowAdapter() {<br>      public void windowClosing(WindowEvent event) {<br>        System.exit(0);<br>      }<br>    });<br><br>    appletApplication.init();<br>    appletApplication.start();<br>  }<br>}<br></pre>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 5 - Applet and
+Application Program<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Finally, we can add parameters to the HTML file that can be read by out
+Applet program.<br>
+<br>
+Figure 6, shows the additional HTML tag &lt;param&gt; where we add
+parameters firstname and lastname along with their values.&nbsp; The
+JApplet program now extracts the data by placing the parameter name in
+the getParameter method.<br>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">&lt;applet&gt;<br>
+&lt;param name="firstName" value="Max"&gt;<br>
+&lt;param name="lastName" value="Estey"&gt;<br>
+&lt;/applet&gt;<br>
+      <br>
+String value = getParameter("firstName");<br>
+String value = getParameter("lastName");<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 6 - Applet
+Parameter Passing </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 100%; height: 2px;">
+<span style="font-weight: bold;">Applets, Events and Listeners</span><br>
+<br>
+Figure 7 shows an example of both Wndows and Mouse events in an
+applet.&nbsp; Moving a window on top and then behind of the Applet
+without completly covering is a better demonstration of the Window
+events.&nbsp; The counter will increment.&nbsp; Then moving the mouse
+inside and outside the Applet will show the start() and stop() methods
+being called.<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 454px; height: 916px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Color;</small><br>
+      <small>import java.awt.Graphics;<br>
+import java.awt.Graphics2D;<br>
+import java.awt.event.MouseEvent;<br>
+import java.awt.event.MouseListener;<br>
+import javax.swing.JApplet;<br>
+      <br>
+public class HelloWorldApplet extends JApplet implements MouseListener {<br>
+      <br>
+&nbsp; private int counter = 0;<br>
+&nbsp; <br>
+&nbsp; public void init() {<br>
+&nbsp;&nbsp;&nbsp; this.addMouseListener(this);<br>
+&nbsp;&nbsp;&nbsp; System.out.println("init method");<br>
+&nbsp;&nbsp;&nbsp; this.showStatus("init method");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void start() {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("start method");<br>
+&nbsp;&nbsp;&nbsp; this.showStatus("start method");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void stop() {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("stop method");<br>
+&nbsp;&nbsp;&nbsp; this.showStatus("stop method");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void destroy() {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("destroy method");<br>
+&nbsp;&nbsp;&nbsp; this.showStatus("destroy method");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; Graphics2D graphics2D = (Graphics2D)graphics;<br>
+&nbsp;&nbsp;&nbsp; graphics2D.drawString("Sound Example", 25, 25);<br>
+&nbsp;&nbsp;&nbsp; this.showStatus("Counter: " + counter++);<br>
+&nbsp;&nbsp;&nbsp; play(getDocumentBase(), "soundExample.au");<br>
+&nbsp;&nbsp;&nbsp; this.setBackground(Color.cyan);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void mouseEntered(MouseEvent mouseEvent) {<br>
+&nbsp;&nbsp;&nbsp; start();<br>
+&nbsp; }<br>
+&nbsp; public void mouseExited(MouseEvent mouseEvent) {<br>
+&nbsp;&nbsp;&nbsp; stop();<br>
+&nbsp; }<br>
+&nbsp; <br>
+&nbsp; public void mouseClicked(MouseEvent mouseEvent) {}<br>
+&nbsp; public void mousePressed(MouseEvent mouseEvent) {}<br>
+&nbsp; public void mouseReleased(MouseEvent mouseEvent) {}<br>
+      <br>
+&nbsp; public void update(Graphics graphics){<br>
+&nbsp;&nbsp;&nbsp;&nbsp; paint(graphics);&nbsp; <br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 7 - Applets
+with Events and Listeners<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 100%; height: 2px;"><b>Summary</b>
+<p>This is lecture
+gave an examples of Java Applets, the code to write a Java Applet and
+the HTML file to execute the Java class.&nbsp; Java Applet passing
+parameters was also discussed and shows the simplicity of the Java
+language.&nbsp; Java Applets when first introduced in 1995 proved to
+the Internet world how you could write an application with simple
+programming.</p>
+<span style="font-weight: bold;"></span>
+<hr size="2" width="100%"><b>References</b>
+<ul>
+  <li><a name="applet"></a><a
+ href="http://searchwebservices.techtarget.com/sDefinition/0,,sid26_gci211580,00.html">Applet</a>,
+http://searchwebservices.techtarget.com/sDefinition/0,,sid26_gci211580,00.html,
+Accessed 06 June 2004</li>
+  <li><a name="appletviewer"></a><a
+ href="http://java.sun.com/j2se/1.3/docs/tooldocs/solaris/appletviewer.html">Appletviewer</a>,
+http://java.sun.com/j2se/1.3/docs/tooldocs/solaris/appletviewer.html,
+Accessed 06 June 2004</li>
+  <li><a name="jarReference"></a><a
+ href="http://searchdatabase.techtarget.com/sDefinition/0,,sid13_gci212414,00.html">JAR</a>,
+http://searchdatabase.techtarget.com/sDefinition/0,,sid13_gci212414,00.html,
+Accessed 06 June 2004</li>
+  <li><a name="plugin"></a><a
+ href="http://whatis.techtarget.com/definition/0,,sid9_gci212800,00.html">Plugin</a>,
+http://whatis.techtarget.com/definition/0,,sid9_gci212800,00.html,
+Accessed 06 June 2004<br>
+  </li>
+  <li><a name="policytool"></a><a
+ href="http://java.sun.com/developer/onlineTraining/Security/Fundamentals/magercises/Policytool/">Policytool</a>,
+http://java.sun.com/developer/onlineTraining/Security/Fundamentals/magercises/Policytool/,
+Accessed 06 June 2004</li>
+  <li><a name="javaCodingConventions"></a><a
+ href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">Java
+Coding Conventions</a>,
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html, Accessed
+06 January 2000</li>
+  <li><a name="jarSignerReference"></a><a
+ href="http://java.sun.com/j2se/1.3/docs/tooldocs/win32/jarsigner.html">Jar
+Signer</a>,
+http://java.sun.com/j2se/1.3/docs/tooldocs/win32/jarsigner.html,
+Accessed 19 July 2004<br>
+  </li>
+</ul>
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: center;"><span style="font-weight: bold;"><a
+ name="supplement"></a>Supplement Materials</span><br>
+</div>
+<hr style="width: 100%; height: 2px;"><a name="advancedAppletCode"></a><span
+ style="font-weight: bold;">Advance Applet Code</span><br>
+<br>
+Figure S-1 is an advanced example for a Java Applet in an HyperText
+Markup Language (HTML) file.<br>
+<table
+ style="text-align: left; width: 696px; height: 420px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <pre class="programlisting">&lt;!-- Internet Explorer Browser --&gt;<br>&lt;object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"<br>  width="200" height="200" align="baseline"<br>  codebase="http://java.sun.com/products/plugin/1.3/jinstall-13-win32.cab#Version=1"&gt;<br><br>  &lt;param name="code" value="HelloWorldApplet.class"&gt;<br>  &lt;param name="codebase" value="."&gt;<br>  &lt;param name="type" value="application/x-java-applet;version=1.3"&gt;<br>  &lt;param name="scriptable" value="false"&gt;<br><br>  &lt;comment&gt;<br><br>    &lt;!-- Netscape Browser --&gt;<br>    &lt;embed type="application/x-java-applet;version=1.3"<br>       width="200" height="200" align="baseline"<br>       code="HelloWorldApplet.class" codebase="."<br>       pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"&gt;<br>    &lt;noembed&gt;<br>  &lt;/comment&gt;<br>    <br>    No Java 2 SDK, Standard Edition v1.3 support for APPLET!!<br>  &lt;/noembed&gt;<br>  &lt;/embed&gt;<br>&lt;/object&gt;</pre>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure S-1 - Advanced
+Applet Code<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p> </p>
+<div class="figure">
+</div>
+<ul>
+  <li> classid (class identifier) for the Java Plugin, the class
+identifier should be the same in every HTML page</li>
+  <li>browsers load the Java Plugin using the particular class identifer</li>
+  <li>attributes width, height and align set up the
+Applet accordingly</li>
+  <li>code parameter defines the class or jar file
+where to find the executable</li>
+  <li>codebase parameter defines the path
+to the class or jar file</li>
+  <li>type parameter defines which executable
+to implement</li>
+</ul>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><a
+ name="plugIn"></a>Java Plug-In Screen</span>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="aboutPlugins.jpg" alt=""
+ style="width: 1024px; height: 744px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure S-2 - Client /
+Server Architecture<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+Figure S-2 is an example of the plugins that are currently installed in
+this browser.
+<hr style="width: 100%; height: 2px;"><a name="javaTools"></a><span
+ style="font-weight: bold;">Java
+Tools</span>
+</div>
+<div class="section">
+<p> This section talks about the Java Tools that help
+with development and implementation of Java Applets.&nbsp; The
+Appletviewer
+program enables developers to visualize their work without having to
+worry about plug-ins or browser conformance.&nbsp; The Java Archive
+(JAR)
+tool encapsulates and compresses several files into one file.&nbsp; The
+Policy Tool enables Java Applets more flexibility and loosens up
+security of the Java Sandbox. </p>
+<p> All the Java Tools are in the Java bin directory.
+Make sure that the Java bin directory is in your path, e.g. <span
+ style="font-weight: bold;">set
+PATH=%PATH%;c:\jdk1.4\bin</span> This will ensure that all you need to
+execute
+the tools is with a single command and not the entire path name. </p>
+<div class="section">
+<div class="titlepage">
+<div>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><a
+ name="appletViewer"></a>Appletviewer</span>
+<h3 class="title" style="font-weight: normal;"><small>Appletviewer is
+an executable program that was
+available with the initial release of the JDK. This tools enables
+developers to visualize and execute Java Applets without the worrying
+about Browser shortcomings or plug-in requirements. Appletviewer also
+bypasses all the security rules so that you can see functionally how
+your program works without having to worry about annoyances of Web
+Browsers.&nbsp; I am not saying that Security should be avoided but
+in a development context, functionality and innovation is the goal and
+the security phase is one of the last tasks.</small></h3>
+<h3 class="title" style="font-weight: normal;"><small>To start up the
+Appletviewer program is simple.
+Just type <span style="font-weight: bold;">appletviewer</span>, the
+appleviewer program will appear as follows:</small> </h3>
+</div>
+</div>
+<div class="figure">
+<table
+ style="text-align: left; width: 279px; height: 144px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="appletViewer/appletViewer1.jpg" alt=""
+ style="width: 269px; height: 105px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure S-3 - Applet Viewer</span><br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>The Appletviewer command is as follows:<span
+ style="font-weight: bold;">&nbsp; Usage: appletviewer
+&lt;options&gt; url(s)<br>
+</span></p>
+<p>For debugging purposes you can use the following command:<br>
+</p>
+<p>appletviewer -debug URL<br>
+</p>
+<p>Here's an example:<span
+ style="font-family: helvetica,arial,sans-serif;">&nbsp; <span
+ style="font-weight: bold;">appletviewer
+-debug file:///C:/AppletExample.html</span><br>
+</span></p>
+<p><span style="font-family: helvetica,arial,sans-serif;">You can now
+step through the code and if you want information about the debugging
+commands, type ?</span></p>
+<p>Here's an example of appletviewer using a policy file:<br>
+</p>
+<p><span style="font-weight: bold;">appletviewer
+-J-Djava.security.policy=cv64.policy AppletExample.html</span><span
+ style="font-family: helvetica,arial,sans-serif;">
+</span></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><a
+ name="jar"></a>Java ARchive (JAR)<br>
+<br>
+</span>Java ARchive (JAR) files are simply a collection of one to many
+classes in a single container.&nbsp; JAR files are very similar to the
+Zip file.<span style="font-weight: bold;"><span
+ style="font-weight: bold;"><br>
+</span></span>
+<h3 class="title" style="font-weight: bold;"><small>Usage:
+jar {ctxu}[vfm0M] [jar-file]
+[manifest-file] [-C dir] files ... <br>
+</small></h3>
+<ul style="font-weight: bold;">
+  <li>
+    <h3 class="title" style="font-weight: normal;"><small>&nbsp;Example
+1:&nbsp; Archive two class files into an archive called
+classes.jar:&nbsp; <span style="font-weight: bold;">jar cvf
+classes.jar One.class Two.class</span> <br>
+    </small></h3>
+  </li>
+  <li>
+    <h3 class="title" style="font-weight: normal;"><small>Example
+2:&nbsp; Use an existing manifest file 'mymanifest' and archive all
+the files in the foo/ directory into 'classes.jar':&nbsp; <span
+ style="font-weight: bold;">jar cvfm
+classes.jar mymanifest -C foo/</span></small></h3>
+  </li>
+</ul>
+<hr style="width: 100%; height: 2px;"><a name="jarSigner"></a><span
+ style="font-weight: bold;">Jar Signer (jarsigner)</span>&nbsp; In Work<br>
+<pre>jarsigner -keystore C:\java\max -storepass myPassword -keypass keyPassword maxs.jar max </pre>
+<br>
+<hr style="width: 100%; height: 2px;"><big><a name="policyTool"></a>Policy
+Tool</big></div>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div><br>
+The Java Developer Kit versions 1.2 and later
+(Java 2) was modified with new security schemes to provide restricted
+access to system resources. The new tool in Java 2 is the Java Policy
+Tool. The following paragraphs and illustrations are how to interact
+with the tool. <big>
+</big></div>
+<big></big></div>
+<table style="text-align: left; width: 379px; height: 158px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool1.jpg" alt=""
+ style="width: 372px; height: 119px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure Policy-1 - Policy Tool<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p> To start up the Policy Tool, just type
+policytool. </p>
+<div class="figure">
+<table style="text-align: left; width: 420px; height: 112px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool2.jpg" alt=""
+ style="width: 411px; height: 73px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-2</span></small><small><span
+ style="font-weight: bold;"> - Policy File Warning<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p><b></b>You might get a warning stating that the policy
+file isn't set. This only means that there is no default file set. Just
+press the OK button and we will fix this in a couple minutes. </p>
+</div>
+<div class="figure">
+<table style="text-align: left; width: 525px; height: 255px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool3.jpg" alt=""
+ style="width: 515px; height: 216px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-3</span></small><small><span
+ style="font-weight: bold;"> - Policy Tool<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p><b></b>This screen is the policy tool. </p>
+</div>
+<div class="figure">
+<table style="text-align: left; width: 443px; height: 253px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool4.jpg" alt=""
+ style="width: 433px; height: 214px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-4</span></small><small><span
+ style="font-weight: bold;"> - Opening Policy File<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p> Click on the File button and select Open. </p>
+<div class="figure">
+<table style="text-align: left; width: 487px; height: 276px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool5.jpg" alt=""
+ style="width: 478px; height: 237px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-5</span></small><small><span
+ style="font-weight: bold;"> - Policy File Selection<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>You have a choice to either go with the default
+policy file or your own policy file. For educational purposes we will
+go with the system default policy file. The system default policy file
+is located where you placed the JVM under the jre/lib/security
+directory and is named java.policy. So our example the JVM was placed
+in the directory c:\jdk1.3, so the default policy file is located at
+c:\jdk1.3\jre\lib\security\java.policy. Once the file has been loaded
+the policy file will fill in the information as illustrated above. The
+policy tool also displays the current policies in effect in the
+textarea at the bottom of the tool.</p>
+<p>The policy file for which you wish to perform
+signed applets or open up the Java Applet Sandbox is now open and set.
+To make modifications to the policies, modifications are made through
+the policy tool as described next.</p>
+<p>The are three buttons on the policy tool. Add,
+Edit or Remove. These are the policies that will be instanciated when
+Applet Security outside the Sandbox is performed. We are going to add a
+policy in this discussion. Edit allows you to edit previously defined
+policies and Remove removes any previous policies. To add a policy
+press the Add Policy Entry button. </p>
+</div>
+<table style="text-align: left; width: 610px; height: 539px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool6.jpg" alt=""
+ style="width: 600px; height: 500px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-6</span></small><small><span
+ style="font-weight: bold;"> - Policy Entry<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p> The policy entry screen is now displayed. We are
+going to add a new permissions press the Add Permission button.</p>
+<div class="figure">
+<table style="text-align: left; width: 759px; height: 289px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="policyTool/policyTool7.jpg" alt=""
+ style="width: 750px; height: 250px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-7</span></small><small><span
+ style="font-weight: bold;">- Permissions<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>This is the Permissions screen. This is where you
+actually define the different permissions, accesses, etc. For this
+discussion we are going to open up the Java Sandbox.&nbsp; Click on the
+Permission pulldown and select AllPermission. </p>
+</div>
+<table style="text-align: left; width: 759px; height: 289px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool8.jpg" alt=""
+ style="width: 750px; height: 250px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-8</span></small><small><span
+ style="font-weight: bold;">- Policy Tool<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p> We are adding the AllPermission policy so that
+security will be lax for demo purposes. The text field to the right
+will now display java.security.AllPermission. Now press OK which will
+activate our new AllPermission policy. </p>
+<table style="text-align: left; width: 612px; height: 539px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="policyTool/policyTool9.jpg" alt=""
+ style="width: 600px; height: 500px;"></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-9</span></small><small><span
+ style="font-weight: bold;">- Policy Tool Startup<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<p> The Policy Entry screen reappears and displays
+our policy and permission selections. Press the Done button if
+everything is correct.</p>
+<div class="figure">
+<table style="text-align: left; height: 284px; width: 446px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="policyTool/policyTool10.jpg" alt=""
+ style="width: 438px; height: 245px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-10</span></small><small><span
+ style="font-weight: bold;">- Policy Tool Startup<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p> The policy tool main screen now redisplays and
+shows that there were some modifications. In our cases CodeBase
+&lt;ALL&gt; shows up twice. This is because we gave AllPermission to
+everything. Press the File menu item and select Save. We want to save
+the new policy and permissions. </p>
+<div class="figure">
+<table style="text-align: left; width: 375px; height: 112px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="policyTool/policyTool11.jpg" alt=""
+ style="width: 365px; height: 73px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure </span></small><small><span
+ style="font-weight: bold;">Policy-11</span></small><small><span
+ style="font-weight: bold;">- Policy Tool Startup<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p> This is the last screen notifying you that the
+policies were saved.<br>
+</p>
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: center;"><span style="font-weight: bold;">Policytool
+Default Locations</span><br>
+</div>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Policy File<br>
+      </td>
+      <td style="vertical-align: top;">Policy File Path<br>
+      </td>
+      <td style="vertical-align: top;">Examples<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">System Policy File Location<br>
+      </td>
+      <td style="vertical-align: top;">
+      <pre><i>java.home</i>\lib\security\java.policy</pre>
+      </td>
+      <td style="vertical-align: top;">C:\Program
+Files\Java\jre1.5.0\lib\security\java.policy<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">User Policy File Location<br>
+      </td>
+      <td style="vertical-align: top;">
+      <pre><i>user.home</i>\.java.policy  (Note:  There is a leading period in front of java)</pre>
+      </td>
+      <td style="vertical-align: top;">C:\Documents and
+Settings\restey\.java.policy<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Below is an example of the .java.policy tool file:<br>
+<br>
+grant {<br>
+&nbsp; permission java.security.AllPermission;<br>
+};<br>
+<br>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt="" style="width: 32px; height: 32px;" align="left"><small><a
+ href="mailto:information@cv64.us">Web
+Contact</a></small><br>
+<small>
+Last modified:&nbsp; 2003 December 31</small><br>
+<p><br>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

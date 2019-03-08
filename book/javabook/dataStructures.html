@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Data Structures</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N40066B">Chapter 11. Data Structures</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N40066B"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N40066B">11.1. </a><a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4006DC">Vectors</a></dt>
+  <dt>11.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4006E3">Hash
+Tables</a></dt>
+</dl>
+</div>
+<p> The Java language has produced several new types of data
+structures. The new collections, lists and map classes enable the
+language to become more dynamic. We will discuss only Vectors and Hash
+Tables in this chapter. </p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4006DC">11.1. Vectors</a></h2>
+</div>
+</div>
+<p><a name="N4006DC"> Java has the new dynamic concept of a Vector.
+Vector's are a collection of objects that can be initially defined and
+increase in size dynamically, unlike Arrays which are a fixed size.
+Vectors can increase or decrease in size and objects are referred as
+elements. </a></p>
+<p><a name="N4006DC"> Vectors optimize storage management by
+maintaining a capacity and a capacityIncrement. The capacity is always
+at least as large as the vector size. The vector's storage increases in
+chunks the size of capacityIncrement. Applications increase the
+capacity of a vector before inserting a large number of components,
+reducing the amount of incremental reallocation. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4006E3">11.2. Hash
+Tables</a></h2>
+</div>
+</div>
+<p><a name="N4006E3"> Hash tables map keys to values. Any non-null
+object can be used as a key or as a value. Hash tables store and
+retrieve objects using keys. </a></p>
+<p><a name="N4006E3"> An instance of Hashtable has two parameters that
+affect its performance: initial capacity and load factor. The capacity
+is the number of buckets in the hash table, and the initial capacity is
+simply the capacity at the time the hash table is created. The load
+factor is a measure of how full the hash table is allowed to get before
+its capacity is automatically increased. When the number of entries in
+the hashtable exceeds the product of the load factor and the current
+capacity, the capacity is increased by calling the rehash method. </a></p>
+</div>
+</div>
+</body>
+</html>

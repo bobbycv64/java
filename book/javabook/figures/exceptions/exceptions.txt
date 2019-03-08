@@ -1,0 +1,9 @@
+Object
+   \
+    \__ Throwable (implements Serializable)
+             \
+              \__ Error ...
+               \
+                \__ Exception ... 
+                       \
+                        \__ RuntimeException ...

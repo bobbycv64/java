@@ -1,0 +1,1125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <style ="font-family: helvetica,arial,sans-serif;"></style>
+  <style ="font-family: helvetica,arial,sans-serif;"></style>
+</head>
+<body>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div>
+<div class="titlepage">
+<div><br>
+<h2 class="title" style="font-weight: normal; text-align: center;"><small><font
+ color="#000000">Multimedia<br>
+</font></small></h2>
+</div>
+</div>
+<p>This is a favorite or second favorite subject in any programming
+language for most
+developers,
+Multimedia, the favorite is Graphics.&nbsp; Yes, there is a
+difference.&nbsp; This weeks discussion
+will deal with four areas of multimedia.&nbsp; 1) <a
+ href="#textFontsColors">Text,
+Fonts and Colors</a> 2) <a href="#basicGraphics">Basic
+Graphics</a> 3) <a href="#sound">Sound</a>
+4) <a href="#animation">Animation</a>&nbsp;
+We will be using the standard classes from the developers kit.&nbsp;
+Remember this is not an extensive set of classes.&nbsp; If you wish to
+go beyond the basics there are Java2D, Java3D, Sound Application
+Programming Interfaces (APIs) then enhance both performance and quality
+of the application.&nbsp; There are several other tools out there that
+the developer should be aware of when writing multimedia applications.</p>
+<p></p>
+<div class="section">
+<hr style="width: 100%; height: 2px;">
+<p><span style="font-weight: bold;"><a name="textFontsColors"></a>Text,
+Fonts and Colors<br>
+<br>
+</span>We will now discuss how you can make your text
+look better with fonts and colors using simple Object-Oriented
+calls.&nbsp; Figure 1, TextFontColor.java uses the three methods
+drawString
+(java.lang.String), setFont (java.awt.Font) and setColor
+(java.awt.Color).&nbsp; These method calls are
+obvious and are easily set so that you can produce graphical output.<br>
+</p>
+<p>Lines 1 through 3 show the fontName, fontStyle and fontSize are
+being set as defaults when the class is first initialized.&nbsp; In our
+case we will have a default font of Arial, Plain and size 14.&nbsp;
+Remember this is only the attributes not the actual font.&nbsp; <br>
+</p>
+<p>Line 4 shows that we are creating a font object that uses the name,
+style and size that we have defined initially.&nbsp; Line 5 sets the
+Graphics Context to the font that we defined in Line 4.&nbsp; Line 6
+sets the Graphics Context pen color to RED.&nbsp; Line 7 writes the
+string <span style="font-weight: bold;">"Plain and Red"</span> at
+location 100 x and 100 y pixels within the Frame.<br>
+</p>
+<p>Lines 8 through 11 repeats the process, resetting the font
+parameters except the fontStyle which has been changed to
+Font.BOLD.&nbsp; Line 9 sets the font, Line 10 sets the color to WHITE
+and Line 11 writes the string <span style="font-weight: bold;">"Bold
+and White"</span> at location 125, 125.<br>
+</p>
+<p>The remaining lines 12 through 19 produce additional examples of
+color, locations and fonts.&nbsp; Line 20 sets the background of the
+Graphics Context to BLACK.<br>
+</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 432px; height: 740px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.awt.Color;<br>
+import java.awt.Font;<br>
+import java.awt.Graphics;<br>
+      <br>
+public class TextFontColor extends FrameExample {<br>
+      <br>
+      </small><small><span style="font-weight: bold;">1&nbsp; private
+String fontName = "Arial";</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">2&nbsp; private int fontStyle =
+Font.PLAIN;</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">3&nbsp; private int fontSize =
+14;</span><br>
+      <br>
+      </small><small>&nbsp; public TextFontColor() {<br>
+&nbsp;&nbsp;&nbsp; super();<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; Font font;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; // set font to class defaults and color to RED<br>
+      <span style="font-weight: bold;">4&nbsp; font = new
+Font(fontName, fontStyle, fontSize);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">5&nbsp; graphics.setFont(font);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">6&nbsp; graphics.setColor(<span
+ style="color: rgb(153, 0, 0);">Color.RED</span>);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">7&nbsp; graphics.drawString(<span
+ style="color: rgb(153, 0, 0);">"Plain and Red", 100, 100</span>);</span><br>
+      <br>
+&nbsp;&nbsp;&nbsp; // set font to BOLD and color to WHITE<br>
+      <span style="font-weight: bold;">8&nbsp;&nbsp; font = new
+Font(fontName, <span style="color: rgb(153, 0, 0);">Font.BOLD</span>,
+fontSize);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">9&nbsp;&nbsp;
+graphics.setFont(font);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">10 graphics.setColor(<span
+ style="color: rgb(153, 0, 0);">Color.WHITE);<br>
+      </span></span><span style="font-weight: bold;">11
+graphics.drawString(<span style="color: rgb(153, 0, 0);">"Bold and
+White", 125, 125</span>);</span><br>
+      <br>
+&nbsp;&nbsp;&nbsp; // set font to BOLD and ITALIC, color to BLUE<br>
+      <span style="font-weight: bold;">12 font = new Font(fontName, <span
+ style="color: rgb(153, 0, 0);">Font.BOLD + Font.ITALIC</span>,
+fontSize);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">13 graphics.setFont(font);</span><span
+ style="font-weight: bold;"><br>
+&nbsp;&nbsp;&nbsp; // could implement graphics.setColor(Color.BLUE);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">14 graphics.setColor(<span
+ style="color: rgb(153, 0, 0);">new Color(0, 0, 255)</span>);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">15 graphics.drawString(<span
+ style="color: rgb(153, 0, 0);">"Bold, Italic and Blue", 150,
+150</span>);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; // set font to Courier, BOLD, ITALIC, color to GREEN
+and Larger<br>
+16 font = new Font(<span style="color: rgb(153, 0, 0);">"Courier"</span>,
+Font.BOLD + Font.ITALIC, <span style="color: rgb(153, 0, 0);">20</span>);<br>
+17 graphics.setFont(font);<br>
+18 graphics.setColor(<span style="color: rgb(153, 0, 0);">new Color(0,
+255, 0)</span>);<br>
+19 graphics.drawString(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: rgb(153, 0, 0);">"Courier,
+Bold, Italic, Green and Larger", 25, 200</span>);<br>
+      </span>&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; TextFontColor textFontColor = new TextFontColor();<br>
+      <span style="font-weight: bold;">20
+textFontColor.setBackground(Color.BLACK);</span><br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><small>Figure
+1 - TextFontColor.java<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<p>Output of TextFontColor is shown in Figure 2.<br>
+</p>
+<table
+ style="text-align: left; width: 522px; height: 420px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="textFontColor.jpg"
+ alt="" style="width: 512px; height: 384px;"><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><small>Figure 2 - Output of
+TextFontColor<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<p></p>
+</div>
+</div>
+</div>
+<div class="section">
+</div>
+<div class="section">
+<hr style="width: 100%; height: 2px;">
+<p><span style="font-weight: bold;"><a name="basicGraphics"></a>Basic
+Graphics</span><br>
+</p>
+<p>Now that we have an example of how to draw graphics with particular
+text, fonts and colors we can add more features, e.g. drawing shapes,
+filling colors, etc.<br>
+</p>
+<p>Figure 3 is an example of drawing and filling shapes.&nbsp; Drawing
+lines, circles, rectangles or any shape is relatively easy in
+Java.&nbsp; Just call the correct method
+or constructor and you can write basic graphics.&nbsp; Our example
+draws a pair of dice that add up to the number 7.<br>
+</p>
+<p>Figure 3 line 1 set the Graphic Context pen color to RED.&nbsp; Line
+2 draws a rounded rectangle at coordinates 100, 100.&nbsp; The other
+parameters set up the width and height of the rounded rectangle.&nbsp;
+This is actually our first die.&nbsp; Line 3 changes the Graphic
+Context pen color to GREEN.&nbsp; Lines 4 through 6 draw filled ovals
+at the locations as the first two parameters and the size the last two
+parameters.&nbsp; Lines 1 though six draw the first die with the number
+3.&nbsp; The next section draws the second die with the value of 4.<br>
+</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 354px; height: 577px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Color;<br>
+import java.awt.Graphics;<br>
+      <br>
+public class DrawingFilling extends FrameExample {<br>
+      <br>
+&nbsp; public DrawingFilling() {<br>
+&nbsp;&nbsp;&nbsp; super();<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; // first die - number 3<br>
+      <span style="font-weight: bold;">1&nbsp;
+graphics.setColor(Color.RED);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">2&nbsp;
+graphics.drawRoundRect(100, 100, 150, 150, 25, 25);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">3&nbsp;
+graphics.setColor(Color.GREEN);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">4&nbsp; graphics.fillOval(130,
+130, 25, 25);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">5&nbsp; graphics.fillOval(165,
+165, 25, 25);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">6&nbsp; graphics.fillOval(200,
+200, 25, 25);</span><br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; // second die - number 4<br>
+&nbsp;&nbsp;&nbsp; graphics.setColor(Color.RED);<br>
+&nbsp;&nbsp;&nbsp; graphics.drawRoundRect(270, 100, 150, 150, 25, 25);<br>
+&nbsp;&nbsp;&nbsp; graphics.setColor(Color.GREEN);<br>
+&nbsp;&nbsp;&nbsp; graphics.fillOval(300, 130, 25, 25);<br>
+&nbsp;&nbsp;&nbsp; graphics.fillOval(300, 200, 25, 25);<br>
+&nbsp;&nbsp;&nbsp; graphics.fillOval(370, 130, 25, 25);<br>
+&nbsp;&nbsp;&nbsp; graphics.fillOval(370, 200, 25, 25);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; DrawingFilling drawingFilling = new DrawingFilling();<br>
+&nbsp;&nbsp;&nbsp; drawingFilling.setBackground(Color.DARK_GRAY);<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 3 - DrawingFilling.java</span><br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Output of DrawingFilling is shown in Figure 4.<br>
+<br>
+</div>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div>
+<table style="text-align: left; width: 522px; height: 420px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="drawingFilling.jpg"
+ title="" alt="" style="width: 512px; height: 384px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 4 - Output of DrawingFilling</span><br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<hr style="width: 100%; height: 2px;"></div>
+</div>
+<p><span style="font-weight: bold;">Images</span><br>
+</p>
+<p>Including images is a three step procedure. First
+you must define the location of the image, using the
+Toolkit.getDefaultToolkit().getIMage(filename); command. This command
+returns an image object. </p>
+<p> Once the image object has been set, the image is
+set to the location on the frame, in our case translated to 50 x and
+150 y. You can also scale, rotate or shear an image by calling any of
+the methods that are part of the Graphics class. Once the image has
+been set for drawing you can draw the image using the drawImage method.
+</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 338px; height: 452px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Color;<br>
+import java.awt.Graphics;<br>
+import java.awt.Image;<br>
+import java.awt.Toolkit;<br>
+import cv64.swing.FrameExample;<br>
+      <br>
+public class Images extends FrameExample {<br>
+      <br>
+&nbsp; public Images() {<br>
+&nbsp;&nbsp;&nbsp; super();<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public Image getImage() {<br>
+&nbsp;&nbsp;&nbsp; return
+Toolkit.getDefaultToolkit().getImage("max.jpg");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; graphics.drawImage(getImage(), 50, 150, this);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; Images images = new Images();<br>
+&nbsp;&nbsp;&nbsp; images.setBackground(Color.white);<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 5 - Images.java<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Output of Images is shown in Figure 6.<br>
+<br>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 522px; height: 414px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="images.jpg" title=""
+ alt="" style="width: 512px; height: 384px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 6 - Output of Images<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><a
+ name="sound"></a>Sound</span><br>
+<br>
+Adding sound is very simple if you are using the standard Java class,
+AudioClip.&nbsp; The AudioClip class is part of the Applet
+package.&nbsp; You use this interface whether you are using an Applet
+or an
+Application.&nbsp; Figure 7 is an Applet Sound example.&nbsp; Line 1
+shows the SoundApplet class as a subclass of Applet.&nbsp; Line 2 looks
+up the sound file.&nbsp; Line 3 starts the audioClip, plays the sound
+file.&nbsp; Line 4 stops the audioClip.&nbsp; Starting the Applet is
+the same as any Applet, you can use Appletviewer or an HTML file in a
+browser.<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 340px; width: 422px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.applet.Applet;<br>
+import java.applet.AudioClip;<br>
+import java.awt.Graphics;<br>
+      <br>
+      <span style="font-weight: bold;">1 public class SoundApplet
+extends Applet {</span><br>
+      <br>
+&nbsp;&nbsp; private AudioClip audioClip = null;<br>
+      <br>
+&nbsp;&nbsp; public void init() {<br>
+      <span style="font-weight: bold;">2&nbsp;&nbsp; audioClip =
+getAudioClip(getDocumentBase(),
+"sample.au");</span><br>
+&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp; public void paint(Graphics graphics) {<br>
+&nbsp;&nbsp; &nbsp; graphics.drawString("Sound Example 2", 25, 25);<br>
+&nbsp;&nbsp; }<br>
+      <br>
+      <span style="font-weight: bold;">3 public void start() {
+audioClip.loop(); }</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">4 public void stop() {
+audioClip.stop(); }</span><br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 7 - Applet Sound Example<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Figure 8 is another example of executing sound but in an
+Application.&nbsp; <span style="font-style: italic;">What is an Applet
+or JApplet, look at the class hierarchy and you will see that they are
+Panels or JPanels, interesting.</span>&nbsp; Looking at Line 1, the
+SoundApplication class is a subclass of JPanel.&nbsp; We are going to
+the Uniform Resource Locator (URL) to find out sound file.&nbsp;&nbsp;
+Line 2, has the line, <span style="font-weight: bold;">file:\\C:\\somepath\\</span>.&nbsp;
+This means that the sound file is on a Windows platform on the <span
+ style="font-weight: bold;">C</span> disk device and in the folder <span
+ style="font-weight: bold;">somepath</span>.&nbsp; If the file was on a
+Unix system you would see something like, <span
+ style="font-weight: bold;">file://home/somepath</span>.&nbsp; These
+are hardcoded examples, Java has ways to get around the path and
+separator issues using the File class but we don't need to go into this
+in this lecture.&nbsp; Line 3 is the name of the sound file.&nbsp; Line
+4 concatenates the directory and filename, the reason they were
+separated in Lines 2 and 3 was for clarity.&nbsp; Looking at Line 5 is
+our friend AudioClip from the Applet example.&nbsp; Yes, applications
+need to execute this class for sound.&nbsp; Line 5 states Call the
+Applet class's newAudioClip method and pass in the URL.&nbsp; This
+returns an AudioClip (sound file) from the location specified by the
+URL.&nbsp; Line 6, plays the sound file.<br>
+<br>
+Notes on URL:&nbsp; URLs have several types of prefixes, e.g. file://,
+http://, rmi://, etc.&nbsp; An example could be <span
+ style="font-weight: bold;">http://cv64.us/sample.au</span><br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 329px; height: 484px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.applet.Applet;<br>
+import java.applet.AudioClip;<br>
+import javax.swing.JPanel;<br>
+import java.net.URL;<br>
+import java.net.MalformedURLException;<br>
+      <br>
+      <span style="font-weight: bold;">1 public class SoundApplication
+extends JPanel {</span><br>
+      <br>
+&nbsp;&nbsp; private AudioClip audioClip = null;<br>
+&nbsp;&nbsp; private URL url = null;<br>
+&nbsp; <br>
+      <span style="font-weight: bold;">2 private String path =
+"file:\\C:\\somepath\\";</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">3 private String file =
+"sample.au";</span><br>
+&nbsp; <br>
+&nbsp;&nbsp; public SoundApplication() {<br>
+&nbsp;&nbsp; &nbsp; try {<br>
+      <span style="font-weight: bold;">4&nbsp; &nbsp; &nbsp;&nbsp; url
+= new URL(path + file);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">5 &nbsp; &nbsp; &nbsp; audioClip
+=
+Applet.newAudioClip(url);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">6&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+audioClip.play();</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; } catch (MalformedURLException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; System.err.println("Sound
+Application Error");<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp; &nbsp; new SoundApplication();<br>
+&nbsp;&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 8 - Application Sound Example<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><a
+ name="animation"></a>Animation</span><br>
+<br>
+This part of the lecture shows two examples, Applets and Applications,
+both use the Thread technologies that we learned earlier.&nbsp; We have
+two applications.&nbsp; Figure 9 the Applet, is going to cycle through
+several images and Figure 10 the application will actually work with
+the Graphics Context.&nbsp; Figure 9, Line 1 is the delay timer, we are
+going to show an image every 5 seconds.&nbsp; Line 2 sets up the Images
+array.&nbsp; Block 3 gets the default directory base, also called the
+code base, and reads in the files from the HTML file which contains the
+images and loads into an images array.&nbsp; Block 4 reads the delay
+timer, a variable, which will delay the number of seconds between each
+image.&nbsp; Finally, Line 5 displays the current image in the
+array.&nbsp; The Applet program executes in a loop.<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 427px; height: 1380px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Graphics;<br>
+import java.awt.Graphics2D;<br>
+import java.awt.Image;<br>
+import javax.swing.JApplet;<br>
+      <br>
+public class AnimationApplet extends JApplet implements Runnable {<br>
+&nbsp; <br>
+      <span style="font-weight: bold;">1 private int delayTimer =
+5000;&nbsp; // sleep 5 seconds</span><br>
+&nbsp;&nbsp; private int imageIndex = 0;<br>
+&nbsp;&nbsp; private int currentIndex = 0;<br>
+&nbsp;&nbsp; private int maxSize = 5;<br>
+&nbsp;&nbsp; private String delay = null;<br>
+      <span style="font-weight: bold;">2 private Image[] images = new
+Image[maxSize];</span><br>
+&nbsp;&nbsp; private Thread thread;<br>
+&nbsp; <br>
+&nbsp; public void init() {<br>
+&nbsp;&nbsp;&nbsp; <br>
+      <span style="font-weight: bold;">3 &nbsp; // load images into
+image array</span><br>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; for (int i =
+0; i &lt; maxSize; i++) {</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+String imageText = null;</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+imageText = getParameter("image" + i);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (imageText != null) {</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+imageIndex++;</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+images[i] =
+getImage(getCodeBase(), imageText);</span><br>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+else break;</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; }</span><br>
+&nbsp;&nbsp;&nbsp; <br>
+      <span style="font-weight: bold;">&nbsp;4&nbsp; // get delay time</span><br>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; delay =
+getParameter("delay");</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; if (delay !=
+null) {</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delayTimer = Integer.parseInt(delay);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; }</span><br>
+&nbsp; }<br>
+&nbsp; <br>
+&nbsp; // draw images<br>
+&nbsp; public void paint(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; super.paint(graphics);<br>
+&nbsp;&nbsp;&nbsp; Graphics2D graphics2D = (Graphics2D)graphics;<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; if (images[currentIndex] != null) {<br>
+      <span style="font-weight: bold;">5 &nbsp;&nbsp;&nbsp;
+graphics2D.drawImage(images[currentIndex], 0, 0, this);</span><br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+&nbsp; <br>
+&nbsp; public void run() {<br>
+&nbsp;&nbsp;&nbsp; Thread currentThread = Thread.currentThread();<br>
+&nbsp;&nbsp;&nbsp; System.out.println("Thread Name: " +
+currentThread.getName());<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; while (thread == currentThread) {<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repaint();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// display new image<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currentIndex++; // increment through the
+array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (currentIndex &gt;= imageIndex) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currentIndex = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Thread.sleep(delayTimer);&nbsp; // delay between images<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (InterruptedException exception)
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.err.println("run(): " + exception.getMessage());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void start() {<br>
+&nbsp;&nbsp;&nbsp; if (thread == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Creating New
+Thread");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thread = new Thread(this);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thread.start();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Created New Thread:
+" + thread.getName());<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+&nbsp; <br>
+&nbsp; public void stop() {<br>
+&nbsp;&nbsp; if (thread != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Destroying Thread: "
++ thread.getName());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thread = null;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Thread Destroyed");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+} </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 9 - Applet Animation<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Now for an Application example.&nbsp; Looking at the code with Runnable
+is the first clue that this is an Application.&nbsp; Again, Applets are
+Panels or JPanels, yet another clue.&nbsp; Remember, most of the code
+we have seen before.&nbsp; Line 1, creates 5 threads.&nbsp; Block 2,
+loads the different images into an images array.&nbsp;&nbsp; Lines 3
+and 4 randomly compute where the image will be placed on the
+background.&nbsp; Block 5 executes the drawing of the image to the
+Graphics Context.<br>
+</div>
+</div>
+</div>
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); font-family: helvetica,arial,sans-serif; height: 1284px; width: 484px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Graphics;<br>
+import java.awt.Graphics2D;<br>
+import java.awt.Image;<br>
+import java.awt.Toolkit;<br>
+import javax.swing.JFrame;<br>
+import javax.swing.JPanel;<br>
+      <br>
+public class AnimationApplication extends JPanel implements Runnable {<br>
+      <br>
+&nbsp; private int imageIndex = 0;<br>
+&nbsp; private int maxThreadSize = 5;<br>
+&nbsp; private int theadIndex = 0;<br>
+&nbsp; private int x = 0;<br>
+&nbsp; private int y = 0;<br>
+      <br>
+&nbsp; private Image[] foregroundImage = new Image[maxThreadSize];<br>
+&nbsp; private Image backgroundImage = null;<br>
+&nbsp; private Thread[] threads = new Thread[maxThreadSize];<br>
+      <br>
+&nbsp; public AnimationApplication() {<br>
+&nbsp;&nbsp;&nbsp; Toolkit kit = Toolkit.getDefaultToolkit();<br>
+      <span style="font-weight: bold;">2&nbsp; foregroundImage[0] =
+kit.getImage("foreground0.gif");</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;
+foregroundImage[1] = kit.getImage("foreground1.gif");</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;
+foregroundImage[2] = kit.getImage("foreground2.gif");</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;
+foregroundImage[3] = kit.getImage("foreground3.gif");</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;
+foregroundImage[4] = kit.getImage("foreground4.gif");</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;
+backgroundImage = kit.getImage("background.gif");</span><br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paintComponent(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; Graphics2D graphics2D = (Graphics2D) graphics;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if ((backgroundImage != null) &amp;&amp;
+(foregroundImage[imageIndex] != null)) {<br>
+      <span style="font-weight: bold;">5&nbsp;&nbsp;&nbsp;
+graphics2D.drawImage(backgroundImage, 0,
+0, this);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+graphics2D.drawImage(foregroundImage[imageIndex], x, y, this);</span><br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void run() {<br>
+&nbsp;&nbsp;&nbsp; Thread currentThread = Thread.currentThread();&nbsp;
+// get the thread parameters<br>
+      <br>
+&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i=0; i &lt; 10;
+i++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Iteration: " + i + " of " +
+currentThread.getName());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; imageIndex =
+Integer.parseInt(currentThread.getName().substring(7,8)) - 1;<br>
+      <span style="font-weight: bold;">3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x =
+(int)(Math.random() * (imageIndex + 475));</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">4
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y =
+(int)(Math.random() * (imageIndex + 475));</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+currentThread.sleep((long)(Math.random() * 5000));<br>
+&nbsp;&nbsp;<span style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+repaint();</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; } catch (InterruptedException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exception.getMessage();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exception.getStackTrace();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; System.out.println("End of Thread: " +
+currentThread.getName());<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void start() {<br>
+&nbsp;&nbsp;&nbsp; if (theadIndex &gt;= maxThreadSize) System.exit(-1);<br>
+&nbsp;&nbsp;&nbsp; threads[theadIndex] = new Thread(this);&nbsp; //
+create a new thread<br>
+&nbsp;&nbsp;&nbsp;
+threads[theadIndex].start();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// call the run method for the thread<br>
+&nbsp;&nbsp;&nbsp; theadIndex++;<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; AnimationApplication animationApplication = new
+AnimationApplication();<br>
+&nbsp;&nbsp;&nbsp; JFrame frame = new JFrame("Animation Application");<br>
+&nbsp;&nbsp;&nbsp; frame.setSize(475, 475);<br>
+&nbsp;&nbsp;&nbsp; frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);<br>
+&nbsp;&nbsp;&nbsp; frame.getContentPane().add(animationApplication);<br>
+&nbsp;&nbsp;&nbsp; frame.setVisible(true);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; for (int i = 0; i &lt; 5; i++) {<br>
+      <span style="font-weight: bold;">1 &nbsp;&nbsp;&nbsp;
+animationApplication.start();</span><br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }</small><br>
+      <small>}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 10 - Application Animation<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<div class="figure" style="font-family: helvetica,arial,sans-serif;">
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2"
+ cellspacing="2">
+</table>
+<hr style="width: 100%; height: 2px;"><b>Summary</b>
+<br>
+<br>
+This lecture discussed the very basics of programming multimedia
+applications.&nbsp; Multimedia is a high-level approach to Graphics,
+using a lot of the algorithms and classes generated by others using the
+Object-Oriented reuse approach.<br>
+<hr size="2" width="100%"><b>References</b>
+<ul>
+  <li><a name="javaCodingConventions"></a><a href="http://java.sun.com">Java</a>,
+http://java.sun.com, Accessed
+06 January 1997<br>
+  </li>
+</ul>
+<hr style="width: 100%; height: 2px;"></div>
+<div
+ style="text-align: center; font-family: helvetica,arial,sans-serif;"><big>Supplemental
+Materials</big><br>
+</div>
+<big style="font-family: helvetica,arial,sans-serif;"><small></small>
+FrameExample.java<br>
+<br>
+<small>Figure S1 is the FrameExample.java file that was used for most
+of the examples in the lecture.<br>
+<br>
+</small></big>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); font-family: helvetica,arial,sans-serif; width: 521px; height: 1492px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Dimension;<br>
+import java.awt.Graphics;<br>
+import java.awt.Frame;<br>
+import java.awt.Menu;<br>
+import java.awt.MenuBar;<br>
+import java.awt.MenuItem;<br>
+import java.awt.Toolkit;<br>
+import java.awt.PrintJob;<br>
+import java.awt.event.ActionEvent;<br>
+import java.awt.event.ActionListener;<br>
+import java.awt.event.WindowAdapter;<br>
+import java.awt.event.WindowEvent;<br>
+      <br>
+public class FrameExample extends Frame {<br>
+      <br>
+&nbsp; public FrameExample() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setVisible(true);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setScreen();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setMenu();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; validate();<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; graphics.drawString("Hello Frames", 100, 100);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void print() {<br>
+&nbsp;&nbsp;&nbsp; PrintJob printJob = getToolkit().getPrintJob(this,
+"Print", null);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (printJob != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Graphics graphics =
+printJob.getGraphics();<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (graphics != null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; paint(graphics);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; graphics.dispose();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printJob.end();<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void setMenu() {<br>
+&nbsp;&nbsp;&nbsp; MenuBar menuBar = new MenuBar();<br>
+&nbsp;&nbsp;&nbsp; Menu menu = new Menu("File");<br>
+&nbsp;&nbsp;&nbsp; MenuItem printItem = new MenuItem("Print");<br>
+&nbsp;&nbsp;&nbsp; MenuItem exitItem = new MenuItem("Exit");<br>
+      <br>
+&nbsp;&nbsp;&nbsp; printItem.addActionListener(new ActionListener() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void actionPerformed(ActionEvent
+event) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; });<br>
+      <br>
+&nbsp;&nbsp;&nbsp; exitItem.addActionListener(new ActionListener() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void actionPerformed(ActionEvent
+event) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.exit(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; });<br>
+      <br>
+&nbsp;&nbsp;&nbsp; addWindowListener(new WindowAdapter() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void windowClosing(WindowEvent
+event) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.exit(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; });<br>
+      <br>
+&nbsp;&nbsp;&nbsp; menu.add(printItem);<br>
+&nbsp;&nbsp;&nbsp; menu.add(exitItem);<br>
+&nbsp;&nbsp;&nbsp; menuBar.add(menu);<br>
+&nbsp;&nbsp;&nbsp; setMenuBar(menuBar);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void setScreen() {<br>
+&nbsp;&nbsp;&nbsp; Dimension dimension =
+Toolkit.getDefaultToolkit().getScreenSize();<br>
+      <br>
+&nbsp;&nbsp;&nbsp; int screenHeight = dimension.height;<br>
+&nbsp;&nbsp;&nbsp; int screenWidth = dimension.width;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; setSize(screenWidth / 2, screenHeight / 2);<br>
+&nbsp;&nbsp;&nbsp; setLocation(screenWidth / 4, screenHeight / 4);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; String title = "Frame Coordinates: (" + screenWidth
+/ 4 + " x, " + screenHeight / 4 +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " y) Screen size: (" + screenWidth / 2 +
+" pixels wide, " + screenHeight / 2 +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " pixel high)";<br>
+      <br>
+&nbsp;&nbsp;&nbsp; setTitle(title);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; new FrameExample();<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><small>Figure S1 -
+FrameExample.java<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<br style="font-family: helvetica,arial,sans-serif;">
+<big>Here's an image
+of Max to download if you wish.</big><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; font-family: helvetica,arial,sans-serif; width: 234px; height: 297px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="max.jpg" alt="" style="width: 219px; height: 279px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure S2 - max.jpg</span><br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;"><br>
+</span>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">Update
+and Paint</span>
+<p style="font-family: helvetica,arial,sans-serif;"> Java has three
+methods that control how the Graphics Context is updated.&nbsp; The
+paint method only updates the screen
+and uses a bounding box to update only the section of the screen that
+needs repair.&nbsp; Repair is due to other windows overlapping the
+current
+screen. </p>
+<p style="font-family: helvetica,arial,sans-serif;"> The repaint method
+calls the update method,
+that's all.&nbsp; The update method clears the screen contents then
+calls the
+paint method.&nbsp; If your concerned about performance you should
+override
+the update method to call only the paint method. </p>
+<div class="figure" style="font-family: helvetica,arial,sans-serif;">
+<table style="text-align: left; height: 411px; width: 531px;" border="0"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="updatePaint.jpg" alt=""
+ style="width: 518px; height: 375px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small style="font-weight: bold;">Figure
+S4 - Update Lifecycle</small></td>
+    </tr>
+  </tbody>
+</table>
+<p><small></small></p>
+</div>
+<div class="titlepage" style="font-family: helvetica,arial,sans-serif;">
+<div>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title"><small>Buffering</small></h3>
+<h3 class="title" style="font-weight: normal;"><small>When graphics
+performance starts to degrade, most
+of the time the Graphics Context is at fault.&nbsp; Java provides a
+memory
+location called a frame buffer which can store graphics data, perform
+computations, then display the data.&nbsp; Once the frame buffer has
+been
+loaded with the data to display, the frame buffer data is sent to the
+Graphics Context.&nbsp; The following program shows how to use frame
+buffering
+versus the paint method.</small></h3>
+<table
+ style="text-align: left; width: 406px; height: 774px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>import java.awt.Color;<br>
+import java.awt.Graphics;<br>
+import java.awt.Image;<br>
+import java.awt.Toolkit;<br>
+import cv64.multimedia.graphics.Images;<br>
+import cv64.swing.FrameExample;<br>
+      <br>
+public class Performance extends FrameExample {<br>
+      <br>
+&nbsp; private Image bufferedImage;<br>
+&nbsp; private boolean compute = true;<br>
+&nbsp; <br>
+&nbsp; public Performance() {<br>
+&nbsp;&nbsp;&nbsp; super();<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public Image getImage() {<br>
+&nbsp;&nbsp;&nbsp; return
+Toolkit.getDefaultToolkit().getImage("max.jpg");<br>
+&nbsp; }<br>
+      <br>
+&nbsp; // override update method to not clear screen before painting.<br>
+&nbsp; public void update(Graphics graphics) {<br>
+&nbsp;&nbsp;&nbsp; paint(graphics);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void paint(Graphics graphics) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (compute) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("width: " +
+getSize().width +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; " height: " +
+getSize().height);<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bufferedImage =
+createImage(getSize().width, getSize().height);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Graphics bufferedGraphics =
+bufferedImage.getGraphics();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bufferedGraphics.drawImage(getImage(),
+100, 100, this);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bufferedGraphics.dispose();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; compute = false;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; graphics.drawImage(bufferedImage, 0, 0, null);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; Images images = new Images();<br>
+&nbsp;&nbsp;&nbsp; images.setBackground(Color.white);<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small style="font-weight: bold;">Figure
+S5 - Performance<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Here are the
+images for the animation programs.&nbsp; Row 1 is for the
+AnimationApplet, Row 2 is for AnimationApplication.</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; font-family: helvetica,arial,sans-serif; background-color: rgb(204, 255, 255); width: 897px; height: 579px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="image0.jpg" alt="" style="width: 19px; height: 36px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="image1.jpg" alt="" style="width: 19px; height: 36px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="image2.jpg" alt="" style="width: 19px; height: 36px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="image3.jpg" alt="" style="width: 18px; height: 38px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="image4.jpg" alt="" style="width: 18px; height: 38px;"></td>
+      <td style="vertical-align: top; text-align: center;"><big><big><big><span
+ style="font-weight: bold;">Background</span></big></big></big><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="foreground0.gif" alt="" style="width: 20px; height: 20px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="foreground1.gif" alt="" style="width: 20px; height: 20px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="foreground2.gif" alt="" style="width: 20px; height: 20px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="foreground3.gif" alt="" style="width: 20px; height: 20px;"> </td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="foreground4.gif" alt="" style="width: 20px; height: 20px;"></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="background.gif" alt="" style="width: 481px; height: 481px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small style="font-weight: bold;">Figure
+S6 - Animation Images</small> </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt="" style="width: 32px; height: 32px;" align="left"><small><font
+ face="Arial,Helvetica"><a href="mailto:information@cv64.us">Web
+Contact</a></font></small><br>
+<small><font face="Arial,Helvetica">
+Last modified:&nbsp; 2003 December 31</font></small>
+</body>
+</html>

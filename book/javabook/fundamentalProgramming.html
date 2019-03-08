@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Fundamental Programming</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N4001D1">Chapter 3. Fundamental Programming</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N4001D1"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N4001D1">3.1. </a><a href="#N4001D9">Documentation</a></dt>
+  <dd>
+    <dl>
+      <dt>3.1.1. <a href="#N4001DC">Comments</a></dt>
+      <dt>3.1.2. <a href="#N4001F3">javadoc
+(Java Documentation)</a></dt>
+    </dl>
+  </dd>
+  <dt>3.2. <a href="#N40020E">Data
+Types</a></dt>
+  <dt>3.3. <a href="#N40022B">Casting</a></dt>
+  <dt>3.4. <a href="#N400237">Naming
+Conventions</a></dt>
+  <dt>3.5. <a href="#N40023C">Statements</a></dt>
+  <dt>3.6. <a href="#N400241">Declarations
+and Assignments</a></dt>
+  <dt>3.7. <a href="#N400268">Operators</a></dt>
+  <dd>
+    <dl>
+      <dt>3.7.1. <a href="#N40026D">Arithmetic
+Operators</a></dt>
+      <dt>3.7.2. <a href="#N400279">Increment
+/ Decrement Operators</a></dt>
+      <dt>3.7.3. <a href="#N400290">Boolean
+Operators</a></dt>
+      <dt>3.7.4. <a href="#N40029C">Precedence</a></dt>
+    </dl>
+  </dd>
+  <dt>3.8. <a href="#N4002AA">Strings</a></dt>
+  <dt>3.9. <a href="#N4002C1">Formatting
+Output</a></dt>
+  <dt>3.10. <a href="#N4002D8">Flow
+Control</a></dt>
+  <dd>
+    <dl>
+      <dt>3.10.1. <a href="#N4002DD">Conditional
+Flow Control</a></dt>
+      <dt>3.10.2. <a href="#N4002F2">Looping
+Flow Control</a></dt>
+      <dt>3.10.3. <a href="#N400307">Switch
+Flow Control</a></dt>
+      <dt>3.10.4. <a href="#N40031C">Break
+and Continue</a></dt>
+    </dl>
+  </dd>
+  <dt>3.11. <a href="#N400335">Arrays</a></dt>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4001D9">3.1.
+Documentation</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001DC">3.1.1. Comments</a></h3>
+</div>
+</div>
+<p><a name="N4001DC"> Comments are used in source code to provide a
+reader with information on what the developer was thinking when writing
+the program. Comments are very useful because the originator is not
+available or to remind whomever what the code is doing. Comments in
+Java are noted by either // (for a single line) or /* and */ (for
+several lines). </a></p>
+<p><a name="N4001DC"> The win-win situation for developers is no matter
+how much extra comments you put in a program, none of the comments will
+show up in the executable. If you don't believe me just try. Write a
+program with no comments. Compile and note the sizes of both the source
+and bytecode. Now edit the same program and add several comments.
+Compile and the source code will be larger as expected. However the
+bytecode is exactly the same size as the uncommented code. Below is an
+example of our first program with comments. </a></p>
+<div class="figure">
+<p><a name="N4001DC"><b>Figure 3.1. Comments Source Example</b></a></p>
+<div style="text-align: left;">
+<pre class="programlisting"><a name="N4001DC"><tt>figures/fundamentals/HelloworldComments.java</tt><br>          <br>/*  This is a multilined comment at the beggining of the program<br> *  You can put as much text as you wish as long as (slash asterisk)<br> *  and (asterisk slash) and are defined.  Remember you can also put<br> *  (slash slash) on each line.<br> */<br><br>public class HelloworldComments  { // Here&#8217;s a comment at the end of a line<br><br>  // This is the start of the main method.<br><br>  public static void main(String[] args) {<br><br>    // This line prints out Helloworld with Comments<br>    System.out.println("Helloworld with Comments");<br>  }<br><br>} // comments can go anywhere<br></a></pre>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001F3">3.1.2. javadoc (Java Documentation)</a></h3>
+</div>
+</div>
+<p><a name="N4001F3"> Java has included by default a documentation tool
+called javadoc, which means Java Documentation. javadoc reads
+documentation tags that contain the "@" (at sign) in a Java program and
+produces HyperText Modeling Language (HTML) web pages. javadoc is easy
+to write and helpful to anyone who wants to understand your programs.
+Below is an example of our first program Helloworld.java with some
+javadoc included. </a></p>
+<div class="figure">
+<p><a name="N4001F3"><b>Figure 3.2. Helloworld Javadoc</b></a></p>
+<pre class="programlisting"><a name="N4001F3"><tt>figures/fundamentals/HelloworldJavadoc.java</tt><br><br>/** This is a multilined javadoc comment at the beginning<br> *  of the program.  You can put as much text as you wish<br> *  as long as the slash and double asterisk are at the <br> *  beginning and asterisk and slash are defined.<br> *  Remember both javadoc and comments are allowed.<br> */<br><br>/** Here is another javadoc comment on one line. */<br><br>/** <br> *  Here is a javadoc comment for classes.  The<br> *  Helloworld class is a simple example of a Java<br> *  program.<br> *<br> *  @version  2001.09.05<br> *  @author  Robert Estey<br> *  @author  Eric Richardson<br> */<br> public class HelloworldJavadoc { // Here&#8217;s a standard comment<br><br>  /**<br>   *  This is the main method starting the Java program.<br>   *<br>   *  @param args are the command line arguments sent<br>   *  into the main program.<br>   */ <br>   public static void main(String[] args) { // comment<br><br>     // This line prints out Helloworld<br>     System.out.println("Helloworld with javadoc"); <br>   } <br><br>} // comments can go anywhere     </a></pre>
+</div>
+<p><a name="N4001F3"> The javadoc execution below will generate the
+author, version number, private attributes and methods of the
+Helloworld.java file and send the javadoc output to the -d directory.
+Look at the destination directory and look at all the work that javadoc
+produced with very little work on your part. </a></p>
+<p><a name="N4001F3"> set JAVA_DOC_HTML=c:\myDirectory\javadoc </a></p>
+<p><a name="N4001F3"> javadoc -author -version -private -d
+%JAVA_DOC_HTML% HelloworldJavadoc.java </a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40020E">3.2. Data Types</a></h2>
+</div>
+</div>
+<p><a name="N40020E"> Java as described before is explicit towards data
+types. An integer is 4 bytes, not 2 or 8. No matter what Java Virtual
+Machine (JVM) integer is always 4 bytes. Other programming languages
+base their types on the hardware, Java bases on the JVM. The table
+below lists the primitive types and their values. </a></p>
+<div class="figure">
+<p><a name="N40020E"><b>Figure 3.3. Data Types</b></a></p>
+<p><a name="N40020E"><img src="figures/fundamentals/dataTypes.jpg"></a></p>
+</div>
+<p><a name="N40020E"> The char primitive type is of special interest.
+Java conforms to the Unicode specification which means that every known
+character in the world can be designated by a hexadecimal value.
+Unlike, ASCII which can only designate 255 characters, Unicode can
+represent 65536 characters. </a></p>
+<p><a name="N40020E"> Unicode characters are defined in Java as \unnnn,
+where nnnn is the value. For example, \u0007 is equivalent to the bell
+in ASCII. The following table contains some Java equivalents to Unicode
+values. For more information on Unicode go to the web site
+http://unicode.com. </a></p>
+<p><a name="N40020E"> Booleans are a logical operation which contain
+either true or false. Bytes are an eight bit representation of machine
+code. </a></p>
+<p><a name="N40020E"> Integers, shorts and longs are numbers without
+decimals, 0, positive and negative. Depending on your memory needs, you
+can use any of these representing an integer value. For example, if you
+need to address a value that is over 3 billion you will need to declare
+the variable as a long. </a></p>
+<p><a name="N40020E"> Floats and doubles are numbers with decimals,
+0.00, positive and negative. Depending on your memory needs, you can
+use any of these representing a float value. For example, if you need
+to address a value that is 2.8E+20 a float will work. </a></p>
+<div class="figure">
+<p><a name="N40020E"><b>Figure 3.4. Unicode Values</b></a></p>
+<p><a name="N40020E"><img src="figures/fundamentals/unicodeValues.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40022B">3.3. Casting</a></h2>
+</div>
+</div>
+<p><a name="N40022B"> Casting is the process of converting a data type
+to another data type. Some casting is implied by Java itself, e.g. int
+to float, float to double. However there are times when explicit
+declaration must be performed, e.g. float to int. </a></p>
+<div class="figure">
+<p><a name="N40022B"><b>Figure 3.5. Casting</b></a></p>
+<p><a name="N40022B"><img src="figures/fundamentals/casting.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400237">3.4. Naming
+Conventions</a></h2>
+</div>
+</div>
+<p><a name="N400237"> Java has specific naming conventions that must be
+followed or compile errors will occur. Attributes for instance, can use
+most characters with the exception of special characters that are not
+characters or digits in a language. For example, the variable cv-64,
+\u0063\u0076\u0a0d\u0036\u0034 both are legal and +cv-64 is not. The
+reason for the plus character (+ \u00) not being valid is Java is using
+that character to compute. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40023C">3.5. Statements</a></h2>
+</div>
+</div>
+<p><a name="N40023C"> Java has a concept much like many other
+programming languages called a statement. A statement is a section of
+code that requires a computer to perform some work. A statement ends
+with the semicolon character (; \u003b). When entering code your
+statement is not complete without the semicolon. An example would be
+int i; This is stating that an integer attribute i is being declared. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400241">3.6.
+Declarations and Assignments</a></h2>
+</div>
+</div>
+<p><a name="N400241"> Now that you have a idea about Naming and
+Statements you can start declaring and assigning attributes. An
+attribute as we recall is the state of an object. When declaring
+attributes they must have a type (object or primitive) declaration.
+This means the attribute when first being declared must have a type in
+front of the attribute name, e.g. int i; This is called declaration. </a></p>
+<p><a name="N400241"> Newly created attributes that were declared
+should have an initialized state. Although Java predefines attributes
+according to their type, a new attribute should be set to an
+initialized state as a good programming practice. To initialize state
+the attribute receives an assignment. The assignment character is the
+equals character (= \u003d). Assignments are executed from right to
+left. </a></p>
+<div class="figure">
+<p><a name="N400241"><b>Figure 3.6. Declaration Assignment Example</b></a></p>
+<pre class="programlisting"><a name="N400241"><tt>figures/fundamentals/DeclarationAssignment.java</tt><br><br>public class DeclarationAssignment {<br><br>  public static void main(String[] args) {<br><br>    int i;  // declaration example<br>    int j = 64;  // declaration and assignment example<br>    i = 64;  // assignment only example<br><br>    System.out.println("i's value is: " + i + " j's value is: " + j);<br>  }<br>}     </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400241"><b>Figure 3.7. Assignment Examples</b></a></p>
+<pre class="programlisting"><a name="N400241"><tt>figures/fundamentals/AssignmentExamples.java</tt><br>          <br>public class AssignmentExamples {<br><br>  public static void main(String[] args) {<br><br>    int i     = 64;       // integer declaration and assignment<br>    short s   = 64;       // short declaration and assignment<br>    long l    = 64L;      // long declaration and assignment<br>    float f   = 64.64f;   // float declaration and assignment<br>    double d  = 64.64d;   // double declaration and assignment<br>    boolean b = true;     // boolean declaration and assignment<br>    byte by   = 64;       // byte declaration and assignment<br>    char ch   = '\u0064'; // char declaration and assignment<br>    String string = new String();<br><br>    System.out.println("int's value is:     " + i);<br>    System.out.println("short's value is:   " + s);<br>    System.out.println("long's value is:    " + l);<br>    System.out.println("float's value is:   " + f);<br>    System.out.println("double's value is:  " + d);<br>    System.out.println("boolean's value is: " + b);<br>    System.out.println("byte's value is:    " + by);<br>    System.out.println("char's value is:    " + (string.valueOf(ch)));<br>  }<br>}     </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400268">3.7. Operators</a></h2>
+</div>
+</div>
+<p><a name="N400268"> Java has operators much like other programming
+languages. We will discuss some of the operators that are provided by
+the Java language. </a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40026D">3.7.1. Arithmetic Operators</a></h3>
+</div>
+</div>
+<p><a name="N40026D"> Java's arithmetic operators are the basic four
+operations. Add, Subtract, Multiply and Divide. The following table
+shows examples of using the arithmetic operators. Exponents and other
+operators that use symbols, e.g. (** \u00\u00) are not allowed in Java,
+since the language is Object-Oriented. </a></p>
+<div class="figure">
+<p><a name="N40026D"><b>Figure 3.8. Arithmetic Operators</b></a></p>
+<p><a name="N40026D"><img
+ src="figures/fundamentals/arithmeticOperators.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400279">3.7.2. Increment / Decrement
+Operators</a></h3>
+</div>
+</div>
+<p><a name="N400279"> Java uses the same increment and decrement
+operators as C and C++. To increment any attribute use the plus plus
+characters, e.g. (++ \u00\u00). To decrement use the minus minus
+characters, e.g. (-- \u00\u00). Both of these operations add
+(increment) or subtract (decrement) the current value in an attribute
+by one. </a></p>
+<p><a name="N400279"> The increment/decrement operators can be placed
+before or after the attribute. By placing the increment/decrement
+operator in front means to increment the attribute first then process
+any block of code after. Placing the increment/decrement operator after
+the variable means to increment the attribute after processing a block
+of code. </a></p>
+<div class="figure">
+<p><a name="N400279"><b>Figure 3.9. Increment Decrement Operators</b></a></p>
+<pre class="programlisting"><a name="N400279"><tt>figures/fundamentals/IncrementDecrementOperators.java</tt><br>          <br>public class IncrementDecrement {<br><br>  public static void main(String[] args) {<br><br>    int i = 0;<br><br>    System.out.println(i);	// i = 0<br>    System.out.println(i++);	// i = 0<br>    System.out.println(i++);  // i = 1<br>    System.out.println(++i);  // i = 3<br>    System.out.println(i--);    // i = 3<br>    System.out.println(--i);	// i = 1<br>  }<br>}     </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400290">3.7.3. Boolean Operators</a></h3>
+</div>
+</div>
+<p><a name="N400290"> Java has a set of boolean (logical) operations
+available and are evaluated as either true or false. A boolean
+operation that is used a lot is the equals equals character, e.g. (==
+\u00\u00). The equals equals character evaluates if the values on
+either side are equal. The exclamation equals character (!= \u00\u00)
+evaluates if the values are not equal. Java uses the exclamation symbol
+(! \u00) as not. Below are other boolean examples supported by Java. </a></p>
+<div class="figure">
+<p><a name="N400290"><b>Figure 3.10. Boolean Operators</b></a></p>
+<p><a name="N400290"><img
+ src="figures/fundamentals/booleanOperators.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40029C">3.7.4. Precedence</a></h3>
+</div>
+</div>
+<p><a name="N40029C"> Java's many different symbols representing
+operations follow a strict rule of precedence. This means if you have a
+statement, e.g. 4 + 5 * 6; what order of computation occurs. Do you get
+the value 34 or 54? Precedence evaluates a statement in a given order
+by the type of symbols used. In the case above the statement would
+evaluate to 34 because multiplication is higher in the order of
+precedence. </a></p>
+<p><a name="N40029C"> The highest order is the parenthesis symbols (()
+\u00\u00) and good programming practice uses parenthesis to not only
+clarify work but for an operation that you wish. If you wanted to the
+statement 4 + 5 * 6; to compute using the addition first then put
+parenthesis around the attributes, e.g. (4 + 5) * 6. This would give
+the result of 54. The following table shows some of the default
+precedence rules for Java. </a></p>
+<div class="figure">
+<p><a name="N40029C"><b>Figure 3.11. Precedence</b></a></p>
+<p><a name="N40029C"><img src="figures/fundamentals/precedence.jpg"></a></p>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4002AA">3.8. Strings</a></h2>
+</div>
+</div>
+<p><a name="N4002AA"> Strings are a sequence of characters. One of
+Java's fundamental designs was Simple. The C/C++ languages has the
+concepts of strings but they were difficult to work with because they
+were character arrays. You can also do this in Java but using the
+java.lang.String class simplified the process. String examples are in
+the figure below. </a></p>
+<p><a name="N4002AA"> Strings cannot use boolean operations because
+they are not primitives but Objects. To perform boolean operations you
+must use the methods in the java.lang.String class, e.g.
+string.equals("someValue"); This statement checks if the string object
+is equal to someValue. </a></p>
+<div class="figure">
+<p><a name="N4002AA"><b>Figure 3.12. Strings</b></a></p>
+<pre class="programlisting"><a name="N4002AA"><tt>figures/fundamentals/Strings.java</tt><br>          <br>public class Strings {<br><br>  public static void main(String[] args) {<br><br>    // empty string<br>    String string = "";<br><br>    // Initialization and assignment for a string<br>    String message = "message";<br><br>    // Concatenation example<br>    String one = "cv";<br>    String two = "64";<br>    String three = "";<br><br>    three = one + " " + two;<br><br>    // three = cv 64<br>    System.out.println("string three equals: " + three);<br><br>    // Substring example<br>    String four = "cv64";<br>    String five = four.substring(2,2);<br><br>    // five = 64<br>    System.out.println("string five equals: " + five);<br>  } <br>}        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4002C1">3.9.
+Formatting Output</a></h2>
+</div>
+</div>
+<p><a name="N4002C1"> To view output for your program the
+java.lang.System class contains methods that produce generic output
+features. To print the contents of a variable is as simple as
+System.out.println("message"); The word message appears in your output
+device, usually the screen. But there are times when formatting output
+is either required or desirable. </a></p>
+<p><a name="N4002C1"> Java has the java.text.Format class that enables
+formatting locale-sensitive (specification for country specific
+properties) information such as dates, messages and numbers. The System
+class is used to print out the formatted information. The following
+diagram gives some examples of formatted output. </a></p>
+<div class="figure">
+<p><a name="N4002C1"><b>Figure 3.13. Formatting Output</b></a></p>
+<pre class="programlisting"><a name="N4002C1"><tt>figures/fundamentals/FormattingOutput.java</tt><br>          <br>import java.text.DecimalFormat;<br><br>public class FormattingOutput {<br><br>  public static void main(String[] args) {<br><br>    DecimalFormat decimalFormat = new DecimalFormat("$,##0.##");<br>    float numerator   = 64.0f;<br>    float denomenator = 13.0f;<br>    int intValue = (int)numerator / (int)denomenator;	// 4<br>    float floatValue = numerator / denomenator;        	// 4.923077<br><br>    System.out.println("Integer Value: " + intValue);	// 4<br>    System.out.println("Float Value:   " + floatValue);	// 4.923077<br>    System.out.println("Small Dollars: " + <br>      decimalFormat.format(floatValue));		// $4.92<br><br>    System.out.println("Large Dollars: " +<br>      decimalFormat.format(floatValue * 1000));	// $4,923.08<br>  }<br>}     </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4002D8">3.10. Flow
+Control</a></h2>
+</div>
+</div>
+<p><a name="N4002D8"> A block of code is defined as one or more
+statements within a set of brackets ({} \u00\u00). Java just like most
+programming languages can control how we process information through
+the concept of Flow Control. Java has three basic flow controls
+conditional, looping and selection. </a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4002DD">3.10.1. Conditional Flow Control</a></h3>
+</div>
+</div>
+<p><a name="N4002DD"> Conditional flow control is performed by the
+if-else commands. If a boolean (logical) condition is true then do the
+block of code else do the else block of code. If there is no else block
+then do nothing. </a></p>
+<div class="figure">
+<p><a name="N4002DD"><b>Figure 3.14. Conditional Flow Control</b></a></p>
+<pre class="programlisting"><a name="N4002DD"><tt>figures/fundamentals/ConditionalFlowControl.java</tt><br>          <br>public class ConditionalFlowControl { <br><br>  public static void main(String[] args) {<br><br>    int smallInt = 13;<br>    int largeInt = 64;<br><br>    //  == is a logical comparison, not assignment.<br>    if (smallInt == largeInt) {<br>        System.out.println("This will never execute");<br>    } else {<br>        System.out.println(smallInt + " isn't equal to " + largeInt);<br>    }<br><br>    if (smallInt &lt; largeInt) {<br>      System.out.println(smallInt + " is smaller than " + largeInt);<br>    }<br><br>    if (smallInt &gt; largeInt) {<br>        System.out.println("This will never execute");<br>    } else {<br>        System.out.println(smallInt + " is smaller than " + largeInt);<br>    }<br>  }<br>}<br></a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4002F2">3.10.2. Looping Flow Control</a></h3>
+</div>
+</div>
+<p><a name="N4002F2"> Looping flow control is performed by the for,
+do-while or while commands. The do-while flow control will guarantee
+execution of the block of statements at least once. All looping flow
+controls will repeat execution of the block of statements until the
+boolean value is false. </a></p>
+<div class="figure">
+<p><a name="N4002F2"><b>Figure 3.15. Looping Flow Control</b></a></p>
+<pre class="programlisting"><a name="N4002F2"><tt>figures/fundamentals/LoopingFlowControl.java</tt><br>          <br>public class LoopingFlowControl {<br><br>  public static void main(String[] args) {<br><br>    int i = 0;<br><br>    // for loop example<br>    System.out.println("\nFor");<br><br>    for(int j = 0; j &lt; 10; j++) {<br>      System.out.print(j);<br>    }<br><br>    // while example<br>    i = 0;<br>    System.out.println("\nWhile");<br><br>    while(i &lt; 10) {<br>      System.out.print(i++);<br>    }<br><br>    // do while example<br>    i = 0;<br>    System.out.println("\nDo While");<br><br>    do {<br><br>      System.out.print(i++);<br>    } while(i &lt; 10);<br>  }<br>}        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400307">3.10.3. Switch Flow Control</a></h3>
+</div>
+</div>
+<p><a name="N400307"> The switch flow control will execute a block of
+code depending on the value of an attribute. </a></p>
+<div class="figure">
+<p><a name="N400307"><b>Figure 3.16. Switch Flow Control</b></a></p>
+<pre class="programlisting"><a name="N400307"><tt>figures/fundamentals/SwitchFlowControl.java</tt><br>          <br>public class SwitchFlowControl {<br><br>  public static void main(String[] args) {<br><br>    for(int i = 0; i &lt; 6; i++) {<br><br>      switch(i) {<br><br>        case 0:<br>          System.out.println("Case 0: " + i);<br>        break;<br><br>        case 1:<br>          System.out.println("Case 1: " + i);<br>        break;<br><br>        case 2:<br><br>        case 3:<br>          System.out.println("Case 2 or 3: " + i);<br>        break;<br><br>        case 4:<br><br>        default:<br><br>          System.out.println("Case 4 or other values: " + i);<br><br>        break;<br>      }<br>    }<br>  }<br>}        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40031C">3.10.4. Break and Continue</a></h3>
+</div>
+</div>
+<p><a name="N40031C"> There are times when you with to leave a block of
+code before the logical decision. Java has a break command which when
+encountered will automatically end processing of the block (break out
+of the block) and execute the next statement outside of the block. The
+break command can also break to a label in the program. </a></p>
+<p><a name="N40031C"> Java also has a continue command that stops the
+current iteration and starts with a new iteration. The continue command
+can also continue to a label in the program where the code is executed.
+</a></p>
+<p><a name="N40031C"> Break breaks out of the block. Continue stops
+executing in the block, increments or decrements the attribute and
+starts at the beginning of the block. Continue doesn't break out of the
+block. </a></p>
+<div class="figure">
+<p><a name="N40031C"><b>Figure 3.17. Break Continue Label Flow Control</b></a></p>
+<pre class="programlisting"><a name="N40031C"><tt>figures/fundamentals/BreakContinueLabelFlowControl.java</tt><br>          <br>public class BreakContinueLabelFlowControl {<br><br>  public static void main(String[] args) {<br><br>    int   year     = 1;<br>    int   goal     = 100000;<br>    float balance  = 0f;<br>    float interest = 0.0725f;<br>    float payment  = 2000f;<br><br>    while (year &lt;= 30) {<br><br>      balance = (balance + payment) * (1 + interest);<br><br>      // if loan paid off then break out of loop<br>      if (balance &gt; goal) break;<br><br>      // if 30 years of payments then continue out of loop<br>      if (year == 30) continue;<br><br>      System.out.println(<br>        "year: " + year + <br>        "\tbalance: " + balance + <br>        "\tpayment: " + payment);<br><br>      year++;<br>    }<br>  }<br>}        </a></pre>
+</div>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400335">3.11. Arrays</a></h2>
+</div>
+</div>
+<p><a name="N400335"> Arrays are a number of similar items arranged in
+a specific order. Arrays are navigated by index keys, starting with
+position 0 and incremented by integer values. Mentioned before C/C++
+doesn't have a String class so C/C++ use an array of characters to
+store values as a String. </a></p>
+<div class="figure">
+<p><a name="N400335"><b>Figure 3.18. Arrays</b></a></p>
+<pre class="programlisting"><a name="N400335"><tt>figures/fundamentals/Arrays.java</tt><br>          <br>public class Arrays {<br><br>  public static void main(String[] args) {<br><br>    int[]   arrayOfIntegers = new int[10];<br>    float[] arrayOfFloats = new float[10];<br><br>    for (int i = 0; i &lt; 10; i++) {<br>      arrayOfIntegers[i] = i;<br>      arrayOfFloats[i] = i * 13.64f;<br>    }<br><br>    for (int i = 0; i &lt; 10; i++) {<br>      System.out.println(arrayOfIntegers[i] + " " + <br>        arrayOfFloats[i]);<br>    }<br>  }<br>}<br></a></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

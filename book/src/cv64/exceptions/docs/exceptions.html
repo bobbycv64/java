@@ -1,0 +1,966 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>exceptions</title>
+</head>
+<body>
+<div class="chapter" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div>
+<h2 class="title" style="font-weight: normal; text-align: center;"><small><font
+ color="#000000">Error Handling</font></small></h2>
+We will discuss Error Handling which includes Exceptions and
+Assertions.&nbsp; Error handling is an
+integral part of Java and controls the process of a runtime program,
+Java Virtual Machine (JVM) or even the Operating System (OS).&nbsp;
+Java has two definitions for things that go wrong.&nbsp; <span
+ style="font-weight: bold;">Errors</span> are events that occur when
+the JVM, OS
+or something besides the application program is having problems.&nbsp;
+Examples would include compile<font color="#ff0000">-</font>time
+errors, syntax errors in a class, insufficient memory of the OS to
+create a process, and security issues."&nbsp; <span
+ style="font-weight: bold;">Exceptions</span>, also
+known as Runtime Exceptions, occur when an application is
+executing.&nbsp; Exceptions can have OS issues, e.g. file not found,
+memory extensions or invalid
+computations, such as division by zero.&nbsp; Since Java is object
+oriented, exceptions are also objects and have a
+type associated with them.&nbsp; Developers can also create their own
+exception types. <br>
+</div>
+</div>
+<div class="section">
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Note:&nbsp;
+Structure programming behavior is called a function whereas
+Object-Oriented behavior is called a method.&nbsp; </span><br>
+<br>
+Exceptions in programming can be
+better understood
+when compared to error handling techniques used previously in
+procedural
+languages.&nbsp; Some of the advantages of exception handling will be
+apparent with this illustrative approach.&nbsp; Standard Java libraries
+use
+Exceptions, using your created exceptions is not
+required.&nbsp; We can emulate procedural handling of errors in Java
+for this
+perspective.&nbsp; The C Programming language is an example, where
+procedural practices are used.&nbsp; Since the syntax of C is very much
+like Java, the examples will have a C like approach.<br>
+<p>In a procedural
+language, there are two primary functions of handling error or
+exceptional conditions.&nbsp; The first function involves returning
+the results or in our examples, a method.&nbsp; The result is checked
+and the
+program continues as if the function worked correctly or
+handles the problem and continues with the same flow of control or
+perhaps another branch of execution.&nbsp; The other function involves
+using
+global variables or a shared data structure.&nbsp; This
+function would change the value of the shared variables and then the
+caller of the function would check these after the function returns to
+determine the course of action.&nbsp; There are certainly other more
+advanced
+techniques but this will give the reader the procedural style
+of error handling.&nbsp; Figure 1 illustrates the
+return value function of error handling.<br>
+</p>
+<div class="figure">
+<table
+ style="text-align: left; width: 387px; height: 567px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-family: helvetica,arial,sans-serif;">
+      <td style="vertical-align: top;"><small>/**<br>
+* The Procedural class checks the range between zero and nine.<br>
+* @return 0 if okay, non-zero if out of range<br>
+*/<br>
+class Procedural {<br>
+      <span style="font-weight: bold;">&nbsp; 1 public static int
+checkRange(int value) {</span><br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (value &lt; 0 || value &gt; 9) {<br>
+&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return -1;<br>
+&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; return 0;<br>
+&nbsp;&nbsp;&nbsp; }&nbsp; <br>
+&nbsp; }<br>
+      <br>
+      <span style="font-weight: bold;">&nbsp; 2 public static void
+main(String[] args) {</span><br>
+      <br>
+&nbsp;&nbsp;&nbsp; int value = 4;<br>
+&nbsp;&nbsp;&nbsp; int error = checkRange(value);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (error != 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* handle problem */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print("Out of range: "
++ value + "\n");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; value = 10;<br>
+&nbsp;&nbsp;&nbsp; error = checkRange(value);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (error != 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print("Out of range: "
++ value + "\n");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.exit(0);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 1 - Procedure
+Exception Class<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+The checkRange function, Line 1, takes an integer and if the value is
+between
+0 and 9, the function returns zero which is the traditional return
+value
+for success.&nbsp; Otherwise the function returns a non-zero value
+which
+is considered a failure.&nbsp; The main function, Lines 2, calls the
+checkRange
+function
+twice, once for success and once for failure and prints the result to
+the console.&nbsp; Note that for every call to the function, there is
+one line of error handling.&nbsp; This code is not part of the normal
+flow of the program
+and
+detracts from readability.&nbsp; The next example uses the shared
+global
+variable function to hold the previous return value from the function.<br>
+<hr style="width: 100%; height: 2px;"></div>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 388px; height: 612px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-family: helvetica,arial,sans-serif;">
+      <td style="vertical-align: top;"><small>class Procedural2 {<br>
+      <br>
+&nbsp; /** holds return value */<br>
+&nbsp; public static int error;<br>
+      <br>
+&nbsp; /**<br>
+&nbsp;&nbsp; * Checks range between 0-9<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * Sets global error variable to 0 if okay, non-zero if out
+of range<br>
+&nbsp;&nbsp; */<br>
+&nbsp; public static void checkRange(int value) {<br>
+&nbsp;&nbsp;&nbsp; if (value &lt; 0 || value &gt; 9) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; error = -1;<br>
+&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; error = 0;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; int value = 4;<br>
+&nbsp;&nbsp;&nbsp; checkRange(value);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (error != 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* handle problem */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print("Out of
+range: " + value + "\n");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; value = 10;<br>
+&nbsp;&nbsp;&nbsp; checkRange(value);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (error != 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.print("Out of
+range: " + value + "\n");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; System.exit(0);<br>
+&nbsp; }<br>
+}</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 2 - Procedure
+Exception Class (Part 2)</b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Notice that when using a global variable, the
+return value is freed up to return useful information such as data
+transformed by the function, Figure 2.&nbsp; This is one of the main
+advantages
+of a
+shared data structure.&nbsp; However, in multi-threaded code, this
+technical
+would be problematic at best.&nbsp; Much more work would have to be
+done to
+make this code thread safe.&nbsp; To simplify the error handling we
+could
+create a checkError that checks the error value and does what
+ever is appropriate based on the error code.&nbsp; This could
+encapsulate the
+if statement and logging and other tasks inside the function rather
+than
+having the code inline.&nbsp; There still would be a error function
+call
+after
+each program function call. This
+is
+left as an exercise for the reader.
+</div>
+<p>The two examples in Figure 2, illustrate the two common functions of
+handling errors by returning status values from functions and
+by using a shared data structure which in this case is one
+variable.&nbsp;
+Some of the problems with using return values is that the error
+checking is done in the normal flow of the program by the caller and
+the other problem is that the function might have been able to return
+some useful information such as a result but now returns the error
+code.&nbsp; Of course there are ways around these problems but most are
+compromises at best and still intrude on program design.<br>
+</p>
+<p><span style="font-weight: bold;">Note:&nbsp; Return values have
+always been part of the UNIX tradition where a
+program will return its run status to the calling program which is very
+often the shell program. </span><br>
+</p>
+<p>This simple but highly effective interface
+contract has helped to allow programs to be combined in ways not
+imagined by the creator of the program.&nbsp; This also allows
+scripting
+or other languages to combine programs very effectively.&nbsp; In fact,
+in
+our Java example above we could have returned a non-zero value on
+failure and then the Java program could have returned its status to the
+shell.&nbsp; In this case we call System.exit(0) in all cases.&nbsp;
+The
+C programming language main
+function can return int but in Java we have to call exit since main
+returns void.&nbsp; All Java main functions should exit properly to
+the calling program.&nbsp; This is brought up so that the reader can be
+aware
+of the great power of return values.&nbsp; Many times returning a value
+from
+a function is useful so you will see this quite often in Java.&nbsp;
+Cases such
+as stream handling are very procedural and return values very useful
+when used inside flow control statements.&nbsp; Inside Object Oriented
+programs we will see that exceptions are the best approach for
+non-procedure functions.&nbsp; Now we will discuss exceptions and how
+they
+augment return values in code.</p>
+<hr style="width: 100%; height: 2px;">Exceptions are Java objects that
+hold state and
+can be Serialized.&nbsp; Since they are serializable, they can be
+passed from
+server to client using Remote Method Invocation (RMI).&nbsp; RMI is the
+built-in
+distributed object system in Java.&nbsp; Figure 3 shows the exception
+hierarchy.&nbsp; All the exceptions shown are in the package <span
+ class="emphasis"><i>java.lang</i></span>
+(default package).<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 355px; height: 139px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-family: helvetica,arial,sans-serif;">
+      <td style="vertical-align: top;">
+      <ul>
+        <li><span class="inlinemediaobject">Object</span></li>
+        <ul>
+          <li><span class="inlinemediaobject">Throwable (implements
+Serializable)</span></li>
+          <ul>
+            <li><span class="inlinemediaobject">Error ...</span></li>
+            <ul>
+              <li><span class="inlinemediaobject">Exception ... </span></li>
+              <ul>
+                <li><span class="inlinemediaobject">RuntimeException ...</span></li>
+              </ul>
+            </ul>
+          </ul>
+        </ul>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 3 - Exception
+Hierarchy</b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section">
+<div class="figure" style="font-family: helvetica,arial,sans-serif;"><br>
+Exceptions
+derive from the class Throwable.&nbsp; From Throwable derives both
+Error and
+Exception.&nbsp; Error types are usually reserved for the Virtual
+Machine implementers and are usually fatal and rarely caught by user
+programs.&nbsp; RuntimeException is derived from Exception.&nbsp; Both
+RuntimeException and Error are rarely extended because they are not
+part of the method contract which is defined by the method
+signature.&nbsp; As<br>
+mentioned before, contracts are really fundamental to OO programming so
+methods that throw exceptions should be included as part of the method
+signature.&nbsp; Java makes this very easy for the developer as both
+Error and RuntimeException are called <span class="emphasis"
+ style="font-weight: bold; font-style: italic;">unchecked</span><span
+ style="font-weight: bold; font-style: italic;">
+exceptions</span> while all exceptions extending Exception are called <span
+ class="emphasis" style="font-weight: bold; font-style: italic;">checked</span><span
+ style="font-weight: bold; font-style: italic;"> exceptions</span>.&nbsp;
+Checked exceptions are required to be
+part of the method signature.&nbsp; If a method throws a checked
+exception, the caller must
+catch the exception or a compile time error will occur.&nbsp; When a
+method is created that throws a checked exception, a compile error will
+occur unless declared as shown in Figure 4 lines 1 and 2.<br>
+<br>
+</div>
+<table
+ style="text-align: left; width: 450px; background-color: rgb(204, 255, 255); height: 158px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small style="font-weight: bold;">1
+public void
+rangeCheck(int
+value) throws Exception {</small><br>
+&nbsp;&nbsp;&nbsp; <small>System.out.println("In rangeCheck, value: "
++ value);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (value &lt; 0 || value &gt; 9) {<br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throw new Exception("Out of range, 0-9. Value: " + value);</span><br>
+&nbsp;&nbsp;&nbsp;
+}<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 4 - Throwing an
+Exception </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Figure 5 shows a method call in a
+try block and provides a catch block to handle the
+exception.&nbsp; An optional finally block can be added which allows
+the
+programmer to clean up resources or other unfinished details for both
+normal runs or runs where an exception is thrown.&nbsp; The finally
+block
+will be executed after the try block is completed or after an exception
+is thrown in the try block which suspends execution of the try
+block.&nbsp; Nothing will be executed after an exception is thrown in a
+try block, nothing is executed in the catch block or any other block
+once an exception is thrown.&nbsp; Figure 5 is an example which
+shows the
+method above being called.<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 374px; height: 151px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-family: helvetica,arial,sans-serif;">
+      <td style="vertical-align: top;"><small> try {</small><br>
+      <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; object.rangeCheck(3);<br>
+} catch(Exception exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("In catch: " +
+exception.getMessage());<br>
+} finally {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("In finally:
+Optional");<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 5 - try - catch
+- finally<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Figure 6 shows the complete example which illustrates
+exceptions and the try, catch, finally block.<br>
+<br>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 460px; height: 473px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <span
+ style="font-family: helvetica,arial,sans-serif;"> /**</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><span style="font-family: helvetica,arial,sans-serif;"> *
+Checks
+range between 0-9</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> *</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> * @param
+value the value to check </span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> *
+@exception Exception if value out of range, 0-9</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> */<br>
+      </span><span style="font-family: helvetica,arial,sans-serif;">class
+Except {</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+public void rangeCheck(int value) throws Exception {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In rangeCheck, value: " + value);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (value &lt; 0 || value &gt; 9) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throw new Exception("Out of range, 0-9. Value: " + value);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+public static void main(String[] args) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Except obj = new Except();</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+try {</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(3);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(10); // exception thrown</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(5); // not reached</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><span style="font-family: helvetica,arial,sans-serif;">
+catch(Exception exception) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In catch: " + exception.getMessage());</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><span style="font-family: helvetica,arial,sans-serif;"> finally
+{</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In finally: Optional");</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">}</span></small>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 6 - throwing -
+try - catch - finally<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The program output is as follows:<br>
+<br>
+</div>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 194px; height: 135px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <small><span
+ style="font-family: helvetica,arial,sans-serif;">$ java Except</span></small><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><span style="font-family: helvetica,arial,sans-serif;">In
+rangeCheck, value: 3</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In
+rangeCheck, value: 10</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In catch:
+Out of range, 0-9. Value: 10</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In
+finally: Optional</span></small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 7 - Program
+Output<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The first section we have looked at basic error and exception handling
+including using a Java exception with the try, catch, and finally
+block.&nbsp; We have seen the importance of return values from main
+methods and functions for the calling program or calling code as this
+is an important part of the interface or contract of the method.&nbsp;
+In Java, the throws clause is part of the method signature and thus
+a contract for the method. </div>
+<div class="section">
+<div class="titlepage">
+<div></div>
+</div>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Creating
+Exceptions</span><br>
+<br>
+This section we will create an Exception and
+use with the previous example.&nbsp; Exceptions are just classes like
+other
+Java classes and thus can hold state and have additional methods.&nbsp;
+To match the previous examples, we will create a RangeException
+class that holds the integer value and the minimum and maximum range
+supported
+by the method.&nbsp; Figure 8 is the code for the newly created
+exception.<br>
+<br>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 389px; height: 266px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <small><span
+ style="font-family: helvetica,arial,sans-serif;">class RangeException
+extends Exception {</span></small><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public int min;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public int max;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public int value;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public RangeException(int min, int max, int value) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// message to superclass ctor</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+super(value + " out of range: " + min + "-" + max);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.min = min;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.max = max;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this.value = value;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">}</span></small>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 8 - Creating an
+Exception<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The constructor does all the work in this method by creating a format
+for the message, for the super class and saves the state.&nbsp; The
+code
+that catches this exception can then use the message via the standard
+getMessage method or can obtain the min, max, and value fields and
+act on this information.
+</div>
+<p>Figure 9, shows the previous example
+modified to use the RangeException class.&nbsp; The range min and
+max are now parameters to help make an easier integration.<span
+ style="font-family: monospace;"><br>
+</span></p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 449px; height: 550px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <small><span
+ style="font-family: helvetica,arial,sans-serif;">class Except2 {</span></small><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public int min = 0;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public int max = 9;</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> <br>
+&nbsp;&nbsp; /**</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+* Checks range between min-max</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+*</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+* @param value the value to check </span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+* @exception Exception if value out of range, min-max</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;
+*/</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public void rangeCheck(int value) throws RangeException {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In rangeCheck, value: " + value);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (value &lt; min || value &gt; max) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp;&nbsp; throw new RangeException(min, max, value);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+public static void main(String[] args) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Except2 obj = new Except2();</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+try {</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(3);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(10); // exception thrown</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+obj.rangeCheck(5); // not reached</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><span style="font-family: helvetica,arial,sans-serif;">
+catch(RangeException exception) {</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In catch: " + exception.getMessage());</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(exception);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Min: " + exception.min);</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><span style="font-family: helvetica,arial,sans-serif;"> finally
+{</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("In finally: Optional");</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">&nbsp;&nbsp;
+}</span><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">}</span></small>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 9 - Creating
+Exception Code<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+The program output is as follows:
+<p><span style="font-family: monospace;"></span> </p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 209px; height: 181px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <small><span
+ style="font-family: helvetica,arial,sans-serif;">$ java Except2</span></small><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><br style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In
+rangeCheck, value: 3</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In
+rangeCheck, value: 10</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In catch:
+10 out of range: 0-9</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">RangeException:
+10 out of range: 0-9</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">Min: 0</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;">In
+finally: Optional</span></small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 10 - Program
+Output<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p></p>
+<p>In the catch block we have added printing the
+exception which calls the toString method which in a super
+class is defined to return the classname plus the message.&nbsp; We
+have
+changed the code to catch our new exception type so we can access the
+state variable min.&nbsp; As you can see this simplifies the code and
+makes more useful and reusable.</p>
+</div>
+<div class="section">
+<div class="section">
+<div class="titlepage">
+<div>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Using
+Runtime Exceptions</span>
+<h3 class="title" style="font-weight: normal;"><small>As was discuss
+previously, using checked versus unchecked exceptions is
+preferred.&nbsp; There are a few
+exceptions.&nbsp;
+The following RuntimeExceptions should be used when
+appropriate.</small></h3>
+</div>
+</div>
+<table summary="Simple list" class="simplelist"
+ style="background-color: rgb(204, 255, 255);" border="0">
+  <tbody>
+    <tr>
+      <td>IllegalArgumentException: An illegal argument is
+passed to the method such as the wrong class type.</td>
+    </tr>
+    <tr>
+      <td>IllegalStateException: Object is not in the correct
+state for the requested operation.</td>
+    </tr>
+    <tr>
+      <td>NullPointerException: Use like IllegalArgumentException
+when a null value is involved.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 11 - Runtime
+Exceptions<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section">
+<div class="titlepage">
+<div><br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Exceptional
+Conditions</span>
+<h3 class="title" style="font-weight: normal;"><small>The question of
+when to use an exception rather
+than a return value is part of design and a judgment rather than any
+fixed formula.&nbsp; This section will give a few ideas and examples to
+help
+with the selection process.</small></h3>
+<h3 class="title" style="font-weight: normal;"><small>In the IO streams
+libraries when reading a stream,
+normally we expect to eventually get to the end of a stream.&nbsp; In
+this
+case the method read generally returns -1 for end of file and
+other wise returns the number of bytes read. If no successful flag can
+be
+returned or if an explicit method check for status can be used, this
+could be a candidate for an exception.&nbsp; The <span class="emphasis"><i>java.io</i></span>
+uses both approaches as the package defines EOFException as
+well as using the flag returned from a method.</small></h3>
+<h3 class="title" style="font-weight: normal;"><small>The last area to
+discuss are business exceptions.&nbsp;
+Checking a return value or status object takes discipline on the part
+of the client programmer.&nbsp; In some cases this may be appropriate
+to
+establish critical but normal operations that throw exceptions.&nbsp;
+An
+example could be a banking system where the client must handle
+overdraft or non sufficient funds which makes the idea of an
+OverdraftException
+a good idea.&nbsp; Failure to do so would be very bad and not the
+normal case but happens quite often.&nbsp; This is type of situation
+where
+use
+of a business exception makes sense.&nbsp; Business exceptions and
+hierarchies could get out of hand in a quick hurry if some strict
+criteria is not met.</small></h3>
+<hr style="width: 100%; height: 2px;"><big>Stack Trace is your
+friend</big>
+<h3 class="title" style="font-weight: normal;"><small>Many of the
+methods in the Throwable
+class which is the top most exception class are quite useful.&nbsp; We
+saw
+the getMessage and the toString methods earlier.&nbsp;
+The printStackTrace is a very good method to call in the
+catch block.&nbsp; This method is overloaded two times.&nbsp; The no
+argument method prints the message to standard error while the other
+methods print to a
+PrintWriter
+or a PrintStream of your choice.&nbsp; For normal single threaded
+code these work pretty well for identifying errors as the stack trace
+shows the line numbers where the exception occurred. If the reader
+places the call exception.printStackTrace() into the catch block of
+the previous example, the following message will be printed shown in
+Figure 12.</small></h3>
+<small></small></div>
+<small></small></div>
+</div>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><small></small><small></small></div>
+<small></small></div>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 308px; height: 90px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> <small><span
+ style="font-family: helvetica,arial,sans-serif;">RangeException: 10
+out of range: 0-9</span></small><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <small><span style="font-family: helvetica,arial,sans-serif;"> at
+Except3.rangeCheck(Except3.java:14)</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+      <span style="font-family: helvetica,arial,sans-serif;"> at
+Except3.main(Except3.java:22)</span></small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 12 - Stack Trace<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+This shows that the exception occurred at line 22
+in main which came from line 14 in rangeCheck.&nbsp; This
+makes it pretty easy to find the problem as long as you have the source
+code where the problem occurred in the trace.&nbsp; You will get the
+whole
+call stack so work backward to find the source of the problem.
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Assertions</span>
+<p class="docText">Assertions are relatively new to Java, starting with
+version 1.4 and add messaging to an application.&nbsp; Assertions are
+Boolean expressions.&nbsp; Figure 13 shows a coding example of an
+assertion.&nbsp; This assertion example prints out "Successful" if args
+is greater than 1.&nbsp; Else send out the message "args less than 1"
+and exit the program.&nbsp; The assert syntax is:&nbsp; <span
+ style="font-weight: bold;">assert attribute1 booleanExpression
+attribute2 : "Text";</span><br>
+</p>
+<table
+ style="text-align: left; width: 280px; height: 133px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>public class
+AssertExample {<br>
+&nbsp; <br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; assert args &gt; 1 : "args less than 1";<br>
+      <br>
+&nbsp;&nbsp;&nbsp; System.out.println("Successful");<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 13 - Assert
+Example<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p class="docText">Assertion programs require additional parameters
+when compiling and executing, Figure 14 shows the compile and execution
+commands.<br>
+</p>
+<table
+ style="text-align: left; height: 85px; width: 769px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Compiling<br>
+      </td>
+      <td style="vertical-align: top;">javac -source 1.4
+javaSourceFile, e.g. javac -source 1.4 AssertExample.java<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Executing<br>
+      </td>
+      <td style="vertical-align: top;">java -ea javaSourceFile, e.g.
+java -ea AssertExample<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 14 - Assertion
+Commands<br>
+      </b></small></td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 100%; height: 2px;"><b
+ style="font-family: helvetica,arial,sans-serif;">Summary</b>
+<p></p>
+This lecture discussed how to setup an application to handle exceptions
+using the try-catch-finally structure, throw and create your own
+exceptions.&nbsp; Exceptions enable programs to continue processing
+versus stop execution.<br>
+<span style="font-weight: bold;"></span>
+<hr style="font-family: helvetica,arial,sans-serif;" size="2"
+ width="100%"><b style="font-family: helvetica,arial,sans-serif;">References</b>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><a name="exceptions"></a><a href="http://cv64.us">Exceptions</a>,
+http://cv64.us,
+Accessed 06 January 2000</li>
+  <li><a name="javaCodingConventions"></a><a
+ href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">Java
+Coding Conventions</a>,
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html, Accessed
+06 January 2000</li>
+</ul>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt="" style="width: 32px; height: 32px;" align="left"><small><font
+ face="Arial,Helvetica"><a href="mailto:information@cv64.us">Web
+Contact</a></font></small><br>
+<small><font face="Arial,Helvetica">
+Last modified:&nbsp; 2003 December 31</font></small>
+<p></p>
+</div>
+</div>
+</div>
+</body>
+</html>

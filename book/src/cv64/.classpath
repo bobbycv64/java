@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="j2ee/cv64/WEB-INF/src/ejb"/>
+	<classpathentry kind="lib" path="j2ee/cv64/ee/DatabaseApp_MySQLClient.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

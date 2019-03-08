@@ -1,0 +1,273 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <link href="http://cv64.us/cv64.bmp" rel="SHORTCUT ICON">
+  <meta name="MSSmartTagsPreventParsing" content="TRUE">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.75 [en] (Windows NT 5.0; U) [Netscape]">
+  <title>Java 101</title>
+  <meta name="description" content="Java 101">
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"
+ alink="#ff0000" link="#0000ee" vlink="#551a8b">
+<center style="font-family: Arial;"><b><font color="#000000"><font
+ size="+3">Java 101 Page</font></font></b></center>
+<p style="font-family: Arial;"><font color="#000000">I have written
+this page to help others on their new adventures with the Java
+programming language.&nbsp; This is a step by step document on how to
+download, install and execute the Java programming
+language.&nbsp; Included in this document is a simple HelloWorld
+application to make sure your compiler is working
+correctly.&nbsp;&nbsp; If you want to see great Java success
+stories please go to the world famous Java web page:<br>
+</font></p>
+<div style="text-align: center; font-weight: bold; font-family: Arial;"><font
+ color="#000000"><a href="http://java.sun.com">http://java.sun.com</a></font></div>
+<p style="font-family: Arial;"> </p>
+<p style="font-family: Arial;"><b><font color="#000000"><font size="+1">1)&nbsp;
+Download</font></font></b> </p>
+<p style="font-family: Arial;"><font color="#000000">Go to the Java
+site and get the Java Standard Edition (SE)<a
+ href="http://java.sun.com/j2se/">
+</a>and
+make
+sure you download the </font>Java SE Development
+Kit (JDK) which includes the Java Runtime Environment (JRE)<font
+ color="#000000">. &nbsp;The
+JRE only executes Java programs, you can't do any development with
+the
+JRE, only execution. &nbsp;You don't need the Enterprise Edition (EE)
+because
+this
+is Java 101, not Java 900.&nbsp; Read all the instructions and download
+the
+software to your system.&nbsp; <span style="font-weight: bold;">Remember
+where you put the download, my suggestion, put on your DESKTOP.&nbsp;
+Click on the image below:<br>
+</span></font></p>
+<p style="font-family: Arial;"><a
+ href="http://java.sun.com/javase/downloads/index.jsp" target="_blank"><img
+ alt="GetJava Download Button" title="GetJava"
+ src="http://java.com/en/img/everywhere/getjava_med.gif?cid=jdp106568"
+ style="border: 0px solid ; margin: 8px; width: 100px; height: 43px;"></a></p>
+<p style="font-family: Arial;"><font color="#000000"><span
+ style="font-weight: bold;">The suggested download for Java at the
+time of this webpage release is:<br>
+</span></font></p>
+<p style="font-family: Arial;"><font color="#000000"><span
+ style="font-weight: bold;"></span></font></p>
+<table
+ style="text-align: left; width: 652px; height: 30px; font-family: Arial;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">JDK / JRE with NetBeans IDE<br>
+      </td>
+      <td style="vertical-align: top;">
+      <h3>JDK 6 Update 6 with NetBeans 6.1</h3>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-family: Arial;"><font color="#000000"><span
+ style="font-weight: bold;"><big>2a)&nbsp; Installation Directories - <span
+ style="color: rgb(204, 0, 0);">Pay Attention Here, SUPER IMPORTANT
+STEP!!!</span></big><br>
+</span></font></p>
+<ul style="font-family: Arial;">
+  <li><small><font color="#000000"><big style="color: rgb(204, 0, 0);"><big><big>Put
+the JDK, JRE and NetBeans in non-default
+directories.</big></big></big></font></small></li>
+  <li><small><font color="#000000"><big style="color: rgb(204, 0, 0);"><big><big>Do
+not go with the
+defaults, e.g. Program Files, you will only burn yourself in the future.</big></big></big></font></small></li>
+</ul>
+<table style="text-align: left; width: 50%; font-family: Arial;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Operating System<br>
+      </td>
+      <td style="vertical-align: top;">JDK<br>
+      </td>
+      <td style="vertical-align: top;">JRE<br>
+      </td>
+      <td style="vertical-align: top;">NetBeans<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Unix / Linux / Macintosh<br>
+      </td>
+      <td style="vertical-align: top;">/usr/java/jdk<br>
+      </td>
+      <td style="vertical-align: top;">/usr/java/jre<br>
+      </td>
+      <td style="vertical-align: top;">/usr/java/netbeans<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Windows<br>
+      </td>
+      <td style="vertical-align: top;">c:\java\jdk<br>
+      </td>
+      <td style="vertical-align: top;">c:\java\jre<br>
+      </td>
+      <td style="vertical-align: top;">c:\java\netbeans<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-family: Arial;"><b><font size="+1">2b)&nbsp;
+Installation - Linux</font></b><br>
+</p>
+<div style="margin-left: 40px; font-family: Arial;">Edit your
+environment variables and
+put the following values:<br>
+<br>
+export JAVA_HOME=&lt;where you loaded the jdk&gt;/bin<br>
+export PATH=$PATH:$JAVA_HOME<br>
+</div>
+<p style="margin-left: 40px; font-family: Arial;"><span
+ style="font-weight: bold;">Example:&nbsp;</span>
+<br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;">export
+JAVA_HOME=/usr/java/jdk<br>
+export PATH=$PATH:$JAVA_HOME/bin<br>
+</p>
+<p style="font-family: Arial;"><b><font size="+1">2c)&nbsp;
+Installation - Windows</font></b> </p>
+<p style="margin-left: 40px; font-family: Arial;">The
+installation is self extracting so just double click the file and
+follow the instructions.&nbsp; <br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;">Create a JAVA_HOME
+environment variable as follows:<br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;"><img
+ src="javaHome.png" alt=""><br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;">Update the Path
+environment variable as follows, appending:<br>
+<br>
+<big><big><span style="font-weight: bold;">;%JAVA_HOME%\bin</span></big></big><br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;"><img
+ style="width: 347px; height: 147px;" src="path.jpg" alt=""></p>
+<p style="margin-left: 40px; font-family: Arial;">You can also do this
+from the command line as follows:<br>
+</p>
+<div style="margin-left: 40px; font-family: Arial;"> </div>
+<p style="margin-left: 40px; font-family: Arial;"><b>set
+JAVA_HOME=</b>&lt;where you loaded
+the jdk&gt;<br>
+<b>set PATH=%PATH%</b>; %JAVA_HOME%\bin<br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;">For Example:<br>
+</p>
+<p style="margin-left: 40px; font-family: Arial;">set
+JAVA_HOME=c:\java\jdk<br>
+set PATH=%PATH%;%JAVA_HOME%<big>\bin</big></p>
+<p style="font-family: Arial;"> </p>
+<p style="font-family: Arial;"><b><font size="+1">2d)&nbsp;
+Installation - Macintosh</font></b> </p>
+<div style="margin-left: 40px; font-family: Arial;">Most
+Macintosh systems come with Java (Programming Language) and X11
+(Windowing Software) preloaded, if not then get your System disks and
+install Java and X11.&nbsp; You can perform a search for these
+products.&nbsp; If you see the Java folder then Java is installed, if
+you see X11R6 then X11 is installed.<br>
+<br>
+Double click on X11, this will bring up an xterm (X terminal)
+window.&nbsp; This is equivalent to command line.&nbsp; Leave the
+window open to test if Java is correctly installed on your system.<br>
+</div>
+<p style="font-family: Arial;"><b><font size="+1">3)&nbsp; Test
+Installation</font></b> </p>
+<p style="font-family: Arial;">After doing the installation procedures
+your ready to test.&nbsp; You can easily do
+this by typing the command at any command prompt:<br>
+</p>
+<div style="text-align: center; font-family: Arial;"><b><font
+ color="#000000">java
+-fullversion</font></b></div>
+<p style="font-family: Arial;"> </p>
+<p style="font-family: Arial;">This will come back with something like
+the following:&nbsp; <span style="font-weight: bold;">java full
+version "1.6.0_01-b03"</span> </p>
+<p style="font-family: Arial;">If you see this then Java was installed
+on your system and is executing that particular version.&nbsp; In this
+case we
+are executing JDK 6 </p>
+<p style="font-family: Arial;"><b><font size="+1">4)&nbsp; Test
+Program
+(Helloworld.java)</font></b> </p>
+<p style="font-family: Arial;"><b>Note:&nbsp; Follow the instructions
+exactly.&nbsp; Java is case and syntax specific, any deviation from
+these instructions with result in failure.</b> </p>
+<p style="font-family: Arial;"><b>Suggestion:&nbsp;</b> I would create
+a directory where I would put all my personal Java files, e.g.&nbsp;
+<br>
+</p>
+<ul style="font-family: Arial;">
+  <li><span style="font-weight: bold;">/java/cv64 </span><span
+ style="font-weight: bold;"></span>or&nbsp;<span
+ style="font-weight: bold;"></span></li>
+  <li><span style="font-weight: bold;">c:\java\cv64</span><span
+ style="font-weight: bold;"> </span></li>
+</ul>
+<p style="font-family: Arial;"> </p>
+<p style="font-family: Arial;">Now that the Java compiler is up and
+running lets try a quick test program.&nbsp; Below is the entire
+Helloworld.java
+program.&nbsp; Open up a new file called Helloworld.java and copy the
+following
+code into the new file using the editor of your choice and save the
+file,
+e.g. edit Helloworld.java </p>
+<p style="font-family: Arial;">public class Helloworld&nbsp; { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+public static void main(String[ ] args)&nbsp; { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Helloworld"); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+} <br>
+} </p>
+<p style="font-family: Arial;">After you have saved the file then you
+will need to use the java compiler (javac) to compile your source code
+program (Helloworld.java) into Java byte code (Helloworld.class), type
+the following command: </p>
+<p style="font-family: Arial;"><b>javac *.java</b>&nbsp;&nbsp;&nbsp;
+&lt;- this will compile your source program. </p>
+<p style="font-family: Arial;">Now execute the command to watch your
+hardwork in action: </p>
+<p style="font-family: Arial;"><b>java Helloworld</b>&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;-- this will execute the Helloworld.class program. </p>
+<p style="font-family: Arial;">You should see </p>
+<p style="font-family: Arial;">Helloworld </p>
+<p style="font-family: Arial;"><b><font size="+1">5)&nbsp; Now to
+Really get started</font></b> </p>
+<p style="font-family: Arial;">Hopefully everything wen't well and now
+your on your way to being a Java Guru.&nbsp; Go to <a
+ href="http://java.sun.com">http://java.sun.com</a> for excellent
+tutorials, downloads and information about Java. </p>
+<p style="font-family: Arial;"> </p>
+<hr style="font-family: Arial;" width="100%">
+<center style="font-family: Arial;">
+<div style="text-align: left;"><a href="mailto:information@cv64.us"><img
+ src="../../../images/cv64logo.gif" alt=""
+ style="border: 0px solid ; width: 32px; height: 32px;" align="left"></a><a
+ href="mailto:bobbycv64@yahoo.com"><small>Web
+Contact</small><br>
+</a><small><a href="mailto:estey@cv64.us">
+Last modified:&nbsp; 2008 April 29</a><br>
+</small></div>
+<p><br>
+</p>
+</center>
+<br style="font-family: Arial;">
+<br style="font-family: Arial;">
+</body>
+</html>

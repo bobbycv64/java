@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Streams and Files</title>
+</head>
+<body>
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N400810">Chapter 13. Streams and Files</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N400810"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N400810">13.1. </a><a href="#N40083C">The
+Standard Streams</a></dt>
+  <dt>13.2. <a href="#N40084E">How
+to access the standard interface.</a></dt>
+  <dd>
+    <dl>
+      <dt>13.2.1. <a href="#N400853">System
+Properties</a></dt>
+      <dt>13.2.2. <a href="#N400892">Reading
+Standard Input</a></dt>
+      <dt>13.2.3. <a href="#N4008CC">Reading
+program arguments.</a></dt>
+      <dt>13.2.4. <a href="#N4008ED">Using
+the standard output and standard error streams.</a></dt>
+      <dt>13.2.5. <a href="#N400906">Providing
+a proper return value.</a></dt>
+    </dl>
+  </dd>
+  <dt>13.3. <a href="#N400934">Using
+Streams</a></dt>
+  <dd>
+    <dl>
+      <dt>13.3.1. <a href="#N400939">Introduction
+to streams.</a></dt>
+      <dt>13.3.2. <a href="#N400982">Working
+with the file system.</a></dt>
+      <dt>13.3.3. <a href="#N4009AC">Reading</a></dt>
+      <dt>13.3.4. <a href="#N4009F8">Writing</a></dt>
+      <dt>13.3.5. <a href="#N400A2A">Reading
+a URL as a stream.</a></dt>
+    </dl>
+  </dd>
+</dl>
+</div>
+<p>Streams and files are fundamental to most programming tasks. They
+are needed for reading input to a program and writing output from the
+program. Logging is also a very important task that uses streams. In
+the Java Virtual Machine (VM), all streams and files interact with the
+host file system for the operating system. To maintain cross platform
+compatibility, some OS features may not be available that are native on
+that platform. This chapter will give a overview of features,
+techniques and examples to get the reader started. Working with streams
+is relatively straight forward but the choice of which stream to use
+can be daunting as there are so many to choose. It's not as bad as it
+seems as you'll see.</p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40083C">13.1. The
+Standard Streams</a></h2>
+</div>
+</div>
+<p><a name="N40083C">When UNIX was created, the operating system used a
+file as a metaphor for many different purposes. This abstraction turned
+out to be quite powerful as devices such as a serial port look just
+like a file so they can be opened and read or written to just like a
+standard file. The basic unit of execution, a process interacts with
+the program running inside it in a standard way. The process makes
+available the environment including any variables and command line
+arguments, an input stream, output stream, and an error stream. This
+interface between the program and the process is the same in C, as it
+is in Java. They are named standard IO or standard input, output, and
+error respectively.</a></p>
+<div class="figure">
+<p><a name="N40083C"><b>Figure 13.1. The Java VM running inside a
+process.</b></a></p>
+</div>
+<p><a name="N40083C">The Java VM is an application running inside the
+process. The Java program's byte code that gets interpreted by the VM
+has access to the interface supplied by the process through objects
+available from the VM and the <tt>main</tt> program command line. Just
+to sum up, the process is managed by the operating system. The VM is
+managed by the process and the Java program is managed by the VM. Also
+consider that security such as file permissions are managed as well by
+the VM.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40084E">13.2. How to
+access the standard interface.</a></h2>
+</div>
+</div>
+<p><a name="N40084E">The standard interface is considered all resources
+available to the program without opening extra resources. Extra
+resources can be accessed via opening files, database connections, or
+perhaps a message queue. This section shows how to access the system
+properties, standard input, and command line arguments which are inputs
+/ controls to the program. We also show how to use the standard output
+and error streams which are outputs from the program.</a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400853">13.2.1. System Properties</a></h3>
+</div>
+</div>
+<p><a name="N400853">A Java program has access to properties supplied
+by the Virtual Machine (VM). These properties are similar to
+environment variables supplied to processes by the Operating System
+(OS). These are called system properties in the Java World. The follow
+program illustrates the concept and should be invoked as follows:</a></p>
+<pre class="screen"><a name="N400853">$ java -Dmyprop=myvalue Env<br>      </a></pre>
+<div class="figure">
+<p><a name="N400853"><b>Figure 13.2. Reading System Properties.</b></a></p>
+<pre class="programlisting"><a name="N400853"><tt>figures/streams/Env.java</tt><br><br>import java.util.Properties;<br><br>public class Env {<br>   <br>    public static void main(String[] args) {<br>	Properties props = System.getProperties();<br>	props.list(System.out);<br>	<br>    }<br>}<br><br>      </a></pre>
+</div>
+<p><a name="N400853">The follow is an edited list of the output which
+is much longer than the list below. The properties shown are ones that
+may be interesting to the reader and pertain to this chapter.</a></p>
+<pre class="screen"><a name="N400853">-- listing properties --<br>path.separator=:<br>user.dir=/home/maxwell/jdocbook_02/docroot/src...<br>java.io.tmpdir=/tmp<br>line.separator=<br>os.name=Linux<br>myprop=myvalue<br>os.version=2.2.19<br>user.home=/home/maxwell<br>file.encoding=ISO-8859-1<br>user.name=maxwell<br>user.language=en<br>java.version=1.3.1<br>java.vendor=Blackdown Java-Linux Team<br>file.separator=/<br>      </a></pre>
+<p><a name="N400853">The following list denotes some the properties
+above and how they affect the readers use of the Java IO streams.</a></p>
+<table summary="Simple list" class="simplelist" border="0">
+  <tbody>
+    <tr>
+      <td><span class="emphasis"><i>path.separator</i></span> This is
+the separator used for classpath. This is needed if a program needs to
+search the classpath directly.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>java.io.tmpdir</i></span> This is
+the directory where temporary files should be written.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>line.separator</i></span> This is
+blank as this is a non printable character to the terminal but the
+value is \n for UNIX.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>myprop</i></span> This is the
+property passed to the runtime on the command line via the -D option.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>user.home</i></span> Used for
+writing and reading user preferences or for a dialog box initial
+directory.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>file.encoding</i></span> The
+default file encoding for the user.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>file.separator</i></span> This is
+the separator used to denote paths and files of the file system.</td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="N400853">The reader should compile and run the above
+program and look at the properties for their system.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400892">13.2.2. Reading Standard Input</a></h3>
+</div>
+</div>
+<p><a name="N400892">This section looks at reading standard input to
+the user program. Standard input is the data sent to a program either
+through input entered from a keyboard at the command line over via a
+pipe in the shell. Also since a Java can be invoked from within a Java
+program, one program can feed input to the next. All these are examples
+of standard input.</a></p>
+<div class="figure">
+<p><a name="stdin-figure"><b>Figure 13.3. Reading Standard Input.</b></a></p>
+<pre class="programlisting"><a name="stdin-figure"><tt>figures/streams/Stdin.java</tt><br><br>import java.io.*;<br>    <br>public class Stdin {<br>    public static void main(String[] args) {<br>	InputStream is = System.in;<br>	try {<br>	    int c;<br><br>	    while((c = is.read()) != -1) {<br>		System.out.print((char)c);<br>	    }<br>	}<br>	catch(IOException e) {<br>	    System.err.println("Problem reading");<br>	    e.printStackTrace(System.err);<br>	}<br>    }<br>}<br><br>      </a></pre>
+</div>
+<p><a name="stdin-figure">The above figure shows quite a few concepts
+that need to be covered. The <tt>System</tt> has a static field <tt>in</tt>
+which is an <tt>InputStream</tt>. Reading from the system in can be
+done in a loop and the end of the loop is represented by the integer
+-1. The <tt>read</tt> method of all the <tt>InputStream</tt> and
+derived classes returns an int. All the streams in this hierarchy are
+designed to read bytes and are considered byte streams. The int is cast
+to a char since we know the input from the keyboard in character data.
+Invoke the program as follows and type some characters and then press
+Control-D in Unix to create the end of stream marker.</a></p>
+<pre class="screen"><a name="stdin-figure">$ java Stdin<br>      </a></pre>
+<p><a name="stdin-figure">An alternative way is to use the following
+command to pipe some input to the Java program.</a></p>
+<pre class="screen"><a name="stdin-figure">$ echo "This is some standard input" | java Stdin<br>      </a></pre>
+<p><a name="stdin-figure">This covers the basics of reading standard
+input the next section will look at reading arguments which is the last
+form of input to a Java program.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4008CC">13.2.3. Reading program arguments.</a></h3>
+</div>
+</div>
+<p><a name="N4008CC">This section is very short but is here for
+completeness. A program that can be run from the command line can take
+arguments. This is the final program input which included properties
+and standard input. The following program shows how to read arguments
+and invoke the program.</a></p>
+<div class="figure">
+<p><a name="N4008CC"><b>Figure 13.4. Getting program arguments.</b></a></p>
+<pre class="programlisting"><a name="N4008CC"><tt>figures/streams/Args.java</tt><br><br>public class Args {<br>   <br>    public static void main(String[] args) {<br>	int numArgs = args.length;<br>	for (int i=0; i &lt; numArgs; i++) {<br>	    System.out.println(args[i]);<br>	} <br>    }<br>}<br><br>	</a></pre>
+</div>
+<p><a name="N4008CC">Running the program.</a></p>
+<pre class="screen"><a name="N4008CC">$ java Args arg1 arg2 arg3=3 arg4<br>      </a></pre>
+<p><a name="N4008CC">Output from the program.</a></p>
+<pre class="screen"><a name="N4008CC">arg1<br>arg2<br>arg3=3<br>arg4      <br>      </a></pre>
+<p><a name="N4008CC">The next two sections show how to use standard
+output and standard error from a Java program.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4008ED">13.2.4. Using the standard output
+and standard error streams.</a></h3>
+</div>
+</div>
+<p><a name="N4008ED">Standard output and standard error are very
+similar to standard input except they are output from the program
+rather than input to the program. <tt>System</tt> has two more static
+fields named <tt>out</tt> and <tt>err</tt> which are of type <tt>OutputStream</tt>.
+Standard output is considered a normal output channel from a program
+whereas standard error is an error stream. This is a pretty binary
+approach but utilities that output textual or other data are very
+important and fit this model. Errors would normally be written to the
+console or a error log. Logging systems used in programs tend to allow
+different levels of output from info to outright errors. Standard
+output tends not to be a part of logging and should be considered real
+output from the program.</a></p>
+<p><a name="N4008ED">If we look at </a><a href="#stdin-figure"
+ title="Figure 13.3. Reading Standard Input.">Figure 13.3</a>, we can
+see that the program is really an &#8220;echo&#8221; program where all the input is
+echoed to the standard output and in event of error, an error message
+is written to standard error as well as the stack trace. This
+demonstrates the normal use of the standard output and error streams.
+The final section discusses return values.</p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400906">13.2.5. Providing a proper return
+value.</a></h3>
+</div>
+</div>
+<p><a name="N400906">Providing a return value is very important to
+finish the contract for the standard interface. Programs that may be
+run from the command line or called from other Java programs is
+different for Java as every class can have a <tt>main</tt> method.
+This class can be called directly from Java but the only way to return
+a non-zero value from the VM is to call System.exit with a non-zero
+argument. This section will show how to make a program that can be
+called both from another Java program or the command line that will
+behave properly. The following figure is an example.</a></p>
+<div class="figure">
+<p><a name="N400906"><b>Figure 13.5. Providing a return value.</b></a></p>
+<pre class="programlisting"><a name="N400906"><tt>figures/streams/Return.java</tt><br><br>import java.io.*;<br>    <br>public class Return {<br>    // command line usage<br>    public static void main(String[] args) {<br>	int returnValue = Return.Main(args);<br>	System.exit(returnValue);<br>    }<br><br>    // call directly from java program as shown above<br>    public static int Main(String[] args) {<br>	int returnValue = 0;<br>	InputStream is = System.in;<br>	try {<br>	    int c;<br>	    while((c = is.read()) != -1) {<br>		System.out.print((char)c);<br>	    }<br>	}<br>	catch(IOException e) {<br>	    System.err.println("Problem reading");<br>	    e.printStackTrace(System.err);<br>	    returnValue = 1;<br>	}<br>	return returnValue;<br>    }<br>}<br><br>	</a></pre>
+</div>
+<p><a name="N400906">Looking at the previous figure is a case of self
+documenting code as the code implements the principles we are trying to
+illustrate. The <tt>Main</tt> method can be called directly from Java
+and returns the status from the program, success or failure. The <tt>main</tt>
+method is called when running the program from the command line and
+when the VM exits the status is passed to the shell. In this case the <tt>main</tt>
+method just turns around and calls the <tt>Main</tt> method.</a></p>
+<pre class="screen"><a name="N400906">$ echo $?<br>      </a></pre>
+<p><a name="N400906">Running the above command in UNIX will return the
+status from the VM when running a Java program. The value returned is
+based on the value passed to the <tt>System.exit</tt> method.</a></p>
+</div>
+</div>
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400934">13.3. Using
+Streams</a></h2>
+</div>
+</div>
+<p><a name="N400934">The following sections will illustrate reading and
+writing to streams and files and well as using other stream features to
+access a web server.</a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400939">13.3.1. Introduction to streams.</a></h3>
+</div>
+</div>
+<p><a name="N400939">Streams in Java is a big subject. There are more
+than forty classes and interfaces combined associated with streams.
+This section will work to help clarify the common uses and help with
+the selection process.</a></p>
+<p><a name="N400939">Character streams were added to Java in version
+1.1. These streams are designed to read and write character data such
+as text. The type char is a 16-bit Unicode characters. This means that
+the character streams are made to handle Unicode and other common
+encodings. All character streams derive from <tt>Reader</tt> and <tt>Writer</tt>.
+Use these streams when reading and writing character data.</a></p>
+<p><a name="N400939">Byte streams make up most of the remainder of the
+IO package. These classes derive from <tt>InputStream</tt> and <tt>OutputStream</tt>.
+A byte is always 8-bit in Java. The method <tt>read</tt> on <tt>InputStream</tt>
+reads one byte into an int of the range 0-255 or returns -1 for end of
+stream. An integer is 32-bit in Java so much of the excess space is
+unused but this makes it easy for arithmatic operation on a byte and
+casting to a byte will not lose data. The classes <tt>DataInputStream</tt>
+and <tt>DataOutputStream</tt> were also added in Java 1.1 for
+serialization and should be used for reading and writing Java objects
+into a file.</a></p>
+<p><a name="N400939">There are a couple of other classes worth noting.
+The <tt>RandomAccessFile</tt> can be used for reading and writing and
+the <tt>FileDescriptor</tt> class has a <tt>sync</tt> method for
+making sure the underlying file system has saved the changes made to a
+file. You need to use a <tt>RandomAccessFile</tt> or a <tt>FileOutputStream</tt>
+class to get a file descriptor. A <tt>OutputStreamWriter</tt> can be
+constructed using a <tt>FileOutputStream</tt> object to get this
+capability for writer type streams. Buffered stream can help gain
+performance for reading and writing files. Create the appropriate
+buffered stream from the file stream.</a></p>
+<p><a name="N400939">Note: <tt>System.in</tt> is an <tt>InputStream</tt>
+and can't be replaced by a reader. In a similar way <tt>System.out</tt>
+is a PrintStream which is deprecated and can't be replaced by a
+character based PrintWriter. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400982">13.3.2. Working with the file
+system.</a></h3>
+</div>
+</div>
+<p><a name="N400982">Java abstracts the file system so that all
+platforms look the same. Java supplies a <tt>File</tt> class that
+allows the program to read from the file system and create files and
+directories. The following program lists information about a file or a
+directory. The word directory is used in Java but some OSes call a
+directory a folder.</a></p>
+<div class="figure">
+<p><a name="N400982"><b>Figure 13.6. Getting information about a file
+or directory.</b></a></p>
+<pre class="programlisting"><a name="N400982"><tt>figures/streams/FileInfo.java</tt><br><br>import java.io.File;<br>import java.util.Date;<br><br>public class FileInfo {<br><br>    public static void main(String[] args) {<br>	String pathname = "."; // default<br>	if(args.length &gt; 0) {<br>	    pathname = args[0];<br>	}<br>	<br>	File file = new File(pathname);<br>	String filename = file.getName();<br>	System.out.println();<br>	System.out.print("FileInfo: " + filename);<br>	if (!file.exists()) {<br>	    System.out.println(": No such file or directory");<br>	    System.exit(1);<br>	}<br>	<br>	System.out.println();<br>	System.out.println("Readable: " + file.canRead());<br>	System.out.println("Writable: " + file.canWrite());<br>	System.out.println("Absolute Path: " + file.isAbsolute());<br>	System.out.println("File: " + file.isFile());<br>	System.out.println("Directory: " + file.isDirectory());<br>	System.out.println("Hidden: " + file.isHidden());<br>	System.out.println("Last Modified: " + new Date(file.lastModified()));<br>	System.out.println("Length: " + file.length());<br>    }<br>}<br><br>	</a></pre>
+</div>
+<p><a name="N400982">The next few listing show snippets of code used to
+do important tasks related to files and the file system. The following
+lists the contents of a directory if the <tt>File</tt> object is a
+directory based on the <tt>isDirectory</tt> method.</a></p>
+<pre class="programlisting"><a name="N400982">File dir = new File("somedir");<br>String[] files = dir.list();<br>for (int i = 0; i &lt; files.length; i++) {<br>    System.out.println(files[i]);<br>}<br>      </a></pre>
+<p><a name="N400982">The next show how do a few more things with a file.</a></p>
+<pre class="programlisting"><a name="N400982">// move a file<br>File oldFile = new File("oldname");<br>File newFile = new File("newname");<br>oldFile.rename(newFile);<br><br>// make directories<br>File onedir = new File("onedir");<br>onedir.mkdir();<br>File morethanone = new File("more/than/one");<br>morethanone.mkdirs();<br>      </a></pre>
+<p><a name="N400982">This section should some basics one dealing with
+the file system. In the next section we will look at reading files.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4009AC">13.3.3. Reading</a></h3>
+</div>
+</div>
+<p><a name="N4009AC">This section will look at reading data from files
+in particular. Reading text can be done char by char, into an char
+array or line by line. The next figure shows a program that will read a
+file line by line and output each line to standard output. Make sure to
+create the text file to run the examples.</a></p>
+<div class="figure">
+<p><a name="N4009AC"><b>Figure 13.7. Reading lines of text.</b></a></p>
+<pre class="programlisting"><a name="N4009AC"><tt>figures/streams/LineRead.java</tt><br><br>import java.io.*;<br>    <br>public class LineRead {<br>    public static void main(String[] args) {<br>	try {<br>	    FileReader fr = new FileReader("linetext.txt");<br>	    BufferedReader br = new BufferedReader(fr);<br>	    String line;<br>	    while((line = br.readLine()) != null) { // null for EOF<br>		System.out.println(line);<br>	    }<br>	}<br>	catch(IOException e) {<br>	    System.err.println("Problem reading");<br>	    e.printStackTrace(System.err);<br>	}<br>    }<br>}<br><br>	</a></pre>
+</div>
+<div class="figure">
+<p><a name="N4009AC"><b>Figure 13.8. Text File for Read Examples.</b></a></p>
+<pre class="literallayout"><a name="N4009AC"><tt>figures/streams/linetext.txt</tt><br><span
+ class="inlinemediaobject">This is a line of text.<br>We are reading each line with a Reader.<br>Buffered reads line by line and non-buffered char by char.<br>This is the last line!!!</span><br>	</a></pre>
+</div>
+<p><a name="N4009AC">The <tt>readLine()</tt> method reads all but the
+carriage return / linefeed or combination into the string depending on
+the input file format. The <tt>println()</tt> method adds the line
+ending format based on the platform the program is running on. The next
+program reads one character at a time. Note that the end of file (EOF)
+marker is different (null) for the buffered stream <tt>readLine()</tt>
+method. Note that usually the EOF is -1 but some methods throw <tt>EOFException</tt>
+to mark the end of the file.</a></p>
+<div class="figure">
+<p><a name="N4009AC"><b>Figure 13.9. Reading text one char at a time.</b></a></p>
+<pre class="programlisting"><a name="N4009AC"><tt>figures/streams/CharRead.java</tt><br><br>import java.io.*;<br>    <br>public class CharRead {<br>    public static void main(String[] args) {<br>	try {<br>	    FileReader fr = new FileReader("linetext.txt");<br>	    int c;<br>	    while((c = fr.read()) != -1) { // -1 for EOF<br>		System.out.print((char)c);<br>	    }<br>	}<br>	catch(IOException e) {<br>	    System.err.println("Problem reading");<br>	    e.printStackTrace(System.err);<br>	}<br>    }<br>}<br><br>	</a></pre>
+</div>
+<p><a name="N4009AC">Reading a character at a time reads the result
+into an int as described earlier. Using the <tt>print()</tt> requires
+a cast to char otherwise the integer representation would be written to
+the output stream since this method is overloaded to take int as well.</a></p>
+<p><a name="N4009AC">This section has shown some basic ways to read
+files that contain characters. Reading using the byte oriented streams
+is very similar and can be used for data oriented files. The next
+section looks at Writing to files.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4009F8">13.3.4. Writing</a></h3>
+</div>
+</div>
+<p><a name="N4009F8">Writing to files is just the same as writing to
+any other. The main two classes to start with are <tt>FileOutputStream</tt>
+for byte oriented data and <tt>FileWriter</tt> for char oriented data.
+Both have the same constructor which allows a file, file descriptor,
+string, or a string and a boolean. The last one is used if you want to
+append to the file. Once you have this object created then they can be
+used with most of the other streams types that take a output stream or
+writer as an argument for their constructor. The follow is an example.</a></p>
+<pre class="programlisting"><a name="N4009F8">FileOutputStream fos = new FileOutputStream("myfile");<br>DataOutputStream dos = new DataOutputStream(fos);<br>// or<br>ObjectOutputStream oos = new ObjectOutputStream(fos);<br>// or<br>BufferedOutputStream bos = new BufferedOutputStream(fos);<br><br>      </a></pre>
+<p><a name="N4009F8">One of the three types of streams above could be
+used depending on the type of output desired. <tt>ObjectOutputStream</tt>
+is used for serializing objects. <tt>DataOutputStream</tt> for
+platform independent data and the buffered stream can be used by itself
+or chained to the <tt>ObjectOutputStream</tt> or the <tt>DataOutputStream</tt>
+just as it is chained to the <tt>FileOutputStream</tt> above. Chaining
+is the name of the pattern shown here where one object uses another in
+this manner.</a></p>
+<p><a name="N4009F8">The next example shows the chaining of Writers.</a></p>
+<pre class="programlisting"><a name="N4009F8">FileWriter fw = new FileWriter("myfile");<br>PrintWriter pw = new PrintWriter(fw);<br>// or<br>BufferedWriter bw = new BufferedWriter(fw);<br>      </a></pre>
+<p><a name="N4009F8">Depending on the application, one of these writers
+could work better than the other. A <tt>PrintWriter</tt> can be used
+with <tt>System.out</tt> as an argument to the constructor and works
+the same as the deprecated <tt>PrintStream</tt>. This class does not
+throw exceptions so a <tt>checkError()</tt> method is provided to
+check for errors that may occur.</a></p>
+</div>
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400A2A">13.3.5. Reading a URL as a stream.</a></h3>
+</div>
+</div>
+<p><a name="N400A2A">The classes to read from a URL are really part of
+the <span class="emphasis"><i>java.net</i></span> package but reading
+from a remote URL is as easy as reading from an input stream. The
+following example illustrates this point.</a></p>
+<div class="figure">
+<p><a name="N400A2A"><b>Figure 13.10. Reading from a URL.</b></a></p>
+<pre class="programlisting"><a name="N400A2A"><tt>figures/streams/UrlRead.java</tt><br><br>import java.io.InputStream;<br>import java.net.*;<br>    <br>public class UrlRead {<br>    public static void main(String[] args) {<br>	if (args.length &lt; 1) {<br>	    System.out.println("Usage: java UrlRead {url}");<br>	    System.exit(1);<br>	}<br>	try {<br>	    URL url = new URL(args[0]);<br>	    URLConnection urlConn = url.openConnection();<br>	    InputStream in = urlConn.getInputStream();<br>	    byte[] buffer = new byte[1024];<br><br>	    int bytesRead; // bytes read<br>	    while((bytesRead = in.read(buffer)) &gt;= 0) {<br>		System.out.write(buffer, 0, bytesRead);<br>	    }<br>	}<br>	catch(Exception e) {<br>	    System.err.println("Some problem");<br>	    e.printStackTrace(System.err);<br>	}<br>    }<br>}<br><br>	</a></pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <link href="http://cv64.us/cv64.bmp" rel="SHORTCUT ICON">
+  <meta name="MSSmartTagsPreventParsing" content="TRUE">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.75 [en] (Windows NT 5.0; U) [Netscape]">
+  <title>cv64.us - Tomcat and MySQL</title>
+  <meta name="description" content="Tomcat and MySQL">
+</head>
+<body>
+<div
+ style="text-align: center; font-family: helvetica,arial,sans-serif;"><big><big><span
+ style="font-weight: bold;">Tomcat &amp; MySQL Setup Instructions</span></big></big><br>
+</div>
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">This page
+describes the procedures to download, install and configure Tomcat
+(Java Server Page (JSP) Server) and MySQL (Relational Database) for a
+Web Enabled Database.<br>
+<br>
+</span>
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a
+ name="downloads"></a>Downloads</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><br>
+<big>MySQL Database is a world leader in Relational Databases and open
+source technology.&nbsp; This is the database that we will be
+interacting with.&nbsp; Connector J contains the Java DataBase
+Connectivity jar files which Tomcat needs to communicate to the MySQL
+server.&nbsp; Tomcat is a Java Server Page (JSP) architecture, model
+and program for front end web page processing.&nbsp; Download the
+various products from the following links below:<br>
+<br>
+</big></span></big></big></big></font></big></big></big>
+<table
+ style="text-align: left; font-family: helvetica,arial,sans-serif; width: 651px; height: 112px;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">MySQL Database<br>
+      </td>
+      <td style="vertical-align: top;"><a
+ href="http://dev.mysql.com/downloads/mysql/">http://dev.mysql.com/downloads/mysql/</a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Connector J<br>
+      </td>
+      <td style="vertical-align: top;"><a
+ href="http://dev.mysql.com/downloads/connector/j/">http://dev.mysql.com/downloads/connector/j/</a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Tomcat<br>
+      </td>
+      <td style="vertical-align: top;"><font color="navy" size="2"><span
+ style="font-size: 10pt; color: navy;"></span></font><big><font
+ style="font-family: helvetica,arial,sans-serif;" color="navy" size="2"><big><a
+ title="http://cvs.apache.org/builds/jakarta-taglibs/nightly/projects/standard/"
+ href="http://jakarta.apache.org/tomcat/">http://jakarta.apache.org/tomcat/</a></big></font></big></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Tomcat JSTL<br>
+      </td>
+      <td style="vertical-align: top;"><font
+ style="font-family: helvetica,arial,sans-serif;" color="navy" size="2"><span
+ style="font-size: 10pt; color: navy;"></span></font><big><font
+ style="font-family: helvetica,arial,sans-serif;" color="navy" size="2"><big><a
+ title="http://cvs.apache.org/builds/jakarta-taglibs/nightly/projects/standard/"
+ href="http://cvs.apache.org/builds/jakarta-taglibs/nightly/projects/standard/">http://cvs.apache.org/builds/jakarta-taglibs/nightly/projects/standard/</a></big></font></big></td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a
+ name="downloads"></a>Installation</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><br>
+</span></big></big></big></font></big></big></big>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li>Install and configure the MySQL Database, detailed instructions
+are described here:&nbsp; <a href="Tomcat_MySQL_Setup.html#MySQL">MySQL
+Installation and Configuration</a></li>
+  <li>Install and configure the Tomcat JSP Server, detailed
+instructions are described here:&nbsp; <a href="#tomcat">Tomcat
+Installation and Configuration</a></li>
+  <li>Unzip the ConnectorJ Java ARchive (JAR) file and place in the <span
+ style="font-weight: bold;">%CATALINA_HOME%\lib</span>
+directory, e.g.</li>
+</ul>
+<div style="margin-left: 40px; font-family: helvetica,arial,sans-serif;">
+<div style="margin-left: 40px;"><span
+ style="color: rgb(0, 102, 0); font-weight: bold;">copy
+mysql-connector-java-5.1.6-bin.jar
+c:\tomcat\lib\mysql-connector-java-5.1.6-bin.jar</span><br>
+</div>
+</div>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li>Unzip the Tomcat JSTL JAR file and place in the <span
+ style="font-weight: bold;">%CATALINA_HOME%\lib</span>
+directory, e.g.</li>
+</ul>
+<div style="margin-left: 80px; font-family: helvetica,arial,sans-serif;"><big><span
+ style="color: rgb(0, 102, 0);">copy jstl.jar
+c:\tomcat\lib\jstl.jar<br>
+copy standard.jar c:\tomcat\lib\standard.jar<br>
+</span></big></div>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a
+ name="MySQLCommands"></a>MySQL Commands</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><br>
+</span></big></big></big></font></big></big></big><span
+ style="font-family: helvetica,arial,sans-serif;">The following are
+useful commands for MySQL Adminstrative purposes:</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">command<br>
+      </td>
+      <td style="vertical-align: top;">mysql&gt; \. externalSQLFile.sql<br>
+      </td>
+      <td style="vertical-align: top;">Example of executing an external
+SQL file.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">mysqladmin<br>
+      </td>
+      <td style="vertical-align: top;">mysqladmin -u username -p command<br>
+      </td>
+      <td style="vertical-align: top;">Logging into the mysql server
+and issueing a command.&nbsp; The password will be prompted after you
+press carriage return.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">mysqladmin<br>
+      </td>
+      <td style="vertical-align: top;">mysqladmin -u root -p command<br>
+      </td>
+      <td style="vertical-align: top;">Example of root logging in.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">mysql<br>
+      </td>
+      <td style="vertical-align: top;">mysql -u username -p<br>
+      </td>
+      <td style="vertical-align: top;">Logging into the mysql command
+line editor.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">mysql<br>
+      </td>
+      <td style="vertical-align: top;">grant all privileges on *.* to
+root@localhost with grant option;<br>
+      </td>
+      <td style="vertical-align: top;">Opens up all databases and
+tables in the MySQL Database.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">telnet<br>
+      </td>
+      <td style="vertical-align: top;">telnet localhost 3306<br>
+      </td>
+      <td style="vertical-align: top;">Testing if MySQL is online.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a name="MySQL"></a>MySQL
+Installation and Configuration</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><br>
+<big>The following are
+the steps and instructions for installing the MySQL Server.</big><br>
+</span></big></big></big></font></big></big></big><span
+ style="font-family: helvetica,arial,sans-serif;"></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; width: 593px; height: 4365px; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql1.jpg" alt=""><br>
+After downloading the MySQL software, unzip the zip file and execute
+the setup.exe program.&nbsp; This will bring up the screen above.&nbsp;
+Select Custom and then press <span style="text-decoration: underline;">N</span>ext
+&gt;.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql2.jpg" alt=""><br>
+Press the Change... button and modify the installation directory to
+c:\mysql or a root level directory.&nbsp; Press <span
+ style="text-decoration: underline;">N</span>ext &gt;.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql3.jpg" alt=""><br>
+Your selections will be presented.&nbsp; Make sure that the directory
+is where you want and then press <span
+ style="text-decoration: underline;">I</span>nstall.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql4.jpg" alt=""><br>
+You will be asked for registration, select Skip Sign-up and then press
+Next &gt;<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql5.jpg" alt=""><br>
+The MySQL files will now be copied to your system.&nbsp; We now
+configure MySQL for your system.&nbsp; Press <span
+ style="text-decoration: underline;">F</span>inish.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql6.jpg" alt=""><br>
+Select Standard Configuration and press Next &gt;.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql7.jpg" alt=""><br>
+Select Install As Windows Service and Include Bin Directory in Windows
+PATH and then press Next &gt;.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql8.jpg" alt=""><br>
+Enter a root password with confirmation and check if you want root
+access from remote machines.&nbsp; Press Next &gt;.&nbsp; MySQL will
+start up.&nbsp; If you get a port 3306, default port for MySQL.&nbsp;
+See the next screens.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql9.jpg" alt=""><br>
+Get to this screen by clicking on Start/Settings/Control
+Panel/Administrative Tools/Services and find the MySQL service.&nbsp; <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql10.jpg" alt=""><br>
+Press the Stop button in the Service status panel.&nbsp; Then remove
+MySQL from the system all together before trying a newer instance.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="sql11.jpg" alt=""><br>
+Once everything is set, this screen appears.&nbsp; Press Execute and
+MySQL will prepare configuration, write configuration, start service
+and apply security settings.&nbsp; MySQL should be started.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a name="tomcat"></a>Tomcat
+Basic Installation and Configuration</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><br>
+</span></big></big></big></font></big></big></big><big
+ style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>The
+following are
+the steps and instructions for installing the Tomcat Server.<br>
+<br>
+Note:&nbsp; </big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big><span
+ style="font-weight: bold; color: rgb(0, 102, 0);">%CATALINA%</span><span
+ style="color: rgb(0, 0, 0);"> and </span><span
+ style="font-weight: bold; color: rgb(0, 102, 0);">TOMCAT_ROOT </span><span
+ style="color: rgb(0, 0, 0);">are synonymous.</span></big></span></big></big></big></font></big></big></big>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Unzip
+the Tomcat.zip file as a main directory on the local system, this will
+create the CATALINA environment variable and value, e.g. <span
+ style="font-weight: bold; color: rgb(0, 102, 0);">c:\tomcat</span></big></span></big></big></big></font></big></big></big></li>
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Change
+directory to the <span
+ style="font-weight: bold; color: rgb(0, 102, 0);">%CATALINA%\bin</span>
+directory and create two desktop shortcuts.&nbsp; The first shortcut
+will execute the startup.bat file and the second shortcut will execute
+the shutdown.bat file.</big></span></big></big></big></font></big></big></big></li>
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Change
+directory to </big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big><span
+ style="font-weight: bold; color: rgb(0, 102, 0);">%CATALINA%\webapps</span></big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>
+and create a new directory for your JSP files, e.g. <span
+ style="color: rgb(0, 102, 0); font-weight: bold;">c:\tomcat\webapps\cv64</span>,
+this will be where your JSP files will reside.</big></span></big></big></big></font></big></big></big></li>
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Change
+directory to your newly created webapps directory and create a new
+directory for your XML files, e.g. <span
+ style="color: rgb(0, 102, 0); font-weight: bold;">c:\tomcat\webapps\cv64\WEB-INF</span>,
+this is where your XML files will reside.</big></span></big></big></big></font></big></big></big></li>
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Add
+the following JSP code to a file called </big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big><span
+ style="font-weight: bold; color: rgb(0, 102, 0);">Test.jsp</span></big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>&nbsp;
+to the newly created JSP directory as shown in Figure Tomcat-1:</big></span></big></big></big></font></big></big></big></li>
+</ul>
+<table
+ style="background-color: rgb(204, 255, 255); text-align: left; width: 470px; height: 204px; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">&lt;!DOCTYPE html PUBLIC
+"-//w3c//dtd html 4.0 transitional//en"&gt;<br>
+&lt;html&gt;<br>
+&nbsp; &lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;title&gt;Test Page&lt;/title&gt;<br>
+&nbsp; &lt;/head&gt;<br>
+      <br>
+&nbsp; &lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;p&gt;Test Page&lt;/p&gt;<br>
+&nbsp; &lt;/body&gt;<br>
+&lt;/html&gt;<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Figure
+Tomcat-1 Test.jsp<br>
+      </span></td>
+    </tr>
+  </tbody>
+</table>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>Add
+the following XML code to a file called </big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big><span
+ style="font-weight: bold; color: rgb(0, 102, 0);">web.xml</span></big></span></big></big></big></font></big></big></big><big><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"><big>&nbsp;
+to the newly created XML directory as shown in Figure Tomcat-2:</big></span></big></big></big></font></big></big></big></li>
+</ul>
+<table
+ style="background-color: rgb(204, 255, 255); text-align: left; width: 742px; height: 194px; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">&lt;?xml version="1.0"
+encoding="ISO-8859-1"?&gt;<br>
+&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"<br>
+&nbsp;&nbsp;&nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br>
+&nbsp;&nbsp;&nbsp; xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"<br>
+&nbsp;&nbsp;&nbsp; version="2.4"&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;description&gt;Test Page&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;display-name&gt;Test Page&lt;/display-name&gt;<br>
+&lt;/web-app&gt;<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Figure
+Tomcat-2 web.xml<br>
+      </span></td>
+    </tr>
+  </tbody>
+</table>
+<big style="font-family: helvetica,arial,sans-serif;"><big><big><font
+ style="color: rgb(0, 0, 0); font-family: helvetica,arial,sans-serif;"
+ color="navy" size="2"><big><big><big><span style="font-size: 10pt;"></span></big></big></big></font></big></big></big><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Tomcat is ready
+to start up and execute.&nbsp; Double click the Start Tomcat shortcut
+and go to your webpage, e.g. </span><a
+ style="font-family: helvetica,arial,sans-serif;"
+ href="http://localhost:8080/cv64/test.jsp">http://localhost:8080/cv64/test.jsp</a><span
+ style="font-family: helvetica,arial,sans-serif;">, you should see the
+following:<br>
+<br>
+</span><img style="font-family: helvetica,arial,sans-serif;"
+ src="tomcatTestpage.jpg" alt=""><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Figure
+Tomcat-Test Page<br>
+</span><span style="font-family: helvetica,arial,sans-serif;"></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="width: 100%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 102, 255);"><big><span
+ style="color: rgb(255, 255, 255); font-weight: bold;"><a
+ name="tomcatMySQL"></a>Tomcat and MySQL Configuration</span></big><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+See Apache
+Instructions to configure Tomcat and MySQL connectivity:&nbsp;
+<a
+ href="http://jakarta.apache.org/tomcat/tomcat-5.0-doc/jndi-datasource-examples-howto.html">http://jakarta.apache.org/tomcat/tomcat-5.0-doc/jndi-datasource-examples-howto.html</a></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Note:&nbsp;
+The Apache Instructions state to place the server.xml configurations
+between &lt;Context&gt; and &lt;/Host&gt;.&nbsp; There is no
+&lt;Context&gt; element so place just above the &lt;/Host&gt; element.</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Below is an
+example of changing the database values in the file <span
+ style="font-weight: bold;">%CATALINA%\conf\server.xml<br>
+<br>
+</span></span>
+<table
+ style="background-color: rgb(204, 255, 255); text-align: left; width: 684px; height: 228px; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">&lt;!-- Add MySQL
+******************************************************************
+--&gt;<br>
+      <br>
+&nbsp; &nbsp; &lt;Context path="/cv64" docBase="cv64" debug="5"
+reloadable="true" crossContext="true"&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Resource
+name="jdbc/cv64DB" auth="Container" type="javax.sql.DataSource"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; maxActive="100" maxIdle="30"
+maxWait="10000"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; username="root" password="bobby"
+driverClassName="com.mysql.jdbc.Driver"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+url="jdbc:mysql://localhost:3306/cv64?autoReconnect=true"/&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/Context&gt;<br>
+      <br>
+&lt;!-- Add MySQL
+******************************************************************
+--&gt;<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Figure %CATALINA%\conf\server.xml<br>
+<br style="font-family: helvetica,arial,sans-serif;">
+</span></span><span style="font-family: helvetica,arial,sans-serif;">Below
+is an example of the <span style="font-weight: bold;">%CATALINA_HOME%\webapps\cv64\</span></span><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">WEB-INF\web.xml</span></span><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;"></span>
+file.</span><br style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="background-color: rgb(204, 255, 255); width: 20%; text-align: left; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">&lt;?xml version="1.0"
+encoding="ISO-8859-1"?&gt;<br>
+&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"<br>
+&nbsp;&nbsp;&nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br>
+&nbsp;&nbsp;&nbsp; xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"<br>
+&nbsp;&nbsp;&nbsp; version="2.4"&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;description&gt;Test Database&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;display-name&gt;Test
+Database&lt;/display-name&gt;<br>
+      <br>
+&nbsp;&nbsp;&nbsp; &lt;resource-ref&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&lt;description&gt;cv64 DB Connection&lt;/description&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&lt;res-ref-name&gt;jdbc/cv64DB&lt;/res-ref-name&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&lt;res-type&gt;javax.sql.DataSource&lt;/res-type&gt;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&lt;res-auth&gt;Container&lt;/res-auth&gt;<br>
+&nbsp;&nbsp;&nbsp; &lt;/resource-ref&gt;<br>
+&lt;/web-app&gt;<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Figure %CATALINA_HOME%\webapps\cv64\</span></span><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">WEB-INF\web.xml</span></span><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;"></span></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+Below is an example of the <span style="font-weight: bold;">%CATALINA_HOME%\webapps\cv64\Test.jsp</span>
+file.</span><br style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; width: 547px; height: 364px; font-family: helvetica,arial,sans-serif; background-color: rgb(204, 255, 255);"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <pre>&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %&gt;<br>&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;<br><br>&lt;sql:query var="rs" dataSource="jdbc/cv64DB"&gt;<br>select * from names<br>&lt;/sql:query&gt;<br><br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;Names Database&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br><br>  &lt;h2&gt;Results&lt;/h2&gt;<br>  <br>&lt;c:forEach var="row" items="${rs.rows}"&gt;<br>    First ${row.first}&lt;br/&gt;<br>    Last  ${row.last}&lt;br/&gt;<br>&lt;/c:forEach&gt;<br><br>  &lt;/body&gt;<br>&lt;/html&gt;</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Figure
+%CATALINA_HOME%\webapps\cv64\Test.jsp</span></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+Restart Tomcat and go to your database webpage, e.g. </span><a
+ style="font-family: helvetica,arial,sans-serif;"
+ href="http://localhost:8080/cv64/dbtest.jsp">http://localhost:8080/cv64/Test.jsp</a><span
+ style="font-family: helvetica,arial,sans-serif;">, you should see the
+following:</span><br>
+<br>
+<table
+ style="text-align: left; width: 687px; height: 281px; background-color: rgb(204, 255, 255);"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);"><img
+ src="tomcatDBTestpage.jpg" alt=""></td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Figure http://localhost:8080/cv64/dbtest.jsp</span></span>
+<hr style="width: 100%; height: 2px;"><a
+ href="mailto:information@cv64.us"><img
+ src="../../../../images/cv64logo.gif" alt=""
+ style="border: 0px solid ; width: 34px; height: 29px;" align="left"></a><a
+ href="mailto:estey@cv64.us"><small><font face="Arial,Helvetica">Web
+Contact</font></small><br>
+</a><a href="mailto:estey@cv64.us"><small><font face="Arial,Helvetica">
+Last modified:&nbsp; 2005 April 06</font></small></a>
+</body>
+</html>

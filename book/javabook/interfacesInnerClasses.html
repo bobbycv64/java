@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Interfaces and Inner Classes</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N4004FC">Chapter 6. Interfaces and Inner
+Classes</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N4004FC"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N4004FC">6.1. </a><a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400504">Interfaces</a></dt>
+  <dt>6.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400554">Interface
+Examples</a></dt>
+  <dt>6.3. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400559">Inner
+Classes</a></dt>
+  <dt>6.4. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400592">Adapter
+Classes</a></dt>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400504">6.1. Interfaces</a></h2>
+</div>
+</div>
+<p><a name="N400504"> Recall from Chapter 1, an interface defines a
+protocol of behavior that can be implemented by any class anywhere in
+the class hierarchy. An interface defines a set of methods with no
+implementation. A class that implements the interface agrees to
+implement all the methods defined in the interface, thereby agreeing to
+certain behavior. </a></p>
+<p><a name="N400504"> Interfaces are a variation of Abstraction. All
+methods in an interface have no implementation, another words only the
+signature of the method is defined. Interfaces can have attributes but
+they must be a constant value. </a></p>
+<p><a name="N400504"> Java allows only single inheritance, however,
+Interfaces are used to bypass this concept. A class can only extend one
+class and zero to many interfaces. </a></p>
+<div class="figure">
+<p><a name="N400504"><b>Figure 6.1. Interface A</b></a></p>
+<pre class="programlisting"><a name="N400504"><tt>figures/interfaces/InterfaceA.java</tt><br>          <br><br>public interface InterfaceA {<br><br>  public String getA1();<br><br>  public String getA2();<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400504"><b>Figure 6.2. Interface B</b></a></p>
+<pre class="programlisting"><a name="N400504"><tt>figures/interfaces/InterfaceB.java</tt><br>          <br><br>public interface InterfaceB {<br><br>  public String getB1();<br><br>  public String getB2();<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400504"><b>Figure 6.3. MyClass Class</b></a></p>
+<pre class="programlisting"><a name="N400504"><tt>figures/interfaces/MyClass.java</tt><br>          <br><br>// MyClass implements interfaces A and B.<br><br>public class MyClass implements InterfaceA, InterfaceB {<br><br><br><br>  // Interface A methods<br><br>  public String getA1() { return "A1"; }<br><br>  public String getA2() { return "A2"; }<br><br><br><br>  // Interface B methods<br><br>  public String getB1() { return "B1"; }<br><br>  public String getB2() { return "B2"; }<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400504"><b>Figure 6.4. Interfaces Class</b></a></p>
+<pre class="programlisting"><a name="N400504"><tt>figures/interfaces/Interfaces.java</tt><br>          <br><br>public class Interfaces {<br><br><br><br>  public static void main(String[] args) {<br><br><br><br>  // Create object myClass which implements two interfaces A and B<br><br>  MyClass myClass = new MyClass();<br><br><br><br>  // Print results from myClass's methods<br><br>  System.out.println("myClass.getA1(): " + myClass.getA1());<br><br>  System.out.println("myClass.getA2(): " + myClass.getA2());<br><br>  System.out.println("myClass.getB1(): " + myClass.getB1());<br><br>  System.out.println("myClass.getB2(): " + myClass.getB2());<br><br>  System.out.println();<br><br><br><br>  // Cast myClass's interfaces to 2 interface types<br><br>  InterfaceA interfaceA = (InterfaceA)myClass;<br><br>  InterfaceB interfaceB = (InterfaceB)myClass;<br><br><br><br>  // Print interface results<br><br>  System.out.println("interfaceA.getA1(): " + interfaceA.getA1());<br><br>  System.out.println("interfaceA.getA2(): " + interfaceA.getA2());<br><br>  System.out.println("interfaceB.getB1(): " + interfaceB.getB1());<br><br>  System.out.println("interfaceB.getB2(): " + interfaceB.getB2());<br><br><br><br>  // These commands won't compile because their interfaces have no such methods<br><br>  // System.out.println("interfaceA.getB1(): " + interfaceA.getB1());	<br><br>  // System.out.println("interfaceA.getB2(): " + interfaceA.getB2());	<br><br>  // System.out.println("interfaceB.getA1(): " + interfaceB.getA1());	<br><br>  // System.out.println("interfaceB.getA2(): " + interfaceB.getA2());	<br><br>  }<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400504"><b>Figure 6.5. Interface Results</b></a></p>
+<p><a name="N400504"><img
+ src="file:///C:/estey/www/computing/java/book/javabook/figures/interfaces/interfacesMain.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400554">6.2. Interface
+Examples</a></h2>
+</div>
+</div>
+<p><a name="N400554"> The following are interface examples. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400559">6.3. Inner
+Classes</a></h2>
+</div>
+</div>
+<p><a name="N400559"> Inner classes are a class or classes that are
+implemented within a class. When an object is created in a class an
+inner class has accessibility to this information as if it were its own
+object. Inner classes help with the implementation of callback methods
+that we saw earlier in interfaces. Inner classes can be hidden from
+other classes within a package. Inner classes take advantage of the
+Java 1.1 event model. </a></p>
+<p><a name="N400559"> When we say hidden inner classes can hide the
+functionality completly from outside the class. The inner class can
+have the private accessor defined which means only the wrapper class
+can access the information. All classes with the exception of inner
+classes must allow some access or they are of no use. </a></p>
+<p><a name="N400559"> Inner classes also can implement the singleton
+pattern. Look at the private inner class and notice that all the
+internal variables are public not private. This is due to the external
+classes not the outer class have no access to the private class. </a></p>
+<div class="figure">
+<p><a name="N400559"><b>Figure 6.6. JavaBean Class</b></a></p>
+<pre class="programlisting"><a name="N400559"><tt>figures/interfaces/JavaBean.java</tt><br>          <br><br>// Interface Example<br><br>public interface JavaBean {<br><br><br><br>  public String get();<br><br>  public void set(String value);<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400559"><b>Figure 6.7. Outer Class Example</b></a></p>
+<pre class="programlisting"><a name="N400559"><tt>figures/interfaces/OuterClass.java</tt><br>          <br><br>// Inner Class Example<br><br>public class OuterClass {<br><br><br><br>  public JavaBean getInnerClass() {<br><br>    return new InnerClass();<br><br>  }<br><br><br><br>  private class InnerClass implements JavaBean {<br><br>    public String get() { return value_; }<br><br>    public void set(String value) { value_ = value; }<br><br>  }<br><br><br><br>  private String value_;<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400559"><b>Figure 6.8. Inner Class Example</b></a></p>
+<pre class="programlisting"><a name="N400559"><tt>figures/interfaces/InnerClassExample.java</tt><br>          <br><br>// Inner Class Example<br><br>public class InnerClassExample {<br><br><br><br>  public static void main(String[] args) {<br><br><br><br>    OuterClass outerClass = new OuterClass();<br><br>    JavaBean javaBean = outerClass.getInnerClass();<br><br>    javaBean.set("Inner Class Example");<br><br>    System.out.println("Inner Class Value: " + javaBean.get());<br><br>  }<br><br>}<br>        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400592">6.4. Adapter
+Classes</a></h2>
+</div>
+</div>
+<p><a name="N400592"> Adapter Classes </a></p>
+</div>
+</div>
+</body>
+</html>

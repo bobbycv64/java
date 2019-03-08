@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>J2EE Starter</title>
+  <meta name="author" content="restey">
+</head>
+<body>
+<div
+ style="text-align: center; font-family: helvetica,arial,sans-serif;"><big><big><big><span
+ style="font-weight: bold;">J2EE Starter</span></big></big></big><br>
+</div>
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">
+There are several files that are viewable online at this site or
+download the zip file.&nbsp; The following is an example of how to get
+an
+basic J2EE web application working with the MySQL database or MS Access:<br>
+<br>
+</span>
+<hr style="width: 100%; height: 2px;"><font
+ face="Helvetica, Arial, sans-serif">1)&nbsp; Download and install
+the latest version of <a href="http://java.sun.com/j2se/">Java 2
+Standard Edition</a> and <a href="http://java.sun.com/j2ee/">Java 2
+Enterprise
+Edition</a>, remember these are two separate programs.</font><br>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+2)&nbsp; Download Apache Ant from <a href="http://ant.apache.org">http://ant.apache.org</a><br>
+<br>
+3)&nbsp; Download MySQL database and ConnectorJ from <a
+ href="http://mysql.com">http://mysql.com</a><br>
+<br>
+4)&nbsp; Set environment variables as follows:<br>
+<br>
+</span>
+<div style="margin-left: 40px;"><span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">Linux
+Environment Variables</span><span
+ style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+<ul>
+  <li><span style="font-family: helvetica,arial,sans-serif;">export
+JAVA_HOME=/j2sdk...</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">export
+J2EE_HOME=/j2sdkee...</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">export
+APACHE_HOME=/apache</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">export
+PATH=$PATH:$JAVA_HOME/bin:$J2EE_HOME/bin:$APACHE_HOME/bin</span> </li>
+</ul>
+<span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">Windows
+Environment Variables</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<ul>
+  <li><span style="font-family: helvetica,arial,sans-serif;">set
+JAVA_HOME=c:\j2sdk...</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">set
+J2EE_HOME=c:\j2sdkee...</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">set
+APACHE_HOME=c:\apache</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">set
+PATH=%PATH%;%JAVA_HOME%\bin;%J2EE_HOME%\bin;%APACHE_HOME%\bin</span></li>
+</ul>
+</div>
+<span style="font-family: helvetica,arial,sans-serif;">5)&nbsp; Copy
+the connectorJ jar
+file, e.g. <span style="font-weight: bold;">mysql-connector-java-3.0.9-stable-bin.jar</span>
+file to
+J2EE_HOME/lib directory.</span><span
+ style="font-family: helvetica,arial,sans-serif;"><br>
+<br>
+6)&nbsp; Create a <span style="font-weight: bold;">J2EE_HOME/products</span>
+directory.<br>
+<br>
+7)&nbsp; Copy all the files in the cv64 directory or the zip file to
+<span style="font-weight: bold;">J2EE_HOME/products</span> directory.<br>
+<br>
+8)&nbsp; The <a href="directoryStructure.gif">directory</a> structure
+looks like the following:<br>
+</span>
+<div style="margin-left: 40px;">
+<ul>
+  <li><span style="font-family: helvetica,arial,sans-serif;">databases:&nbsp;
+These are actual databases and configurations for this project, e.g.
+MySQL and MS Access.</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">docs:&nbsp;
+Project documentation</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">ee:&nbsp;
+Enterprise Archives</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">META-INF:&nbsp;
+Project Metadata</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">WEB-INF:&nbsp;
+Project source, libraries, classes and build files</span></li>
+  <ul>
+    <li><span style="font-family: helvetica,arial,sans-serif;">ejb:&nbsp;
+Enterprise JavaBeans (EJB)<br>
+      </span></li>
+    <li><span style="font-family: helvetica,arial,sans-serif;">images:&nbsp;
+Images</span></li>
+    <li><span style="font-family: helvetica,arial,sans-serif;">jsp:&nbsp;
+Java Server Pages (JSP)<br>
+      </span></li>
+  </ul>
+</ul>
+</div>
+<span style="font-family: helvetica,arial,sans-serif;">
+</span>
+<div style="margin-left: 40px;"><span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;">Note:&nbsp;
+There is a cv64.jpx JBuilder file located in the ejb directory.&nbsp;
+You can download a very impressive IDE from Borland for only $10 at <a
+ href="http://borland.com">http://borland.com</a></span><br>
+</div>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+9)&nbsp; Start the J2EE engine:&nbsp; <span style="font-weight: bold;">j2ee
+-verbose</span><br>
+<br>
+10)&nbsp; Start the deployment tool:&nbsp; <span
+ style="font-weight: bold;">deploytool</span><br>
+<br>
+11)&nbsp; Once the deployment tool is up you will need to edit the
+Server Configurations:<br>
+</span>
+<ul>
+  <li><span style="font-family: helvetica,arial,sans-serif;">Click on <span
+ style="text-decoration: underline;">T</span>ools &gt;Server <span
+ style="text-decoration: underline;">C</span>onfiguration &gt;</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">This will
+bring Server Configuration screen, click on the Data Source Standard
+file.</span></li>
+  <li><span style="font-family: helvetica,arial,sans-serif;">Set up
+MySQL and MS Access as they appear in the following image:<br>
+    </span></li>
+</ul>
+<div style="text-align: center;"><img src="jdbcConfiguration.jpg" alt=""
+ title="" style="width: 695px; height: 544px;">
+</div>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+12)&nbsp; Open the ear file in the deployment tool and deploy the
+application.&nbsp; Watch the sparks fly and when the application has
+been deployed you can test your work at:&nbsp; <a
+ href="http://127.0.0.1:8000/database/index.jsp">http://127.0.0.1:8000/database/index.jsp</a><br>
+<br>
+</span>
+<hr style="width: 100%; height: 2px;"><font
+ face="Helvetica, Arial, sans-serif"><b><small><small><font size="+2"><small><small>Windows
+System
+Data Source Name (DSN) Setup</small></small></font></small></small></b></font>
+<p><font face="Helvetica, Arial, sans-serif">The following is an
+example of
+how to set up the System Data Source Name (DSN). &nbsp;Once DSN is
+configured application software can connect and perform transactions on
+the database, e.g. Java.</font> </p>
+<p><font face="Helvetica, Arial, sans-serif">The first step is to go to
+the Administrator Tools screen as illustrated below:</font> </p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="adminTools.jpg"
+ style="height: 325px; width: 239px;" title="" alt=""> </font> </p>
+<p><font face="Helvetica, Arial, sans-serif">Double click on Data
+Sources (ODBC) and click on the System DSN tab and the following screen
+will appear.</font> </p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="odbcSystem1.jpg"
+ alt="" title="" style="width: 461px; height: 377px;"> <br>
+</font> </p>
+<p><font face="Helvetica, Arial, sans-serif">Click <u>A</u>dd and the
+following screen will appear.</font> </p>
+<p><font face="Helvetica, Arial, sans-serif"><img
+ src="newDataSource.jpg" style="height: 345px; width: 468px;" title=""
+ alt=""> </font> </p>
+<p><font face="Helvetica, Arial, sans-serif">Select Microsoft Access
+Driver (*.mdb) and press Finish, the following screen will appear.</font>
+</p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="accessSetup.jpg"
+ style="height: 312px; width: 471px;" title="" alt=""> </font> </p>
+<p><font face="Helvetica, Arial, sans-serif">Click <u>S</u>elect to
+find your
+database.</font> </p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="selectDB.jpg"
+ style="height: 243px; width: 402px;" title="" alt=""> </font> </p>
+<p><font face="Helvetica, Arial, sans-serif">Click ok and the Setup
+screen will reappear with your settings.&nbsp; If there are passwords
+or other configurations you will have to click on <u>A</u>dvanced...</font>
+</p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="setup.jpg"
+ style="height: 312px; width: 471px;" title="" alt=""> <br>
+</font></p>
+<p><font face="Helvetica, Arial, sans-serif">Enter the Data Source Name
+and press OK, the following screen will appear.<br>
+</font> </p>
+<p><font face="Helvetica, Arial, sans-serif"><img src="odbcSystem2.jpg"
+ alt="" title="" style="width: 461px; height: 377px;"> </font></p>
+<font face="Helvetica, Arial, sans-serif">The System DSN is
+now configured.</font>
+<hr style="width: 100%; height: 2px;">
+<div style="text-align: left;"><img src="cv64.bmp" title="" alt=""
+ style="width: 32px; height: 32px;" align="left"><small><font
+ face="Arial,Helvetica"><a href="mailto:information@cv64.us">Web
+Contact</a></font><font face="Arial,Helvetica"><br>
+Last modified:&nbsp; 2003 December 05</font></small><br>
+</div>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+</body>
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body>
+<div class="titlepage" style="font-family: helvetica,arial,sans-serif;">
+<div><br>
+<h2 class="title" style="font-weight: normal; text-align: center;"><small><font
+ color="#000000">Streams and Files<br>
+</font></small></h2>
+</div>
+</div>
+<p style="font-family: helvetica,arial,sans-serif;">Streams and files
+are fundamental to most programming tasks.&nbsp; They
+are needed for reading input to a program and writing output from the
+program.&nbsp; Logging is also a very important task that uses
+streams.&nbsp; In
+the Java Virtual Machine (JVM), all streams and files interact with the
+host file system for the Operating System
+(OS).&nbsp; To maintain cross platform
+compatibility, some OS features may not be available that are native on
+that platform.&nbsp; This lecture will give a overview of features,
+techniques and examples of streams and files.&nbsp; Working with
+streams
+is relatively straight forward but the choice of which stream to use
+can be daunting as there are so many to choose.&nbsp; There are more
+than forty stream classes and interfaces combined in the Java
+programming language.</p>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<p>Character streams were added to Java in version
+1.1.&nbsp; These streams are designed to read and write character data
+such
+as text.&nbsp; The type char is 16-bit <a href="http://unicode.org">Unicode</a>
+characters. This means that
+the character streams are made to handle Unicode and other common
+encoding.&nbsp; All character streams derive from Reader and
+Writer.&nbsp;
+Use these streams when reading and writing character data.</p>
+<p>Byte streams make up most of the remainder of the
+IO package.&nbsp; These classes derive from InputStream and
+OutputStream.&nbsp;
+A byte is always 8-bit in Java.&nbsp; The method read on InputStream
+reads one byte into an int of the range 0-255 or returns -1 for end of
+stream.&nbsp; An integer is 32-bit in Java so much of the excess space
+is
+unused but this makes it easy for arithmetic operation on a byte and
+casting to a byte will not lose data. The classes DataInputStream
+and DataOutputStream were also added in Java 1.1 for
+serialization and should be used for reading and writing Java objects
+into a file.</p>
+<p>There are a couple of other classes worth noting.&nbsp;
+The RandomAccessFile can be used for reading and writing and
+the FileDescriptor class has a sync method for
+making sure the underlying file system has saved the changes made to a
+file.&nbsp; You need to use a RandomAccessFile or a FileOutputStream
+class to get a file descriptor.&nbsp; An OutputStreamWriter can be
+constructed using a FileOutputStream object to get this
+capability for writer type streams.&nbsp; Buffered stream can help gain
+performance for reading and writing files.&nbsp; Create the appropriate
+buffered stream from the file stream.</p>
+<p>Note: System.in is an InputStream
+and can't be replaced by a reader.&nbsp; In a similar way System.out
+is a PrintStream which is deprecated and can't be replaced by a
+character based PrintWriter.<br>
+</p>
+<hr style="width: 100%; height: 2px;">
+<p style="font-weight: bold;">The
+Standard Streams</p>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage"><small></small>
+<div></div>
+When UNIX was created, the OS used a
+file as a metaphor for many different purposes.&nbsp; This abstraction
+turned
+out to be quite powerful as devices such as a serial port look just
+like a file so they can be opened, read or written to just like a
+standard file.&nbsp; The basic unit of execution, a process interacts
+with
+the program running inside it in a standard way. The process makes
+available the environment including any variables and command line
+arguments, an input stream, output stream, and an error stream. This
+interface between the program and the process is the same in C, C++ and
+Java.&nbsp; They are named standard IO or standard input, output, and
+error respectively.&nbsp; Figure 1 illustrates the standard stream
+types and Java values.<br>
+<br>
+</div>
+<table
+ style="text-align: left; height: 112px; width: 300px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Standard Input</td>
+      <td style="vertical-align: top;">System.in<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Standard Output</td>
+      <td style="vertical-align: top;">System.out<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Standard Error</td>
+      <td style="vertical-align: top;">System.err<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 1 - Unix / Java
+Streams<br>
+      </b></small></td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="figure">
+<div class="mediaobject"><br>
+<span style="font-weight: bold;">Java Virtual Machine (JVM)</span><br>
+<br>
+The JVM is an application running inside the
+process.&nbsp; The Java program's byte code that gets interpreted by
+the JVM
+has access to the interface supplied by the process through objects
+available from the JVM and the main program command line.&nbsp; Just
+to sum up, the process is managed by the OS.&nbsp; The JVM is
+managed by the process and the Java program is managed by the
+JVM.&nbsp; Also
+consider that security such as file permissions are managed as well by
+the JVM.</div>
+</div>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage"><small></small>
+<div><small></small>
+<h2 class="title" style="clear: both; font-weight: normal;"><small>How
+to
+access the standard interface</small></h2>
+<small></small></div>
+<small></small></div>
+<p>The standard interface is considered all resources
+available to the program without opening extra resources.&nbsp; Extra
+resources can be accessed via opening files, database connections, or
+perhaps a message queue.&nbsp; This section shows how to access the
+system
+properties, standard input, and command line arguments which are inputs
+/ controls to the program. We also show how to use the standard output
+and error streams which are outputs from the program.</p>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><small></small>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title" style="font-weight: bold;"><small>System Properties</small></h3>
+A Java program has access to properties supplied
+by the JVM. These properties are similar to
+environment variables supplied to processes by the OS. These are called
+system properties (also known as environmental variables) and Figure 2
+illustrates the concept and should be invoked as follows:<br>
+<br>
+</div>
+</div>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 281px; height: 207px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> $ java Env </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small> import
+java.util.Properties;<br>
+      <br>
+public class Env {<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; Properties props = System.getProperties();<br>
+&nbsp;&nbsp;&nbsp; props.list(System.out);<br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 2 - System
+Properties<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Figure 3 is an edited list of the output which is much longer than
+the list below. The properties shown are ones that may be interesting
+to the reader and pertain to this chapter.<br>
+<br>
+</div>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 378px; height: 266px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>--listing properties --<br>
+path.separator=:<br>
+user.dir=/home/maxwell/jdocbook_02/docroot/src...<br>
+java.io.tmpdir=/tmp<br>
+line.separator=<br>
+os.name=Linux<br>
+myprop=myvalue<br>
+os.version=2.2.19<br>
+user.home=/home/maxwell<br>
+file.encoding=ISO-8859-1<br>
+user.name=maxwell<br>
+user.language=en<br>
+java.version=1.3.1<br>
+java.vendor=Blackdown Java-Linux Team<br>
+file.separator=/</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 3 - System
+Properties Output<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>Figure 4 lists some of the properties
+above and how they affect the readers use of the Java IO streams.</p>
+<table summary="Simple list" class="simplelist"
+ style="background-color: rgb(204, 255, 255); width: 857px; height: 194px;"
+ border="0">
+  <tbody>
+    <tr>
+      <td><span class="emphasis"><i>path.separator</i></span> This is
+the separator used for classpath. This is needed if a program needs to
+search the classpath directly.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>java.io.tmpdir</i></span> This is
+the directory where temporary files should be written.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>line.separator</i></span> This is
+blank as this is a non printable character to the terminal but the
+value is \n for UNIX.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>myprop</i></span> This is the
+property passed to the runtime on the command line via the -D option.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>user.home</i></span> Used for
+writing and reading user preferences or for a dialog box initial
+directory.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>file.encoding</i></span> The
+default file encoding for the user.</td>
+    </tr>
+    <tr>
+      <td><span class="emphasis"><i>file.separator</i></span> This is
+the separator used to denote paths and files of the file system.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 4 - System
+Properties<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><br>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title"><small>Reading Standard Input</small></h3>
+Standard input is data sent to an application program either
+through input entered from a keyboard at the command line, files or via
+a
+pipe in a&nbsp; shell.&nbsp; Since Java can be invoked from within a
+Java
+program, one program can feed input to the next.&nbsp; All these are
+examples
+of standard input.<br>
+<br>
+</div>
+</div>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 275px; height: 308px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.io.*;<br>
+      <br>
+public class Stdin {<br>
+&nbsp; public static void main(String[] args) {<br>
+      <span style="font-weight: bold;">1&nbsp;&nbsp; InputStream is =
+System.in;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int c;<br>
+      <br>
+      <span style="font-weight: bold;">2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while((c = is.read())
+!= -1) {</span><br>
+      <span style="font-weight: bold;">3&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;
+System.out.print((char)c);</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; } catch(IOException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.err.println("Problem reading");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+exception.printStackTrace(System.err);<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 5 - Stdin.java<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Figure 5 shows quite a few concepts
+for standard input that need to be covered.&nbsp; Looking at line 1,
+the System class has a static field <span style="font-weight: bold;">"in"</span>
+which is an InputStream, e.g. System.in.&nbsp; Line 2 is reading from
+the system can be
+done in a loop and the end of the loop is represented by the integer
+-1.&nbsp; The read method of the InputStream, <span
+ style="font-weight: bold;">"is.read()"</span> and
+derived classes returns an int.&nbsp; All the streams in this hierarchy
+are
+designed to read bytes and are considered byte streams.&nbsp; The int
+is cast
+to a char in line 3, since we know the input is from the keyboard in
+character data.&nbsp;
+Invoke the program as shown in Figure 6, type some characters and then
+press
+enter.&nbsp; You will see that the characters are echoing to the
+screen.&nbsp; To exit the program press Control-D in Unix / Linux or
+Control-C in Windows to create the end of stream marker.</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 640px; height: 109px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> $ java Stdin </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">
+      <p>An alternative way is to use the following
+command to pipe some input to the Java program.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"> $ echo "This is some standard
+input" | java Stdin </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 6 - Standard
+Input Example<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><small></small>
+<h3 class="title"><small>Reading program arguments</small></h3>
+<small></small></div>
+<small></small></div>
+<p>The java command also has arguments that can be passed into the
+program's standard input.&nbsp; The following program shows how to read
+arguments
+and invoke the program.&nbsp; Figure 7, line 1 shows the args array in
+the main method.&nbsp; The args array is where the arguments get passed
+into from the command line.&nbsp; Lines 2 and 3 are going to print out
+the arguments.<br>
+</p>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 265px; height: 212px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> public class Args {<br>
+      <br style="font-weight: bold;">
+      <span style="font-weight: bold;">1&nbsp; public static void
+main(String[] args) {</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; int numArgs = args.length;<br>
+      <br>
+      <span style="font-weight: bold;">2&nbsp;&nbsp; for (int i=0; i
+&lt; numArgs; i++) {</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">3&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(args[i]);</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 7 - Args.java<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Figure 8 show the command line, java Args, which executes the
+java.class file and the next 4 arguments, arg1, arg2, arg3=3 and
+arg4.&nbsp; Then the output is printed.<br>
+<br>
+</div>
+<table
+ style="text-align: left; width: 209px; height: 178px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Running the program.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small> $ java Args arg1 arg2
+arg3=3 arg4</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Output from the program.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small> arg1<br>
+arg2<br>
+arg3=3<br>
+arg4</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 8 - Args
+Execution<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><br>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title" style="font-weight: bold;"><small>Using the standard
+output
+and standard error streams</small></h3>
+Standard output and standard error are very
+similar to standard input except they are output from the program
+rather than input to the program. System has two more static
+fields named <span style="font-weight: bold;">"out"</span> and "<span
+ style="font-weight: bold;">err"</span> which are of type
+OutputStream.&nbsp;
+Standard output is considered a normal output channel from a program
+and standard error is an error stream.&nbsp; Errors would normally be
+written to the
+console or an error log.&nbsp; Logging systems used in programs tend to
+allow
+different levels of output from info to outright errors.&nbsp; Standard
+output tends not to be a part of logging and should be considered real
+output from the program.</div>
+</div>
+<p>If we look at Figure 5, we can
+see that the program is really an &#8220;echo&#8221; program where all the input is
+echoed to the standard output and in event of error, an error message
+is written to standard error as well as the stack trace.&nbsp; This
+demonstrates the normal use of the standard output and error streams.</p>
+</div>
+<div class="section">
+<div class="titlepage"><small></small>
+<div><small></small>
+<h3 class="title" style="font-weight: bold;"><small>Providing a proper
+return
+value</small></h3>
+<small></small></div>
+<small></small></div>
+<p>Providing a return value is very important to
+finish the contract for the standard interface.&nbsp; Programs that may
+be
+run from the command line or called from other Java programs is
+different for Java as every class can have a main method.&nbsp;
+This class can be called directly from Java but the only way to return
+a non-zero value from the JVM is to call System.exit with a non-zero
+argument.&nbsp; This section will show how to make a program that can
+be
+called both from another Java program or the command line that will
+behave properly, see Figure 9, see lines 1 and 2.<b><br>
+</b></p>
+<div class="figure">
+<table
+ style="text-align: left; width: 305px; height: 484px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.io.*;<br>
+      <br>
+public class Return {<br>
+&nbsp; // command line usage<br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; int returnValue = Return.Main(args);<br>
+      <span style="font-weight: bold;">1&nbsp; System.exit(returnValue);</span><br>
+&nbsp; }<br>
+      <br>
+&nbsp;&nbsp; // call directly from java program as shown above<br>
+&nbsp;&nbsp; public static int Main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp; int returnValue = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; InputStream is = System.in;<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int c;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((c = is.read())
+!= -1) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.print((char)c);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; } catch(IOException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.err.println("Problem reading");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+exception.printStackTrace(System.err);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returnValue = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+      <span style="font-weight: bold;">2&nbsp;&nbsp; return returnValue;</span><br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 9 - Return.java<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Looking at Figure 9 is a case of self
+documenting code as the code implements the principles we are trying to
+illustrate.&nbsp; The Main method can be called directly from Java
+and returns the status from the program, success or failure.&nbsp; The
+main
+method is called when running the program from the command line and
+when the JVM exits, the status is passed to the OS.&nbsp; In this case
+the
+main
+method just turns around and calls the Main method.</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 71px; width: 170px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"> $ echo $? </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 10 -
+System.exit()<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>Running the command in Figure 10 in a UNIX or Linux OS will return
+the
+status from the JVM when running a Java program.&nbsp; The value
+returned is
+based on the value passed to the System.exit method.</p>
+</div>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage"><small></small>
+<div><small></small>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title"><small>Working with the file
+system</small></h3>
+Java abstracts the file system so that all
+platforms look the same.&nbsp; Java supplies a File class that
+allows the program to read from the file system and create files and
+directories.&nbsp; The following program lists information about a file
+or a
+directory.&nbsp; The word directory is used in Java but some OSes call
+a
+directory a folder.</div>
+</div>
+<div class="figure">
+<p>Figure 11 illustrates how to getting information about a file
+or directory.&nbsp; Line 1 creates the file object of the File
+class.&nbsp; The attribute pathname is a string value of the OS.&nbsp;
+If you have a Unix or Linux OS then the pathname could be "<span
+ style="font-weight: bold;">/home/estey/java.txt"</span> or Windows "<span
+ style="font-weight: bold;">c:\estey\java.txt"</span>.&nbsp; Once the
+file has been identified there are several methods to get the values of
+the file, Lines 2 though 9.&nbsp; Java also fixes the problem of a
+separator with the file.separator() method.&nbsp; This method returns
+"/" for Unix or Linux and "\" for Windows.<b><br>
+</b></p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 580px; width: 456px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.io.File;<br>
+import java.util.Date;<br>
+      <br>
+public class FileInfo {<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; String pathname = "."; // default<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if(args.length &gt; 0) {<br>
+&nbsp;&nbsp;&nbsp; pathname = args[0];<br>
+&nbsp; }<br>
+      <br>
+      <span style="font-weight: bold;">1 File file = new File(pathname);</span><br>
+&nbsp; String filename = file.getName();<br>
+&nbsp; System.out.println();<br>
+&nbsp; System.out.print("FileInfo: " + filename);<br>
+      <br>
+&nbsp; if (!file.exists()) {<br>
+&nbsp;&nbsp;&nbsp; System.out.println(": No such file or directory");<br>
+&nbsp;&nbsp;&nbsp; System.exit(1);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; System.out.println();<br>
+      <span style="font-weight: bold;">2 System.out.println("Readable:
+" + file.canRead());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">3 System.out.println("Writable:
+" + file.canWrite());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">4 System.out.println("Absolute
+Path: " + file.isAbsolute());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">5 System.out.println("File: " +
+file.isFile());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">6 System.out.println("Directory:
+" + file.isDirectory());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">7 System.out.println("Hidden: "
++ file.isHidden());</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">8 System.out.println("Last
+Modified: " + new
+Date(file.lastModified()));</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">9 System.out.println("Length: "
++ file.length());</span><br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 11 - File
+information<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>The next few listing show snippets of code used to
+do important tasks related to files and the file system. Figure 12
+lists the contents of a directory if the File object is a
+directory based on the isDirectory method.</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 214px; height: 119px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> File dir = new
+File("somedir");<br>
+String[] files = dir.list();<br>
+for (int i = 0; i &lt; files.length; i++) {<br>
+&nbsp; System.out.println(files[i]);<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 12 - Directory
+List<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>Figure 13 shows how rename and create directories.<br>
+</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 284px; height: 197px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> // move a file<br>
+File oldFile = new File("oldname");<br>
+File newFile = new File("newname");<br>
+oldFile.renameTo(newFile);<br>
+      <br>
+// make directories<br>
+File onedir = new File("onedir");<br>
+onedir.mkdir();<br>
+File morethanone = new File("more/than/one");<br>
+morethanone.mkdirs();</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 13 - Directory
+Commands<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage"><small></small>
+<div><br>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title"><small><b>Reading lines of text</b></small></h3>
+This section will look at reading data from files.&nbsp; Reading text
+can be done char by char, into an char
+array or line by line.&nbsp; Figure 14 shows a program that will read a
+file line by line and output each line to standard output.&nbsp; Make
+sure to
+create the text file to run the examples.&nbsp; Line 1 reads the file
+linetext.txt.&nbsp; Line 2 reads a line of data and Line 3 prints out
+the line.&nbsp; The readLine() method reads all but the
+carriage return / linefeed or combination into the string depending on
+the input file format.&nbsp; The println() method adds the line
+ending format based on the platform the program is running on. <br>
+<br>
+</div>
+</div>
+<div class="figure">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 368px; height: 340px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.io.*;<br>
+      <br>
+public class LineRead {<br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; try {<br>
+      <span style="font-weight: bold;">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FileReader fr = new
+FileReader("linetext.txt");</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferedReader br = new
+BufferedReader(fr);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String line;<br>
+      <br>
+      <span style="font-weight: bold;">2 &nbsp;&nbsp;&nbsp;&nbsp;
+while((line = br.readLine())
+!= null) { // null for EOF</span><br>
+      <span style="font-weight: bold;">3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(line);</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; } catch(IOException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println("Problem
+reading");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+exception.printStackTrace(System.err);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 14 - Reading
+lines of a file<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="figure">
+<p><b>Reading text one char at a time<br>
+</b></p>
+<p>Figure 15 reads one character at a time.&nbsp; Note that the end of
+file (EOF)
+marker, Line 1 is different (null) for the buffered stream readLine()
+method.&nbsp; Note that usually the EOF is -1 but some methods throw
+EOFException
+to mark the end of the file.&nbsp; Reading a character at a time reads
+the result
+into an int as described earlier. Using the print() requires
+a cast to char, Line 2, otherwise the integer representation would be
+written to
+the output stream since this method is overloaded to take int as well.</p>
+<p>This section has shown some basic ways to read
+files that contain characters. Reading using the byte oriented streams
+is very similar and can be used for data oriented files. The next
+section looks at Writing to files.</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 306px; height: 308px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> import java.io.*;<br>
+      <br>
+public class CharRead {<br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileReader fr = new
+FileReader("linetext.txt");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int c;<br>
+      <br>
+      <span style="font-weight: bold;">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while((c = fr.read()) != -1)
+{ // -1 for EOF</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.print((char)c);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; } catch(IOException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println("Problem
+reading");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+exception.printStackTrace(System.err);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 15 - Reading
+characters<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+</div>
+<div class="section" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage"><small></small>
+<div><small></small>
+<hr style="width: 100%; height: 2px;">
+<h3 class="title"><small>Writing</small></h3>
+Writing to files follows the same basic rules as reading.&nbsp; The
+main two classes to start with are FileOutputStream
+for byte oriented data and FileWriter for char oriented data.&nbsp;
+Both have the same constructor which require a file, file descriptor,
+string, or a string and a boolean.&nbsp; The last attributes are used
+if you want to
+append to the file.&nbsp; Once you have this object created then they
+can be
+used with most of the other streams types that take an output stream or
+writer as an argument for their constructor, see Figure 16.&nbsp; One
+of the three types of streams in Figure 16 could be
+used depending on the type of output desired.&nbsp; ObjectOutputStream
+is used for serializing objects, DataOutputStream for
+platform independent data and the buffered stream can be used by itself
+or chained to the ObjectOutputStream or the DataOutputStream.&nbsp;
+Chaining
+is the name of the pattern shown here where one object uses another in
+this manner.<br>
+<br>
+</div>
+</div>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 367px; height: 132px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> FileOutputStream fos =
+new FileOutputStream("myfile");<br>
+DataOutputStream dos = new DataOutputStream(fos);<br>
+// or<br>
+ObjectOutputStream oos = new ObjectOutputStream(fos);<br>
+// or<br>
+BufferedOutputStream bos = new BufferedOutputStream(fos);</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 16 - Output
+Streams<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<p>Figure 17 shows the chaining of Writers.&nbsp; Depending on the
+application, one of these writers
+could work better than the other.&nbsp; A PrintWriter can be used
+with System.out as an argument to the constructor and works
+the same as the deprecated PrintStream.&nbsp; This class does not
+throw exceptions so a checkError() method is provided to
+check for errors that may occur.</p>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 116px; width: 266px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small> FileWriter fw = new
+FileWriter("myfile");<br>
+PrintWriter pw = new PrintWriter(fw);<br>
+// or<br>
+BufferedWriter bw = new BufferedWriter(fw);</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 17 - Writers<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<hr style="width: 100%; height: 2px;">
+<p><small></small><span style="font-weight: bold;">Reading a URL as a
+stream</span></p>
+</div>
+<div class="titlepage" style="font-family: helvetica,arial,sans-serif;">
+<div></div>
+<small></small></div>
+<p style="font-family: helvetica,arial,sans-serif;">The classes to read
+from a URL are really part of
+the <span class="emphasis"><i>java.net</i></span> package but reading
+from a remote URL is as easy as reading from an input stream, see
+Figure 18.<br>
+</p>
+<div class="figure" style="font-family: helvetica,arial,sans-serif;">
+<table
+ style="text-align: left; width: 100%; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-family: helvetica,arial,sans-serif;">
+      <td style="vertical-align: top;"> <small>import
+java.io.InputStream;<br>
+import java.net.*;<br>
+      <br>
+public class UrlRead {<br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; if (args.length &lt; 1) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Usage: java UrlRead
+{url}");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.exit(1);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+      <br>
+&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; URL url = new URL(args[0]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; URLConnection urlConn =
+url.openConnection();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InputStream in =
+urlConn.getInputStream();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; byte[] buffer = new
+byte[1024];<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int bytesRead; // bytes read<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while((bytesRead =
+in.read(buffer)) &gt;= 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.write(buffer, 0, bytesRead);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; } catch(Exception exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println("Some
+problem");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+exception.printStackTrace(System.err);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 18 - URL Reading<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2"
+ cellspacing="2">
+</table>
+<hr style="width: 100%; height: 2px;"><b
+ style="font-family: helvetica,arial,sans-serif;">Summary</b>
+<br>
+<br>
+This lecture discussed the very basics of programming.&nbsp; Streams
+and File I/O.&nbsp; The lecture gave examples of how to read and write
+data, streams and URL files.&nbsp; Streams are basically a single row
+of bits also known as unformatted that are read into a program.&nbsp;
+Files are usually formatted depending on the delimeters, e.g. tabs,
+spaces.&nbsp; There are also text and binary types that must be
+accounted for.<br>
+<hr style="font-family: helvetica,arial,sans-serif;" size="2"
+ width="100%"><b style="font-family: helvetica,arial,sans-serif;">References</b>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><a name="filesStreams"></a><a href="http://cv64.us">Files and
+Streams</a>, http://cv64.us,
+Accessed 06 January 2000</li>
+  <li><a name="unicode"></a><a href="http://unicode.org">Unicode</a>,
+http://unicode.org, Accessed 06 January 2000</li>
+</ul>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt="" style="width: 32px; height: 32px;" align="left"><small><font
+ face="Arial,Helvetica"><a href="mailto:information@cv64.us">Web
+Contact</a></font></small><br>
+<small><font face="Arial,Helvetica">
+Last modified:&nbsp; 2005 January 24</font></small>
+</div>
+</body>
+</html>

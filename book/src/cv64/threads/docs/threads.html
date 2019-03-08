@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>threads</title>
+</head>
+<body>
+<div class="chapter" style="font-family: helvetica,arial,sans-serif;">
+<div class="titlepage">
+<div><br>
+<h2 class="title" style="font-weight: normal; text-align: center;"><small><font
+ color="#000000">Threads</font></small></h2>
+Multithreading has
+been in the computing industry
+for decades and is nothing new.&nbsp; Multithreading is the main
+process for an
+application and breaking up the application into several smaller
+applications that can execute in parallel are call threads.&nbsp;
+Threads can execute at the same time enabling an application to perform
+a lot faster than before and can be used in any type of computing
+technology not just gaming and animation.<br>
+<br>
+An example of a threaded program is a Web
+Browser.&nbsp; When you go to a web page with images, animation and
+sound, the application program on the Browser is using thread
+technology that is executing several methods at the same time.<br>
+<br>
+Threads extend the
+java.lang.Thread class or implement the Runnable interface.&nbsp;
+Another way of looking at threads is writing an application that could
+be
+thought of as a single threaded program.&nbsp; But when you break up
+the program into smaller executable tasks that can be executed while
+the main thread is executing at the same time, this is thread
+technology.&nbsp; Another name for a thread is lightweight process.
+<br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">First
+Thread Example (Extending Thread)</span><br>
+<br>
+Figure 1 is our first example of writing a thread.&nbsp; There are two
+ways to execute a thread.&nbsp; Either extend the Thread class or
+implement the Runnable interface, both contain the run method.&nbsp;
+Our first example with use the extended class.&nbsp; Line 1 states that
+the ThreadExample class inherits the Thread class.&nbsp; Line 2 is the
+run method.&nbsp; This is the method that is called when writing
+threads.&nbsp; Anytime you wish to implement something as a thread put
+the statements in the run method.&nbsp; <span
+ style="font-weight: bold;">Note:&nbsp; You call the run method by
+calling the start method.&nbsp; </span>Line 3 executes a loop 10
+times printing out the Thread number of the Thread name.&nbsp; Line 4
+just creates a random number of time for the thread to wait.&nbsp; Line
+5 states when the threads are done with execution, the <span
+ style="font-weight: bold;">"End of Thread"</span>
+message appears.&nbsp; <span style="font-weight: bold;">This is the
+thread, not
+including the main.<br>
+<br>
+</span></div>
+</div>
+<div class="section">
+<div class="section">
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 459px; height: 484px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">1 public class
+ThreadExample extends Thread {</span><br>
+      <br>
+&nbsp; public ThreadExample(String string) {<br>
+&nbsp;&nbsp;&nbsp; super(string);<br>
+&nbsp; }<br>
+&nbsp; <br>
+      <span style="font-weight: bold;">2&nbsp; public void run() {</span><br>
+&nbsp;&nbsp; &nbsp;&nbsp; for (int i=0; i &lt; 10; i++) {<br>
+      <span style="font-weight: bold;">3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Iteration: " +
+i
++ " of " + getName());</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+      <span style="font-weight: bold;">4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sleep((long)(Math.random() * 1000));</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch
+(InterruptedException exception)
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+exception.getMessage();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+exception.getStackTrace();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp; &nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+      <span style="font-weight: bold;">5&nbsp;&nbsp;&nbsp;
+System.out.println("End of Thread: " + getName());</span><br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+      <span style="font-weight: bold;">6&nbsp;&nbsp;&nbsp; new
+ThreadExample("Thread One").start();</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">7&nbsp;&nbsp;&nbsp; new
+ThreadExample("Thread Two").start();</span><br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 1 - Extending
+Thread</b></small> </td>
+    </tr>
+  </tbody>
+</table>
+<p class="docText">
+</p>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Calling
+the Thread</span><br>
+<br>
+The main program in Figure 1, is the Multithreading
+process or
+single threaded process.&nbsp; Adding lines 6 and 7 will
+call the thread class ThreadExample.&nbsp; So we have Multithreading
+process, which is the main and two threads Lines 6 and 7, named "Thread
+One" and
+"Thread Two".&nbsp; We call the ThreadExample constructor with the name
+of the thread and the <span style="font-weight: bold;">start() method
+which calls the run()
+method</span>.&nbsp; When this program is executed three applications
+are
+executing, a main and two threads.<br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Program
+Results</span><br>
+<br>
+Figure 2a shows the results from the first run and Figure 2b shows the
+results from the second run.&nbsp; Remember there is a random time
+beingcomputed in Figure 1, step 4.&nbsp; The threads when executing
+will appear out of order.&nbsp; Figure 2a shows that Iteration 0 starts
+for Thread One first, because this was called first
+by Line 6.&nbsp; However Thread Two finishes first.&nbsp; Figure 2b
+shows the second run and Thread One finishes first.&nbsp;&nbsp; The
+point is, the main and two threads are executing at the same time.<br>
+<br>
+<table
+ style="text-align: left; width: 418px; height: 395px; background-color: rgb(204, 255, 255);"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>Iteration: 0 of Thread One<br>
+Iteration: 0 of Thread Two<br>
+Iteration: 1 of Thread Two<br>
+Iteration: 2 of Thread Two<br>
+Iteration: 1 of Thread One<br>
+Iteration: 3 of Thread Two<br>
+Iteration: 2 of Thread One<br>
+Iteration: 4 of Thread Two<br>
+Iteration: 3 of Thread One<br>
+Iteration: 5 of Thread Two<br>
+Iteration: 6 of Thread Two<br>
+Iteration: 4 of Thread One<br>
+Iteration: 5 of Thread One<br>
+Iteration: 7 of Thread Two<br>
+Iteration: 8 of Thread Two<br>
+Iteration: 6 of Thread One<br>
+Iteration: 7 of Thread One<br>
+Iteration: 9 of Thread Two<br>
+End of Thread: Thread Two<br>
+Iteration: 8 of Thread One<br>
+Iteration: 9 of Thread One<br>
+End of Thread: Thread One<br>
+      </small> </td>
+      <td style="vertical-align: top;"><small>Iteration: 0 of Thread One<br>
+Iteration: 0 of Thread Two<br>
+Iteration: 1 of Thread Two<br>
+Iteration: 1 of Thread One<br>
+Iteration: 2 of Thread One<br>
+Iteration: 2 of Thread Two<br>
+Iteration: 3 of Thread Two<br>
+Iteration: 3 of Thread One<br>
+Iteration: 4 of Thread One<br>
+Iteration: 5 of Thread One<br>
+Iteration: 4 of Thread Two<br>
+Iteration: 6 of Thread One<br>
+Iteration: 5 of Thread Two<br>
+Iteration: 6 of Thread Two<br>
+Iteration: 7 of Thread One<br>
+Iteration: 8 of Thread One<br>
+Iteration: 7 of Thread Two<br>
+Iteration: 9 of Thread One<br>
+End of Thread: Thread One<br>
+Iteration: 8 of Thread Two<br>
+Iteration: 9 of Thread Two<br>
+End of Thread: Thread Two</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 2a - Run One</b></small>
+      </td>
+      <td style="vertical-align: top;"><small><b>Figure 2b - Run Two</b></small>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Second
+Thread Example (Implementing Runnable)<br>
+</span><br>
+Now that we can see how to extend the Thread class we are now going to
+create threads with the Runnable interface.&nbsp; Figure 3 shows our
+code.&nbsp; Line 1 shows that we are doing an implementation not an
+extension.&nbsp; Line 2 we are going to create an array with a maximum
+of 5
+threads.&nbsp; Line 3 shows our run method.&nbsp; The only thing that
+has changed is the thread that is going into the run method, this is
+the
+Thread, thus Line 4 gets the current thread entering the run
+method.&nbsp; Line 5 creates a new thread and places in the threads
+array.&nbsp; Line 6 uses the new thread can calls the start method
+which really is calling the run method.&nbsp; Again, this is our
+threaded program.<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 540px; height: 740px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small style="font-weight: bold;">1
+public class RunnableExample implements Runnable {</small><br>
+      <small><br>
+      <span style="font-weight: bold;">2&nbsp; private Thread[] threads
+= new
+Thread[5];</span><br>
+&nbsp; &nbsp; private int index = 0;<br>
+&nbsp;&nbsp;&nbsp; private int maxThreadSize = 5;<br>
+      <br>
+      <span style="font-weight: bold;">3&nbsp; public void run() {</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">4&nbsp; &nbsp; Thread
+currentThread = Thread.currentThread();&nbsp; // get the thread
+parameters</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i=0; i &lt; 10; i++) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Iteration: " + i + " of " +
+currentThread.getName());<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+currentThread.sleep((long)(Math.random() * 1000));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch
+(InterruptedException exception) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+exception.getMessage();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+exception.getStackTrace();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp; &nbsp;&nbsp; System.out.println("End of Thread: " +
+currentThread.getName());<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; <br>
+&nbsp; public void start() {<br>
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; if (index &gt;= maxThreadSize)
+System.exit(-1);<br>
+      <br>
+      <span style="font-weight: bold;">5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+threads[index] = new Thread(this);&nbsp; // create a new thread</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+threads[index].start();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// call the run method for the thread</span><br>
+      <br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; index++;<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+&nbsp; &nbsp; &nbsp; RunnableExample runnableExample = new
+RunnableExample();<br>
+      <span style="font-weight: bold;">7&nbsp;&nbsp;&nbsp;
+runnableExample.start();</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">8&nbsp;&nbsp;&nbsp;
+runnableExample.start();</span><br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 3 -
+Implementing Runnable<br>
+      </b></small></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Lines 7 and 8 start the actual threads.&nbsp; Line 7 is the first
+thread, "Thread-0",
+submitted and Line 8 is the second thread, "Thread-1".&nbsp; Again
+main() is the
+Multithreading process.<br>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;">Program
+Results</span><br>
+<br>
+Figure 4a shows the results from the first run and Figure 4b shows the
+results from the second run.&nbsp; Remember there is a random time
+being computed.&nbsp; The threads when executing
+will appear out of order.&nbsp; Figure 4a shows that Thread-0 starts
+at Thread Number 0 of Thread-0 which is first, because this was called
+by Line 7.&nbsp; This time the first thread implemented finishes
+execution first.&nbsp; Figure 4b
+shows the second run and Thread-1 finishes first.<br>
+<br>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 388px; width: 394px;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>Iteration: 0 of Thread-0<br>
+Iteration: 0 of Thread-1<br>
+Iteration: 1 of Thread-1<br>
+Iteration: 1 of Thread-0<br>
+Iteration: 2 of Thread-1<br>
+Iteration: 3 of Thread-1<br>
+Iteration: 2 of Thread-0<br>
+Iteration: 3 of Thread-0<br>
+Iteration: 4 of Thread-1<br>
+Iteration: 4 of Thread-0<br>
+Iteration: 5 of Thread-1<br>
+Iteration: 5 of Thread-0<br>
+Iteration: 6 of Thread-0<br>
+Iteration: 6 of Thread-1<br>
+Iteration: 7 of Thread-0<br>
+Iteration: 8 of Thread-0<br>
+Iteration: 9 of Thread-0<br>
+Iteration: 7 of Thread-1<br>
+End of Thread: Thread-0<br>
+Iteration: 8 of Thread-1<br>
+Iteration: 9 of Thread-1<br>
+End of Thread: Thread-1</small><br>
+      </td>
+      <td style="vertical-align: top;"><small>Iteration: 0 of Thread-0<br>
+Iteration: 0 of Thread-1<br>
+Iteration: 1 of Thread-0<br>
+Iteration: 2 of Thread-0<br>
+Iteration: 1 of Thread-1<br>
+Iteration: 3 of Thread-0<br>
+Iteration: 2 of Thread-1<br>
+Iteration: 3 of Thread-1<br>
+Iteration: 4 of Thread-1<br>
+Iteration: 4 of Thread-0<br>
+Iteration: 5 of Thread-0<br>
+Iteration: 5 of Thread-1<br>
+Iteration: 6 of Thread-1<br>
+Iteration: 7 of Thread-1<br>
+Iteration: 6 of Thread-0<br>
+Iteration: 8 of Thread-1<br>
+Iteration: 9 of Thread-1<br>
+End of Thread: Thread-1<br>
+Iteration: 7 of Thread-0<br>
+Iteration: 8 of Thread-0<br>
+Iteration: 9 of Thread-0<br>
+End of Thread: Thread-0</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><b>Figure 4a - Run One</b></small></td>
+      <td style="vertical-align: top;"><small><b>Figure 4b - Run Two</b></small></td>
+    </tr>
+  </tbody>
+</table>
+<hr style="width: 100%; height: 2px;"><b
+ style="font-family: helvetica,arial,sans-serif;">Summary</b>
+This lecture discussed briefly threads and how you can extend the
+Thread class or an implementation of the Runnable interface.&nbsp;
+Threads allow you to taking
+advantage of the processor architecture and to enhance the performance
+of
+your application.&nbsp; Threads are also lightweight which means the
+resources have already been accounted for at the start and don't need
+to go through the painful process of process creation.<span
+ style="font-family: helvetica,arial,sans-serif; font-weight: bold;"></span><span
+ style="font-weight: bold;"></span><br>
+<hr style="font-family: helvetica,arial,sans-serif;" size="2"
+ width="100%"><b style="font-family: helvetica,arial,sans-serif;">References</b>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><a name="threads"></a><a
+ href="http://java.sun.com/docs/books/tutorial/essential/threads/index.html">Threads</a>,
+http://java.sun.com/docs/books/tutorial/essential/threads/index.html,
+Accessed 06 June 2004</li>
+  <li><a name="javaCodingConventions"></a><a
+ href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">Java
+Coding Conventions</a>,
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html, Accessed
+06 January 2000</li>
+</ul>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt="" style="width: 32px; height: 32px;" align="left"><small><font
+ face="Arial,Helvetica"><a href="mailto:information@cv64.us">Web
+Contact</a></font></small><br>
+<small><font face="Arial,Helvetica">
+Last modified:&nbsp; 2003 December 31</font></small>
+</div>
+</div>
+</div>
+</body>
+</html>

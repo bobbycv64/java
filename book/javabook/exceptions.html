@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Exceptions</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N4006E3">Chapter 12. Exceptions</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N4006E3"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N4006E3">12.1. </a><a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4006F2">Some
+Perspective</a></dt>
+  <dt>12.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400740">The
+Basics of Exceptions</a></dt>
+  <dt>12.3. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N40079E">Extending
+Exceptions</a></dt>
+  <dt>12.4. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4007DA">Other
+Considerations</a></dt>
+  <dd>
+    <dl>
+      <dt>12.4.1. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4007DD">Using
+Runtime Exceptions</a></dt>
+      <dt>12.4.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4007FB">What
+are exceptional conditions?</a></dt>
+      <dt>12.4.3. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N400810">Stack
+Trace is your friend</a></dt>
+    </dl>
+  </dd>
+</dl>
+</div>
+<p>Exceptions and exception handling are an integral part of Java(tm).
+Since Java is object oriented, exceptions are also objects and have a
+type associated with them. A programmer can also create their own
+exception types. Exceptions are used to handle exceptional conditions
+that occur during normal execution of the program. What exactly is
+exceptional is up for debate and will be discussed later in this
+chapter. For now we should assume that an <span class="emphasis"><i>exceptional
+condition is a condition that occurs in which the normal flow of
+program execution should be changed</i></span>. Another words, some
+work needs to be done outside the normal flow of control before the
+normal flow can be resumed or an alternative flow of control is
+assumed. Before we dive into exceptions, lets review other methods of
+error handling.</p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4006F2">12.1. Some
+Perspective</a></h2>
+</div>
+</div>
+<p><a name="N4006F2">Exceptions in programming can be better understood
+when compared to error handling techniques used in procedural
+languages. Some of the advantages of exception handling will be
+apparent with this illustrative approach. Standard Java libraries use
+Exceptions but using exceptions in your own programming is not
+required. We can emulate procedural handling of errors in Java for this
+perspective. The C Programming language is an example of where
+procedural practices are used and since the syntax of C is very much
+like Java, the examples will have a C like flavor. In a procedural
+language, there are two primary methods of handling error or
+exceptional conditions. The first methods involves returning the result
+back from a function or in our examples a method. This result is then
+checked and the program continues if the function worked correctly or
+handles the problem and continues on the same flow of control or
+perhaps another branch of execution. The other method involves using
+global variables or a shared data structure. In this method, the
+function would change the value of the shared variables and then the
+caller of the function would check these after the function returns to
+determine the course of action. There are certainly other more advanced
+techniques but this will give the reader the flavor of procedural style
+error handling. The following is a simple example that illustrates the
+return value method of error handling.</a></p>
+<div class="figure">
+<p><a name="N4006F2"><b>Figure 12.1. Emulating Procedural Programming
+using return values.</b></a></p>
+<pre class="programlisting"><a name="N4006F2"><tt>figures/exceptions/Procedural.java</tt><br><br>class Procedural {<br>    /**<br>     * Checks range between 0-9<br>     *<br>     * @return 0 if okay, non-zero if out of range<br>     */<br>    public static int checkRange(int value) {<br>	if (value &lt; 0 || value &gt; 9) {<br>	    return 1;<br>	}<br>	else {<br>	    return 0;<br>	}<br>    }<br><br>    public static void main(String[] args) {<br>	int value = 4;<br>	int error = checkRange(value);<br>	if (error != 0) {<br>	    /* handle problem */<br>	    System.out.print("Out of range: " + value + "\n");<br>	}<br>	value = 10;<br>	error = checkRange(value);<br>	if (error != 0) {<br>	    System.out.print("Out of range: " + value + "\n");<br>	}<br>	System.exit(0);<br>    }<br>}<br><br>      </a></pre>
+</div>
+<p><a name="N4006F2">The <tt>checkRange</tt> method takes an integer
+and if the value is not between 0 and 9, the method returns zero which
+is the traditional return value for success. Otherwise the method
+returns a non-zero value which is considered failure. The <tt>main</tt>
+method calls the <tt>checkRange</tt> function twice, once for success
+and once for failure and prints the result to the console. Note that
+for every call to the method, there is more line one line of error
+handling. This code is not part of the normal flow of the program and
+detracts from the readability. The next example uses the shared global
+variable method to hold the previous return value from the method.</a></p>
+<div class="figure">
+<p><a name="N4006F2"><b>Figure 12.2. Emulating Procedural Programming
+using global storage.</b></a></p>
+<pre class="programlisting"><a name="N4006F2"><tt>figures/exceptions/Procedural2.java</tt><br><br>class Procedural2 {<br>    /** holds return value */<br>    public static int error;<br><br>    /**<br>     * Checks range between 0-9<br>     *<br>     * Sets global error variable to 0 if okay, non-zero if out of range<br>     */<br>    public static void checkRange(int value) {<br>	if (value &lt; 0 || value &gt; 9) {<br>	    error = 1;<br>	}<br>	else {<br>	    error = 0;<br>	}<br>    }<br><br>    public static void main(String[] args) {<br>	int value = 4;<br>	checkRange(value);<br>	if (error != 0) {<br>	    /* handle problem */<br>	    System.out.print("Out of range: " + value + "\n");<br>	}<br>	value = 10;<br>	checkRange(value);<br>	if (error != 0) {<br>	    System.out.print("Out of range: " + value + "\n");<br>	}<br>	System.exit(0);<br>    }<br>}<br><br>      </a></pre>
+</div>
+<p><a name="N4006F2"> Notice that when using a global variable, the
+return value is freed up to return useful information such as data
+transformed by the method. This is one of the main advantages of a
+shared data structure. However, in multi-threaded code, this technical
+would be problematic at best. Much more work would have to be done to
+make this code thread safe. To simplify the error handling we could
+create a <tt>checkError</tt> that checks the error value and does what
+ever is appropriate based on the error code. This could encapsulate the
+if statement and logging and other tasks inside the method rather than
+having the code inline. There still would be a error method call after
+each program method call but it would clean up the code a bit. This is
+left as an exercise for the reader.</a></p>
+<p><a name="N4006F2">The two examples above illustrate the two common
+methods of handling errors by returning status values from methods and
+by using a shared data structure which in this case is one variable.
+Some of the problems with using return values is that the error
+checking is done in the normal flow of the program by the caller and
+the other problem is that the function might have been able to return
+some useful information such as a result but now returns the error
+code. Of course there are ways around these problems but most are
+compromises at best and still intrude on program design. Note that
+using return values have always been part of the UNIX tradition where a
+program will return its run status to the calling program which is very
+often the shell program. This simple but highly effective interface
+contract has helped to allow programs to be combined in ways not
+imagined by the creator of the program. It also has allowed scripting
+or other languages to combine programs very effectively. In fact, in
+our Java example above we could have returned a non-zero value on
+failure and then the Java program could have returned its status to the
+shell. In this case we call <tt>System.exit(0)</tt>in all cases. In C <tt>main</tt>
+can return int but in Java we have to call <tt>exit</tt> since <tt>main</tt>
+returns void. All Java <tt>main</tt> methods should exit properly to
+the calling program. This is brought up so that the reader can be aware
+of the great power of return values. Many times returning a value from
+a method is useful so you will see this quite often in Java. Cases such
+as stream handling are very procedural and return values very useful
+when used inside flow control statements. Inside Object Oriented
+programs we will see that exceptions are the best approach for
+non-procedure methods. Now we will discuss exceptions and how they
+augment return values in code.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400740">12.2. The
+Basics of Exceptions</a></h2>
+</div>
+</div>
+<p><a name="N400740">Exceptions are Java objects that hold state and
+can be Serialized. Since they are serializable, they can be passed from
+server to client in Remote Method Invocation (RMI). RMI is the built-in
+distributed object system in Java. The following figure shows the top
+part of the exception hierarchy. All the exceptions shown are in the
+figure are in the package <span class="emphasis"><i>java.lang</i></span>.</a></p>
+<div class="figure">
+<p><a name="N400740"><b>Figure 12.3. Exception Hierarchy</b></a></p>
+<pre class="literallayout"><span class="inlinemediaobject"><a
+ name="N400740">Object<br>   \<br>    \__ Throwable (implements Serializable)<br>             \<br>              \__ Error ...<br>               \<br>                \__ Exception ... <br>                       \<br>                        \__ RuntimeException ...</a></span><br><a
+ name="N400740">      </a></pre>
+</div>
+<p><a name="N400740">Exceptions derive from the class <tt>Throwable</tt>.
+From <tt>Throwable</tt> derives both <tt>Error</tt> and <tt>Exception</tt>.
+Error types are usually reserved for the Virtual Machine implementors
+and are usually fatal and rarely caught by user programs. <tt>RuntimeException</tt>
+is derived from <tt>Exception</tt>. Both <tt>RuntimeException</tt>
+and <tt>Error</tt> are rarely extended because they are not part of
+the method contract which is defined by the method signature. As
+mentioned before, contracts are really fundamental to OO programming so
+methods that throw exceptions should be included as part of the method
+signature. Java makes this very easy for the programmer as both Error
+and RuntimeException are called <span class="emphasis"><i>unchecked</i></span>
+exceptions while all exceptions extending Exception are called <span
+ class="emphasis"><i>checked</i></span> exceptions. <span
+ class="emphasis"><i>Checked</i></span> exceptions are required to be
+part of the method signature. If a method throws a <span
+ class="emphasis"><i>checked</i></span> exception, the caller must
+catch the exception or a compile time error will occur. When a method
+is created that throws a checked exception, a compile error will occur
+unless it is declared as follows.</a></p>
+<pre class="programlisting"><a name="N400740">public void rangeCheck(int value) throws Exception {<br>    System.out.println("In rangeCheck, value: " + value);<br>    if (value &lt; 0 || value &gt; 9) {<br>        throw new Exception("Out of range, 0-9. Value: " + value);<br>    }<br>}<br>    </a></pre>
+<p><a name="N400740">When calling the above method we have to put the
+method call in a try block and provide a catch block to handle the
+exception. An optional finally block can be added which allows the
+programmer to clean up resources or other unfinished details for both
+normal runs or runs where an exception is thrown.. The finally block
+will be executed after the try block is completed or after an exception
+is thrown in the try block which suspends execution of the try block.
+Just like nothing will be executed after an exception is thrown in a
+try block, nothing is executed in the catch block or any other block
+once an exception is throw. The following is an example which shows the
+method above being called.</a></p>
+<pre class="programlisting"><a name="N400740">try {<br>    obj.rangeCheck(3);<br>}<br>catch(Exception e) {<br>    System.out.println("In catch: " + e.getMessage());<br>}<br>finally {<br>    System.out.println("In finally: Optional");<br>}<br>    </a></pre>
+<p><a name="N400740">The following figure shows the complete example
+which illustrates exceptions and the try, catch, finally blocks.</a></p>
+<div class="figure">
+<p><a name="N400740"><b>Figure 12.4. Exception Example</b></a></p>
+<pre class="programlisting"><a name="N400740"><tt>figures/exceptions/Except.java</tt><br>        <br>class Except {<br>    /**<br>     * Checks range between 0-9<br>     *<br>     * @param value the value to check <br>     * @exception Exception  if value out of range, 0-9<br>     */<br>    public void rangeCheck(int value) throws Exception {<br>	System.out.println("In rangeCheck, value: " + value);<br>	if (value &lt; 0 || value &gt; 9) {<br>	    throw new Exception("Out of range, 0-9. Value: " + value);<br>	}<br>    }<br><br>    public static void main(String[] args) {<br>	Except obj = new Except();<br>	try {<br>	    obj.rangeCheck(3);<br>	    obj.rangeCheck(10); // exception thrown<br>	    obj.rangeCheck(5); // not reached<br>	}<br>	catch(Exception e) {<br>	    System.out.println("In catch: " + e.getMessage());<br>	}<br>	finally {<br>	    System.out.println("In finally: Optional");<br>	}<br>    }<br>}<br>   <br>      </a></pre>
+</div>
+<p><a name="N400740">The program output is as follows:</a></p>
+<pre class="screen"><a name="N400740">$ java Except<br>In rangeCheck, value: 3<br>In rangeCheck, value: 10<br>In catch: Out of range, 0-9. Value: 10<br>In finally: Optional<br>    </a></pre>
+<p><a name="N400740">In this section we have looked at basic error and
+exception handling including using a Java exception with try, catch,
+and finally blocks. We have seen the importance of return values from
+main methods and functions for the calling program or calling code as
+this is an important part of the interface or contract of the method.
+In Java, the throws clause is part of the method signature and thus
+contract for the method. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40079E">12.3.
+Extending Exceptions</a></h2>
+</div>
+</div>
+<p><a name="N40079E">In this section we will create an Exception and
+use it in our previous example. Exceptions are just classes like other
+Java classes and thus can hold state and have additional methods etc.
+To match the previous examples, we will create a <tt>RangeException</tt>
+class that hole the integer value and the min and max range supported
+by the method. The following is the code for the exception.</a></p>
+<div class="figure">
+<p><a name="N40079E"><b>Figure 12.5. RangeException Class</b></a></p>
+<pre class="programlisting"><a name="N40079E"><tt>figures/exceptions/RangeException.java</tt><br>        <br>class RangeException extends Exception {<br><br>    public int min;<br>    public int max;<br>    public int value;<br><br>    public RangeException(int min, int max, int value) {<br>	// message to superclass ctor<br>	super(value + " out of range: " + min + "-" + max);<br>	this.min = min;<br>	this.max = max;<br>	this.value = value;<br>    }<br>}<br>   <br>      </a></pre>
+</div>
+<p><a name="N40079E">The constructor does all the work in this method
+as it create a format for the message for the super class and saves the
+state. The code that catches this exception can then use the message
+via the standard <tt>getMessage</tt> method or can grab the min, max,
+and value fields value and act based on this information.</a></p>
+<p><a name="N40079E">The next figure shows the previous example
+modified to use the <tt>RangeException</tt> class. The range min, and
+max are now parameters to help make an easier integration.</a></p>
+<div class="figure">
+<p><a name="N40079E"><b>Figure 12.6. Using the RangeException Class</b></a></p>
+<pre class="programlisting"><a name="N40079E"><tt>figures/exceptions/Except2.java</tt><br>        <br>class Except2 {<br>    public int min = 0;<br>    public int max = 9;<br>    /**<br>     * Checks range between min-max<br>     *<br>     * @param value the value to check <br>     * @exception Exception  if value out of range, min-max<br>     */<br>    public void rangeCheck(int value) throws RangeException {<br>	System.out.println("In rangeCheck, value: " + value);<br>	if (value &lt; min || value &gt; max) {<br>	    throw new RangeException(min, max, value);<br>	}<br>    }<br><br>    public static void main(String[] args) {<br>	Except2 obj = new Except2();<br>	try {<br>	    obj.rangeCheck(3);<br>	    obj.rangeCheck(10); // exception thrown<br>	    obj.rangeCheck(5); // not reached<br>	}<br>	catch(RangeException e) {<br>	    System.out.println("In catch: " + e.getMessage());<br>	    System.out.println(e);<br>	    System.out.println("Min: " + e.min);<br>	}<br>	finally {<br>	    System.out.println("In finally: Optional");<br>	}<br>    }<br>}<br>   <br>      </a></pre>
+</div>
+<p><a name="N40079E">The program output is as follows:</a></p>
+<pre class="screen"><a name="N40079E">$ java Except2<br><br>In rangeCheck, value: 3<br>In rangeCheck, value: 10<br>In catch: 10 out of range: 0-9<br>RangeException: 10 out of range: 0-9<br>Min: 0<br>In finally: Optional<br>    </a></pre>
+<p><a name="N40079E">In the catch block we have added printing the
+exception which calls the <tt>toString</tt> method which in a super
+class is defined to return the classname plus the message. We have
+changed the code to catch our new exception type so we can access the
+state variable min. As you can see this simplifies the code and makes
+in more useful and reusable as well.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4007DA">12.4. Other
+Considerations</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4007DD">12.4.1. Using Runtime Exceptions</a></h3>
+</div>
+</div>
+<p><a name="N4007DD">As was discuss previously, it is a good idea to
+use checked versus unchecked exceptions. There are a few exceptions.
+The following <tt>RuntimeExceptions</tt> should be used when
+appropriate.</a></p>
+<table summary="Simple list" class="simplelist" border="0">
+  <tbody>
+    <tr>
+      <td><tt>IllegalArgumentException</tt>: An illegal argument is
+passed to the method such as the wrong class type.</td>
+    </tr>
+    <tr>
+      <td><tt>IllegalStateException</tt>: Object is not in the correct
+state for the requested operation.</td>
+    </tr>
+    <tr>
+      <td><tt>NullPointerException</tt>: Use like <tt>IllegalArgumentException</tt>
+when a null value is involved.</td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="N4007DD">Most of the other exceptions don't make sense to
+use but it is possible that a designer may choose to extend <tt>RuntimeException</tt>
+as other wise Java would not have unchecked exceptions. No cases to do
+this come to mind but that doesn't mean there are none.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4007FB">12.4.2. What are exceptional
+conditions?</a></h3>
+</div>
+</div>
+<p><a name="N4007FB">The question of when to use a exception rather
+than a return value is part of design and a judgment rather than any
+fixed formula. This section will give a few ideas and examples to help
+with the selection process.</a></p>
+<p><a name="N4007FB">In the IO streams libraries when reading a stream,
+normally we expect to eventually get to the end of a stream. In this
+case the method <tt>read</tt> generally returns -1 for end of file and
+other wise returns the number of bytes read. If no decent flag can be
+returned or if an explicit method check for status can be used, it
+could be a candidate for an exception. The <span class="emphasis"><i>java.io</i></span>
+uses both approaches as the package defines <tt>EOFException</tt> as
+well as using the flag returned from a method.</a></p>
+<p><a name="N4007FB">The last area to discuss are business exceptions.
+Checking a return value or status object takes discipline on the part
+of the client programmer. In some cases it may be appropriate to
+establish critical but normal operations that throw exceptions. An
+example could be a banking system where the client must handle
+overdraft or non sufficient funds which makes the idea of an <tt>OverdraftException</tt>
+a good idea. Failure to do so would be very bad and it is not the
+normal case but happens quite often. This is type situation where use
+of a business exception that makes sense. Business exceptions and
+hierarchies could get out of hand in a quick hurry if some strict
+criteria is not met.</a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400810">12.4.3. Stack Trace is your friend</a></h3>
+</div>
+</div>
+<p><a name="N400810">Many of the methods in the <tt>Throwable</tt>
+class which is the top most exception class are quite useful. We saw
+the <tt>getMessage</tt> and the <tt>toString</tt> methods earlier.
+The <tt>printStackTrace</tt> is a very good method to call in the
+catch block. This method is overloaded two times. The no argument one
+prints the message to standard error while the two others print to a <tt>PrintWriter</tt>
+or a <tt>PrintStream</tt> of your choice. For normal single threaded
+code these work pretty well for identifying errors as the stack trace
+shows the line numbers where the exception occurred. If the reader
+places the call <tt>e.printStackTrace()</tt> into the catch block of
+the previous example, the following message will be printed.</a></p>
+<pre class="screen"><a name="N400810">RangeException: 10 out of range: 0-9<br>        at Except3.rangeCheck(Except3.java:14)<br>        at Except3.main(Except3.java:22)<br>      </a></pre>
+<p><a name="N400810">This shows that the exception occurred at line 22
+in <tt>main</tt> which came from line 14 in <tt>rangeCheck</tt>. This
+makes it pretty easy to find the problem as long as you have the source
+code where the problem occurred in the trace. You will get the whole
+call stack so work backward to find the source of the problem.</a></p>
+<p><a name="N400810">When trying to find problems in multi-threaded
+code, a debugger is needed to dump the state of the threads. This
+should be covered in a chapter on threads.</a></p>
+</div>
+</div>
+</div>
+</body>
+</html>

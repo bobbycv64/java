@@ -1,0 +1,896 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="GENERATOR"
+ content="Mozilla/4.75 [en] (Windows NT 5.0; U) [Netscape]">
+  <title>Week One Lecture&nbsp; Introduction to HyperText Modeling
+Language</title>
+</head>
+<body>
+<center style="font-family: helvetica,arial,sans-serif;"><big><font
+ color="#000000"><big>Introduction
+to Graphical User Interfaces (GUIs)</big></font></big><b><font
+ color="#000000"><br>
+</font></b>
+</center>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><br>
+We will
+learn about the Java
+Abstract Window Toolkit (AWT) and Java Foundation Classes
+(JFC) / Swing.&nbsp;&nbsp; These classes are the basic essentials of
+Graphical User Interfaces (GUI) in the Java programming language.<br>
+</font>
+<h2 class="title"
+ style="clear: both; font-family: helvetica,arial,sans-serif;"><small
+ style="font-weight: normal;"><a name="awt">Abstract
+Window Toolkit (AWT)</a></small><br>
+</h2>
+<p style="font-family: helvetica,arial,sans-serif;">Java has a package
+of predefined classes that
+provide GUI functionality called the Abstract Window Toolkit
+(AWT).&nbsp; These
+classes are called by developers to produce forms, input screens or
+output reports.&nbsp; The
+AWT is an abstraction layer on top of the Java Virtual Machine (JVM)
+and renders the
+different types of <a href="#widget">Widgets </a>(GUI components,
+Buttons, Windows, Tables,
+etc.) on a screen.&nbsp; AWT is the original GUI toolkit.&nbsp; AWT
+components are also known as Heavyweight which rely on the underlying
+operating system's windowing system for support.&nbsp; AWT uses peer
+classes, e.g. java.awt.peer, that interacts between the components and
+operating system. </p>
+<a name="swing" style="font-family: helvetica,arial,sans-serif;"><big>Java
+Foundation Classes (JFC) Swing</big><br>
+</a>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><br>
+The Java Foundation Classes (JFC) / <a href="#swingReference">Swing</a>
+are GUI classes enabling the developer to write programs independent of
+the windowing system or operating system.&nbsp; Swing is the second
+major GUI release of Java classes and are built on top of the
+AWT.&nbsp; The Swing container components, e.g. JApplet, JDialog,
+JFrame, JWindow are also Heavyweight.&nbsp; Look at the JRootPane
+class, this will answer all questions between lightweight and
+heavyweight.&nbsp; Most of the other Swing
+components are Lightweight.&nbsp; LIghtweight components are completely
+written in the Java programming language and there is no peer package
+in use.</font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><br>
+</font>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica"><span
+ style="font-weight: bold;">JFrames and JPanels</span><br>
+<br>
+</font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">The <a href="#jframe">JFrame</a>
+is a top level window with a title and border including the minimize,
+maximize and exit buttons.&nbsp; JFrames are a container for a
+computer's screen, enabling a user to move the component on the screen
+and in some cases resizing the component.&nbsp; The <a
+ href="#borderLayout">BorderLayout</a> manager is the default
+layout.&nbsp; We will review layout managers later in this lecture. </font><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">The <a href="#jpanel">JPanel</a>
+is a contain that an application can attach other components, including
+other JPanels.&nbsp; The FlowLayout manager is the default layout
+manager.<br>
+<br>
+</font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">We will create the
+GUIExample application for our example
+program throughtout this lecture.&nbsp; First, we create a JFrame and a
+JPanel within the
+JFrame, see Figure 1.&nbsp; The class GUIExample </font><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica">is
+an extension of a JPanel.&nbsp; Line 1, creates an instance of a
+JPanel.&nbsp; Line 2, creates an instance of a JFrame and gives the
+JFrame name of </font><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica">GUI
+Example</font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">.&nbsp;
+The next section WindowListener sets up a listener, we will cover
+listeners later but this section ends the application when a user
+presses the exit button on the JFrame.&nbsp; Line 3, adds the JPanel to
+the JFrame.&nbsp; The remaining lines of code set
+up the JFrame with the size of 400 wide by 300 high in pixels and
+display the JFrame.<br>
+<br>
+</font>
+<table
+ style="background-color: rgb(204, 255, 255); height: 582px; width: 499px; font-family: helvetica,arial,sans-serif;"
+ border="0" cols="1">
+  <tbody>
+    <tr>
+      <td style="background-color: rgb(204, 255, 255);">/**<br>
+      <small>&nbsp;* @author Robert Estey<br>
+&nbsp;* @version 1.0<br>
+&nbsp;*/<br>
+      <br>
+import java.awt.Dimension;<br>
+import java.awt.event.WindowAdapter;<br>
+import java.awt.event.WindowEvent;<br>
+import javax.swing.JFrame;<br>
+import javax.swing.JPanel;<br>
+      <br>
+public class GUIExample extends JPanel {<br>
+      <br>
+&nbsp; public GUIExample() {}<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+      <br>
+      <span style="font-weight: bold;">&nbsp;
+1&nbsp; </span></small><font style="font-weight: bold;"><small>GUIExample
+gui</small></font><font style="font-weight: bold;"><small>Example </small></font><font
+ style="font-weight: bold;"><small>= new </small></font><font
+ style="font-weight: bold;"><small>GUIExample</small></font><font
+ style="font-weight: bold;"><small>();&nbsp;
+// create JPanel<br>
+&nbsp; 2&nbsp; JFrame frame = new JFrame("</small></font><font
+ style="font-weight: bold;"><small>GUI Example</small></font><small><span
+ style="font-weight: bold;">");&nbsp; //
+create JFrame</span><br>
+      <br>
+&nbsp;&nbsp;&nbsp; // close window if exit button pressed<br>
+&nbsp;&nbsp;&nbsp;
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <br>
+      <br>
+&nbsp;&nbsp;&nbsp; // add JPanel to JFrame<br>
+      <span style="font-weight: bold;">3 &nbsp;&nbsp;
+frame.getContentPane().add("Center", </span></small><font
+ style="font-weight: bold;"><small>guiExample</small></font><small><span
+ style="font-weight: bold;">);</span><br>
+&nbsp;&nbsp;&nbsp; frame.pack();<br>
+&nbsp;&nbsp;&nbsp; frame.setSize(new Dimension(400,300));<br>
+&nbsp;&nbsp;&nbsp; frame.setVisible(true);<br>
+&nbsp; }<br>
+}</small> </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);"><small>Figure
+1 - Creating a Graphical User Interface (GUI) Container</small></td>
+    </tr>
+  </tbody>
+</table>
+<br style="font-family: helvetica,arial,sans-serif;">
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">Executing the
+GUIExample program,
+the JFrame and JPanel should appear as follows, see Figure 2.&nbsp; The
+JFrame is everything in blue, the title, window handler, resizing bars
+and buttons, e.g.
+minimize, maximize, exit.&nbsp; The JPanel is
+encapsulted within the JFrame and is gray.<br>
+<br>
+</font>
+<table
+ style="text-align: left; width: 408px; height: 336px; background-color: rgb(204, 255, 255); font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr align="center">
+      <td style="vertical-align: top;"><img src="swing1.jpg" title=""
+ alt="" style="width: 400px; height: 300px;"></td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><small>Figure 2 - Main Frame<br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<br style="font-family: helvetica,arial,sans-serif;">
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">There are excellent
+examples of the Containers at <a
+ href="http://java.sun.com/docs/books/tutorial/uiswing/layout/layoutlist.html">http://java.sun.com/docs/books/tutorial/uiswing/layout/layoutlist.html</a><br>
+</font>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica">Now
+that we have
+created a JFrame and JPanel we can add components to
+the JPanel, see Figure 3a.&nbsp;
+Remember to import the correct classes to your main program.&nbsp;
+Figure 3 shows 6 additional lines to the GUIExample class.&nbsp; Lines
+1 through 3 create a JButton, JLabel and JTextField.&nbsp; Lines 4
+through 6 add the components to the JPanel.&nbsp; If you don't add the
+components to the JPanel they will not be displayed.<br>
+</font><br style="font-family: helvetica,arial,sans-serif;">
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">Executing the program
+now displays the following with our new components, JButton, JLabel and
+JTextField, see Figure 3b.<br>
+<br>
+</font>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); height: 339px; width: 922px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">&nbsp;&nbsp; 1 private JButton button = new
+JButton("Some Button");</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp; 2 private JLabel
+label = new JLabel("Some Label");</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp; 3 private
+JTextField textField = new JTextField("Some Text", 20);</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp; public GUIExample() {<br>
+&nbsp; <br>
+      <span style="font-weight: bold;">&nbsp;&nbsp; 4 this.add(button);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp; 5 this.add(label);</span><br
+ style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp; 6
+this.add(textField);</span><br>
+&nbsp; }</small></td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="swing2.jpg" title="" alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 3a - JPanel with additional
+Components Code<br>
+      </span></small></td>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 3b - JPanel with additional
+Components Example</span><br>
+      </small></td>
+    </tr>
+  </tbody>
+</table>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><span style="font-weight: bold;"><br>
+</span></font>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica"><span
+ style="font-weight: bold;">Layout Managers</span><br>
+<br>
+We now have our additional components added to the JPanel but there
+is no Layout control.&nbsp; The new components are placed by the layout
+defaults, remember, JFrames are BorderLayout and JPanels are
+FlowLayout.&nbsp; Layout Managers add control to the location of
+components and there
+are several types of Layout Managers, this lecture will cover the
+<a href="#borderLayout">BorderLayout</a> and <a href="#gridLayout">GridLayout</a>.&nbsp;
+There is an example with code of the
+GridBagLayout, probably the most complex and powerful of all the layout
+managers, located at:<br>
+<br>
+<a
+ href="http://cv64.us/uob/computing/java/book/src/cv64/gridBagLayout/gridBagLayout.html">http://cv64.us/uob/computing/java/book/src/cv64/gridBagLayout/gridBagLayout.html</a><br>
+<br>
+<span style="font-weight: bold; font-style: italic;"><a
+ name="borderLayout"></a>BorderLayout</span><br>
+<br>
+The BorderLayout manager manages components by geographic location,
+e.g. North, East, South, West, Center.&nbsp; Within our constructor we
+define the BorderLayout and extend the JPanel
+add method with the Border parameters, see Figure 4a.&nbsp; The
+GUIExample application has
+the </font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">JLabel in
+the west, JTextField in the Center and JButton in the south of the
+JPanel, see Figure 4b.<br>
+<br>
+</font>
+<table
+ style="text-align: left; height: 340px; width: 711px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>&nbsp;&nbsp;&nbsp;
+this.setLayout(new BorderLayout());<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; this.add(button, BorderLayout.SOUTH);<br>
+&nbsp;&nbsp;&nbsp; this.add(label, BorderLayout.WEST);<br>
+      </small>
+      <div style="text-align: left;"><small>&nbsp;&nbsp;&nbsp;
+this.add(textField, BorderLayout.CENTER);</small></div>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="swing3.jpg" title="" alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 4a - BorderLayout Code</span></small></td>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 4b - </span></small><small><span
+ style="font-weight: bold;">BorderLayout Example</span></small></td>
+    </tr>
+  </tbody>
+</table>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><br>
+</font><font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><span
+ style="font-weight: bold; font-style: italic;"><a name="gridLayout"></a>GridLayout</span><br>
+<br>
+The GridLayout manager is a two dimensional grid by
+rows and then columns.&nbsp; Looking at Figure 5a, the grid that is
+planned will have 3 rows and 1 column.&nbsp; We then add our components
+to the GridLayout.&nbsp; Each component gets added to the GridLayout by
+the order they are added.&nbsp; The example adds the JLabel, JTextField
+and finally the JButton.<br>
+<br>
+</font>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">Now we reverse the
+row and column values and the components are now added vertically, see
+Figure 5b.&nbsp; Remember the items are added to the grid by
+sequence.&nbsp; If the GridLayout was (2, 2) then the first component
+will be placed in row 1, column 1, the second component in row 1,
+column 2, the third in row 2, column 1 and finally the last component
+in row 2, column 2.<br>
+<br>
+</font>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 820px; height: 454px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>&nbsp;&nbsp;&nbsp;
+this.setLayout(new GridLayout(3, 1));<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.add(label);<br>
+&nbsp;&nbsp;&nbsp; this.add(textField);<br>
+&nbsp;&nbsp;&nbsp; this.add(button);</small></td>
+      <td style="vertical-align: top;"><small>&nbsp;&nbsp;&nbsp;
+this.setLayout(new GridLayout(1, 3));<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.add(label);<br>
+&nbsp;&nbsp;&nbsp; this.add(textField);<br>
+&nbsp;&nbsp;&nbsp; this.add(button);</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><img src="swing4.jpg" title=""
+ alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img src="swing5.jpg" title=""
+ alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 5a - </span></small><small><span
+ style="font-weight: bold;">GridLayout (3, 1) Example</span></small></td>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 5b - </span></small><small><span
+ style="font-weight: bold;">GridLayout (1, 3) Example</span></small></td>
+    </tr>
+  </tbody>
+</table>
+<br style="font-family: helvetica,arial,sans-serif;">
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><font
+ style="font-family: helvetica,arial,sans-serif;" face="Arial,Helvetica"><span
+ style="font-weight: bold;">Events and Listeners</span><br>
+<br>
+The GUIExample program now displays the components in the location we
+desire.&nbsp; The application, however, needs to be active.&nbsp; Java
+does this through events and listeners.&nbsp; Events are sources or
+triggers that occur when an object has been activated.&nbsp; Listeners
+are objects that listen for events and perform an action when an event
+has been received.&nbsp; We will use the JButton and JTextField in this
+example.&nbsp; Currently the JButton if pressed just flickers on the
+screen and the JTextField can receive input from the screen.&nbsp; They
+really have no functionality.&nbsp; What we are going to do is make the
+JButton display the number of times pressed in the JTextField.<br>
+<br>
+The code in Figure 6a, Line 1 states that the GUIExample application
+will implement the ActionListener interface.&nbsp; Line 2 adds the
+ActionListener to the JButton, meaning that the JButton when pressed
+will call the actionPerformed method, Line 3.&nbsp; Line 4 then
+increments a counter and sets the value for the JTextField.<br>
+<br>
+Figure 6b, shows that the JButton was pressed 3 times because the
+current value of the JTextField is 3.<br>
+<br>
+</font>
+<table
+ style="text-align: left; height: 340px; background-color: rgb(204, 255, 255); width: 867px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">1 public class GUIExample extends JPanel
+implements ActionListener<br>
+      <br>
+&nbsp; 2
+button.addActionListener(this);</span><br>
+      <br>
+      <span style="font-weight: bold;">&nbsp; 3&nbsp; public void
+actionPerformed(ActionEvent actionEvent) {</span><br
+ style="font-weight: bold;">
+&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; System.out.println("actionPerformed: "
++ counter);<br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp; 4 &nbsp;&nbsp;
+textField.setText(Integer.toString(counter++));</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">}</span></small><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="swing6.jpg" title="" alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 6a - </span></small><small><span
+ style="font-weight: bold;">ActionListener Code<br>
+      </span></small></td>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 6b - </span></small><small><span
+ style="font-weight: bold;">ActionListener Example</span></small></td>
+    </tr>
+  </tbody>
+</table>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica"><br>
+</font>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-family: helvetica,arial,sans-serif;">Here's a
+Graphical Example of Figure 6a.&nbsp; Figure 6c shows all the
+components involved.&nbsp; These are components without any
+functionality.&nbsp; All GUI components have event and listener types,
+e.g. JButtons extends an AbstractButton.&nbsp; Looking at the
+AbstractButton there are three types of listeners, e.g.&nbsp;
+ActionListener, ChangeListener and ItemListener.&nbsp; These are the
+only types of listeners for a JButton.&nbsp; Read the classes in the
+documentation and review what they extend.&nbsp; We will be using
+ActionListener for this example.<br>
+<br>
+Looking at the code line by line should clarify what is occuring with
+events and listeners.&nbsp; Line 2, the ActionListener is added to the
+JButton.&nbsp; This means that the JButton now has a listener when
+pressed.&nbsp; Remember there was just flickering before but now we are
+going to add a listener to the JButton.&nbsp; So what is listening
+when the JButton is pressed?&nbsp; The JPanel, that's what <span
+ style="font-weight: bold;">this</span> means in the method.&nbsp; Look
+at Line 2 again, <span style="font-weight: bold;">button.addActionListener(this)</span>.&nbsp;
+The JButton is the button and you're adding an actionListener which is
+the method addActionListener().&nbsp; Within the addActionListener
+method is <span style="font-weight: bold;">this</span>, which is the
+JPanel.&nbsp; Remember the JButton
+is going to send an event when pressed.&nbsp; And who is
+listening?&nbsp; The JPanel is doing the listening, nothing else.</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+Line 3 is part of the JPanel and has a method called <span
+ style="font-weight: bold;">actionPerformed(ActionEvent actionEvent)</span>.&nbsp;
+When we put <span style="font-weight: bold;">this</span> in line 2
+meant, when the JButton was pressed to look for the actionPerformed
+method in JPanel.&nbsp; When the JButton is pressed go to the
+actionPerformed method in <span style="font-weight: bold;">this</span>,
+JPanel.&nbsp; The message actionPerformed and a counter
+is presented to the default output channel.<br>
+<br>
+Line 4 has nothing to do with events or listeners.&nbsp; All we have
+did is update the value for the JTextField.<br>
+<br>
+Finally, back to line 1.&nbsp; Since the JPanel is the actionListener
+we implement the ActionListener class, thus the statement implements
+ActionListener.&nbsp; The class GUIExample extends JPanel and
+implements ActionListener, which requires the actionPerformed method at
+a minimum.<br>
+</span>
+<table
+ style="text-align: left; height: 420px; background-color: rgb(204, 255, 255); width: 396px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img src="eventsListeners.gif"
+ alt="" title="" style="width: 769px; height: 624px;"></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 6c - Graphical Display Process<br>
+      </span></small></td>
+    </tr>
+  </tbody>
+</table>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Additional
+component example</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Now that we
+understand how to create the components, placement and events and
+listeners all we do now is add other types of components.&nbsp; The
+Java AWT and JFC / Swing classes
+basically work the same.&nbsp; Just instantiate the type of component
+you wish,
+place using a layout manager and add the functionality with events and
+listeners.&nbsp; We will now add a JSlider to our
+GUIExample class.<br>
+<br>
+Looking at Figure 7a, Line 1 we create a JSlider that will be
+HORIZONTAL in orientation, range between the values -3 and 3 and
+starting value of 0.&nbsp; Line 2 we change our GridLayout to 2 rows
+and 2 columns.&nbsp; We add the JSlider to position row 2, column
+2.&nbsp; Lines 4 through 6 set the JSlider with major tick spacing of
+1, paint the tick marks and show the values.<br>
+<br>
+We then add the functionality using a ChangeEvent and
+ChangeListener.&nbsp; When the JSlider has a ChangeEvent the textField
+will update with the value, Line 8.&nbsp; We can see that the JSlider
+was moved to -2 on the JSlider and the JTextField was updated to the
+corresponding value.<br>
+<br>
+</span>
+<table
+ style="text-align: left; background-color: rgb(204, 255, 255); width: 870px; height: 420px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>&nbsp;<span
+ style="font-weight: bold;"> 1 private JSlider slider = new
+JSlider(JSlider.HORIZONTAL, -3, 3, 0);</span><br>
+      <br>
+&nbsp; public GUIExample() {<br>
+      <br>
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 2
+this.setLayout(new GridLayout(2, 2));</span><br
+ style="font-weight: bold;">
+      <br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 3
+this.add(slider);</span><br style="font-weight: bold;">
+      <br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 4
+slider.setMajorTickSpacing(1);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 5
+slider.setPaintTicks(true);</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 6
+slider.setPaintLabels(true);</span><br style="font-weight: bold;">
+      <br style="font-weight: bold;">
+      <span style="font-weight: bold;">&nbsp;&nbsp;&nbsp; 7
+slider.addChangeListener(this);</span><br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void stateChanged(ChangeEvent changeEvent) {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("stateChanged() ");<br>
+&nbsp;&nbsp;&nbsp; JSlider sliderEvent =
+(JSlider)changeEvent.getSource();<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (!sliderEvent.getValueIsAdjusting()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">8
+textField.setText(Integer.toString(sliderEvent.getValue()));</span><br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }</small><br>
+      </td>
+      <td style="vertical-align: top; text-align: center;"><img
+ src="swing7.jpg" title="" alt="" style="width: 400px; height: 300px;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 7a - </span></small><small><span
+ style="font-weight: bold;">JSlider Code<br>
+      </span></small></td>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 7b - JSlider Example</span></small></td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+Making one more modification, another button is added.&nbsp; The
+actionPerformed method now needs to figure out which widget made the
+call.&nbsp; This is done through the actionEvent.getSource()
+call.&nbsp; See Figures 8 and 9.<br>
+<br>
+</span>
+<table
+ style="text-align: left; width: 410px; height: 336px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);"><img
+ src="getSource.jpg" alt="" style="width: 400px; height: 300px;"></td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 255, 255);"><small><span
+ style="font-weight: bold;">Figure 8 - actionEvent.getSource()</span></small><small><span
+ style="font-weight: bold;"></span></small></td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+Here is the complete code for this lecture, see Figure 9 below:<br>
+<br>
+</span>
+<table
+ style="text-align: left; height: 1396px; background-color: rgb(204, 255, 255); width: 530px; font-family: helvetica,arial,sans-serif;"
+ border="0" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><small>/**<br>
+&nbsp;* @author Robert Estey<br>
+&nbsp;* @version 1.0<br>
+&nbsp;*/<br>
+      <br>
+import java.awt.event.ActionEvent;<br>
+import java.awt.event.ActionListener;<br>
+import java.awt.BorderLayout;<br>
+import java.awt.Dimension;<br>
+import java.awt.GridLayout;<br>
+import java.awt.event.WindowAdapter;<br>
+import java.awt.event.WindowEvent;<br>
+import javax.swing.JButton;<br>
+import javax.swing.JFrame;<br>
+import javax.swing.JSlider;<br>
+import javax.swing.JLabel;<br>
+import javax.swing.JPanel;<br>
+import javax.swing.JTextField;<br>
+import javax.swing.event.ChangeEvent;<br>
+import javax.swing.event.ChangeListener;<br>
+      <br>
+public class GUIExample extends JPanel implements ActionListener,
+ChangeListener {<br>
+      <br>
+&nbsp; private JButton button1 = new JButton("Some Button");<br>
+&nbsp; private JButton button2 = new JButton("Another Button");<br>
+&nbsp; private JLabel label = new JLabel("Some Label");<br>
+&nbsp; private JTextField textField = new JTextField("Some Text", 20);<br>
+&nbsp; private JSlider slider = new JSlider(JSlider.HORIZONTAL, -3, 3,
+0);<br>
+      <br>
+&nbsp; private int counter = 1;<br>
+      <br>
+&nbsp; public GUIExample() {<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.setLayout(new BorderLayout());<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.add(button1, BorderLayout.SOUTH);<br>
+&nbsp;&nbsp;&nbsp; this.add(label, BorderLayout.WEST);<br>
+&nbsp;&nbsp;&nbsp; this.add(textField, BorderLayout.CENTER);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.setLayout(new GridLayout(3, 2));<br>
+      <br>
+&nbsp;&nbsp;&nbsp; this.add(label);<br>
+&nbsp;&nbsp;&nbsp; this.add(textField);<br>
+&nbsp;&nbsp;&nbsp; this.add(button1);<br>
+&nbsp;&nbsp;&nbsp; this.add(button2);<br>
+&nbsp;&nbsp;&nbsp; this.add(slider);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; slider.setMajorTickSpacing(1);<br>
+&nbsp;&nbsp;&nbsp; slider.setPaintTicks(true);<br>
+&nbsp;&nbsp;&nbsp; slider.setPaintLabels(true);<br>
+      <br>
+&nbsp;&nbsp;&nbsp; button1.addActionListener(this);<br>
+&nbsp;&nbsp;&nbsp; button2.addActionListener(this);&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; slider.addChangeListener(this);<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void actionPerformed(ActionEvent actionEvent) {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("actionPerformed() " + counter);<br>
+&nbsp;&nbsp;&nbsp; textField.setText(Integer.toString(counter++));<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; if (actionEvent.getSource().equals(button1)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Button 1 Pressed");<br>
+&nbsp;&nbsp;&nbsp; } else if (actionEvent.getSource().equals(button2)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Button 2
+Pressed");<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public void stateChanged(ChangeEvent changeEvent) {<br>
+&nbsp;&nbsp;&nbsp; System.out.println("stateChanged() ");<br>
+&nbsp;&nbsp;&nbsp; JSlider sliderEvent =
+(JSlider)changeEvent.getSource();<br>
+      <br>
+&nbsp;&nbsp;&nbsp; if (!sliderEvent.getValueIsAdjusting()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+textField.setText(Integer.toString(sliderEvent.getValue()));<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp; }<br>
+      <br>
+&nbsp; public static void main(String[] args) {<br>
+&nbsp;&nbsp;&nbsp; GUIExample guiExample = new GUIExample();&nbsp; //
+create JPanel<br>
+&nbsp;&nbsp;&nbsp; JFrame frame = new JFrame("GUI Example");&nbsp; //
+create JFrame<br>
+      <br>
+&nbsp;&nbsp;&nbsp; // close window if exit button pressed<br>
+&nbsp;&nbsp;&nbsp;
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); <br>
+      <br>
+&nbsp;&nbsp;&nbsp; // add JPanel to JFrame<br>
+&nbsp;&nbsp;&nbsp; frame.getContentPane().add("Center", guiExample);<br>
+&nbsp;&nbsp;&nbsp; frame.pack();<br>
+&nbsp;&nbsp;&nbsp; frame.setSize(new Dimension(400,300));</small><br>
+      <small>&nbsp;&nbsp;&nbsp; frame.setVisible(true);<br>
+&nbsp; }<br>
+}</small><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><small><span
+ style="font-weight: bold;">Figure 9 - Lecture 1 Code</span></small></td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"><br>
+</span>
+<hr style="font-family: helvetica,arial,sans-serif;" align="left"
+ width="100%"><small style="font-family: helvetica,arial,sans-serif;"><small><font
+ size="+3"><small><small><a name="mvc"></a>Model
+- View - Controller
+Architecture</small></small></font></small></small>
+<p style="font-weight: bold; font-family: helvetica,arial,sans-serif;"><a
+ name="model"></a>Model - Data
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">The model
+encompasses the state data
+for
+each component.&nbsp; There are different models for different types of
+components.&nbsp; For example, the model of a scroll bar component
+might
+contain information about the current position of its adjustable
+"thumb,"
+the minimum and maximum values, and the thumb's width (relative to the
+range of values).&nbsp; A menu, on the other hand, may simply contain a
+list of the menu items the user can select from.&nbsp; Note that this
+information
+remains the same no matter how the component is painted on the screen,
+model data always exists independent of the component's visual
+representation.
+</p>
+<p style="font-family: helvetica,arial,sans-serif;"><a name="view"></a><span
+ style="font-weight: bold;">View - GUI</span>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">The view refers to
+how you see the
+component
+on the screen.&nbsp; For a good example of how views can differ, look
+at
+an application window on two different GUI platforms.&nbsp; Almost all
+window frames will have a title bar spanning the top of the
+window.&nbsp;
+However, the title bar may have a close box on the left side (like the
+older MacOS platform), or it may have the close box on the right side
+(as
+in the Windows 95 platform).&nbsp; These are examples of different
+types
+of views for the same window object.
+</p>
+<p style="font-weight: bold; font-family: helvetica,arial,sans-serif;"><a
+ name="controller"></a>Controller - Event (Mouse, Keyboard)
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">The controller is
+the portion of the
+user
+interface that dictates how the component interacts with events.&nbsp;
+Events come in many forms, a mouse click, gaining or losing focus, a
+keyboard
+event that triggers a specific menu command, or even a directive to
+repaint
+part of the screen.&nbsp; The controller decides how each component
+will
+react to the event.
+</p>
+<p style="font-weight: bold; font-family: helvetica,arial,sans-serif;"><a
+ name="mvcExample"></a>MVC Example
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">The model passes
+data to the view for
+rendering.
+<br>
+The view determines which events are
+passed
+to the controller.
+<br>
+The controller updates the model based
+on the events received.
+</p>
+<p style="font-family: helvetica,arial,sans-serif;"><a
+ name="swingExample"></a><span style="font-weight: bold;">Swing Example
+(Model Variant)</span>
+</p>
+<font style="font-family: helvetica,arial,sans-serif;"
+ face="Arial,Helvetica">Swing actually makes
+use of a simplified
+variant of the MVC design called the model-delegate.&nbsp; This design
+combines the view and the controller object into a single element that
+draws the component to the screen and handles GUI events known as the
+UI
+delegate.&nbsp; Bundling graphics capabilities and event handling is
+somewhat
+easy in Java, since much of the event handling is taken care of in AWT.</font>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><b
+ style="font-family: helvetica,arial,sans-serif;">Summary</b>
+<p style="font-family: helvetica,arial,sans-serif;">This is lecture
+gave an example of basic Graphical User Interface
+programming in Java.&nbsp; The JFrame class is the framework for Java
+GUIs.&nbsp; JPanels are containers within a JFrame enabling other
+components to be included and managed.&nbsp; There are several
+excellent tutorials and examples available on the Internet.&nbsp; Java
+Almanac has several examples.&nbsp; Here is the link to the Swing
+classes:<br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;"><a
+ href="http://javaalmanac.com/egs/javax.swing/pkg.html">http://javaalmanac.com/egs/javax.swing/pkg.html</a><br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;"><b>GridBagLayout<br>
+</b></p>
+<p style="font-family: helvetica,arial,sans-serif;">Of course the most
+robust and my favorite layout is the <a
+ href="http://cv64.us/uob/computing/java/book/src/cv64/gridBagLayout/gridBagExample.html">GridBagLayout</a>.<br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;"><big><big><big><big><span
+ style="font-weight: bold;">Swing Set - Execute this DEMO!!!</span></big></big></big></big><br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">Go here for a very
+COOL Swing Applet called the Swing Set:&nbsp; <br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">Location of your
+Java Software Development Kit/demo/jfc/SwingSet2/<br>
+</p>
+<p style="font-family: helvetica,arial,sans-serif;">For example:&nbsp; <span
+ style="font-weight: bold; color: rgb(51, 204, 0);">C:\j2sdk1.4.2_07\demo\jfc\SwingSet2\SwingSet2.html</span><br>
+</p>
+<hr style="font-family: helvetica,arial,sans-serif;" size="2"
+ width="100%"><b style="font-family: helvetica,arial,sans-serif;">References</b>
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li><a name="awtReference"></a><a
+ href="http://whatis.techtarget.com/definition/0,,sid9_gci214423,00.html">AWT</a>,
+http://whatis.techtarget.com/definition/0,,sid9_gci214423,00.html,
+Accessed 31 May 2004</li>
+  <li><a name="awtVersusSwing"></a><a
+ href="http://www.ajug.org/info/tech/swing/swing3.html">AWT versus Swing</a>,
+http://www.ajug.org/info/tech/swing/swing3.html, Accessed 6 June 2004<br>
+  </li>
+  <li><a name="jframe"></a><a
+ href="http://java.sun.com/j2se/1.4.2/docs/api/javax/swing/JFrame.html">JFrame</a>,
+http://java.sun.com/j2se/1.4.2/docs/api/javax/swing/JFrame.html,
+Accessed 31 May 2004</li>
+  <li><a name="jpanel"></a><a
+ href="http://java.sun.com/j2se/1.4.2/docs/api/javax/swing/JPanel.html">JPanel</a>,
+http://java.sun.com/j2se/1.4.2/docs/api/javax/swing/JPanel.html,
+Accessed 31 May 2004<br>
+  </li>
+  <li><a name="swingReference"></a><a
+ href="http://searchwebservices.techtarget.com/sDefinition/0,,sid26_gci214421,00.html">Swing</a>,
+http://searchwebservices.techtarget.com/sDefinition/0,,sid26_gci214421,00.html,
+Accessed 31 May 2004</li>
+  <li><a name="widget"></a><a
+ href="http://whatis.techtarget.com/definition/0,,sid9_gci213364,00.html">Widget</a>,
+http://whatis.techtarget.com/definition/0,,sid9_gci213364,00.html,
+Accessed 31 May 2004</li>
+  <li><a name="javaCodingConventions"></a><a
+ href="http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html">Java
+Coding Conventions</a>,
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html, Accessed
+06 January 2000</li>
+  <li><a name="container"></a><a
+ href="http://java.sun.com/docs/books/tutorial/uiswing/layout/layoutlist.html">Swing
+Container Examples</a>,
+http://java.sun.com/docs/books/tutorial/uiswing/layout/layoutlist.html,
+Accessed 06 June 2004</li>
+  <li><a name="gridBagLayout"></a><a
+ href="http://cv64.us/uob/computing/java/book/src/cv64/gridBagLayout/gridBagExample.html">GridBagLayout,</a>
+http://cv64.us/uob/computing/java/book/src/cv64/gridBagLayout/gridBagExample.html<br>
+  </li>
+</ul>
+<img src="http://cv64.us/uob/computing/databases/cv64.bmp" title=""
+ alt=""
+ style="width: 32px; height: 32px; font-family: helvetica,arial,sans-serif;"
+ align="left"><small style="font-family: helvetica,arial,sans-serif;"><a
+ href="mailto:information@cv64.us">Web
+Contact</a></small><br style="font-family: helvetica,arial,sans-serif;">
+<small style="font-family: helvetica,arial,sans-serif;">
+Last modified:&nbsp; 2005 February 21</small>
+</body>
+</html>

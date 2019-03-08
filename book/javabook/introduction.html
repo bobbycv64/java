@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Introduction</title>
+</head>
+<body>
+<div class="titlepage">
+<div>
+<h2 class="title">Chapter 1. Introduction</h2>
+</div>
+</div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<dl>
+  <dt>1.1. <a href="#N400066">Overview</a></dt>
+  <dt>1.2. <a href="#N40006B">Background
+(Software is the Problem)</a></dt>
+  <dt>1.3. <a href="#N400080">Data
+Modularization</a></dt>
+  <dt>1.4. <a href="#N400090">Information
+Hiding</a></dt>
+  <dt>1.5. <a href="#N40009F">Previous
+Models</a></dt>
+  <dt>1.6. <a href="#N4000C0">Object
+Model</a></dt>
+  <dt>1.7. <a href="#N4000D5">Definitions</a></dt>
+  <dt>1.8. <a href="#N4000E6">Class
+Anatomy</a></dt>
+  <dt>1.9. <a href="#N400103">Encapsulation</a></dt>
+  <dt>1.10. <a href="#N40010A">Super
+and Sub Classes (Class Hierarchy
+&amp; Inheritance)</a></dt>
+  <dt>1.11. <a href="#N40011D">Abstraction</a></dt>
+  <dt>1.12. <a href="#N40012D">Interfaces</a></dt>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400066">1.1. Overview</a></h2>
+</div>
+</div>
+<p><a name="N400066"> Object-Oriented (OO) technology today has become
+an industry wide standard with roots tracing back to 1962 and the
+Simula language. With the emergence of Smalltalk 1980, C++ and now
+Java, OO technology has enhanced the new information technology
+paradigm. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40006B">1.2.
+Background (Software is the Problem)</a></h2>
+</div>
+</div>
+<p><a name="N40006B"> Computer Hardware today either meets or exceeds
+consumer demand, however software potential growth is limited. Most
+software is late, over budget, non-interoperable and not robust.
+Combine these issues with computing technology continuously changing in
+the various environments, e.g. business, education, government,
+private, the solution is ever continuous. </a></p>
+<p><a name="N40006B"> While computing hardware and infrastructures
+continued to grow drastically, software programs and enterprise
+solutions still maintain the structured paradigm. The first software
+programs, while being small in todays standards, took hours or days to
+write and were error prone. The low level programming languages
+(assembly), produced machine code, were tedious and hard to comprehend.
+3rd generation programming languages emerged in the late 1950's,
+producing simpler human readable programs by adding a high level
+interface removing the complexity. 3rd generation languages are still
+used today and are plagued with the same problems of machine oriented
+technology. </a></p>
+<p><a name="N40006B"> The 1970's continued with the same approach of a
+central based computing system and end terminals feeding input to a
+single large centralized computer, due to networking not being readily
+accessible at the time. Networking systems and forth Generation
+Languages (4GLs) later in the 1970's automated the generation of
+routine business applications, including the creation of forms, reports
+and menus. </a></p>
+<p><a name="N40006B"> 4GLs offered advantages including the fact that
+people who are not programmers can use them and create simple queries
+accessing information. 4GLs can only generate simple programs to a well
+understood problem. 4GLs continued with the structured approach and
+were very popular in the 1980's. </a></p>
+<p><a name="N40006B"> The 1990's Object-Oriented Programming (OOP)
+languages were gaining acceptance with the emergence of the Internet.
+Once consumers of information technology realized that product
+information and sales were available through this medium (Internet) was
+all OOP needed to take control of computing market share. </a></p>
+<p><a name="N40006B"> Software has made vast amounts of improvement
+since the first computing systems. However, the issue of developing
+robust, enterprise wide, interoperable programs today is not trivial. </a></p>
+<p><a name="N40006B"> Computer technology and automation started
+growing in both private and public sectors. Computer growth and easier
+programming languages, programs started growing larger in size and
+modular programming became a common practice. Modular programming
+enabled large programs to be worked into smaller manageable components
+that could be constructed independently. </a></p>
+<p><a name="N40006B"> The late 1960's with the poor state of software
+standards and procedures. Computer Engineers developed a discipline
+called Structured Programming (SP). SP relies on Functional
+Decomposition (FD), a top down approach to program design in which a
+program is systematically broken down into components, each of which is
+decomposed into subcomponents. </a></p>
+<p><a name="N40006B"> The major pitfall for most in the computing field
+was the Y2K problem. Companies had the opportunity to kill 2 issues
+with one solution but missed the opportunity. Instead of worrying about
+the Y2K conversion they should of did a Y2K elimination of SP and an OO
+solution. Volume of information is expanding faster than the capacity
+to process data and software not Hardware is the problem. While
+computing programs continued to increase and new design concepts were
+being implemented the obvious was clear that the "The Software Crisis"
+had begun. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400080">1.3. Data
+Modularization</a></h2>
+</div>
+</div>
+<p><a name="N400080"> SP focuses on behavior and not state. Large
+programs are broken down as functional modules with data accessible to
+any module or program. Data was secure through file system access. When
+data is global, control is lost. Programs could change attributes at
+will and the functional modules could not validate parameters settings.
+</a></p>
+<p><a name="N400080"> An example would be a light switch. The only
+valid states are on or off. With data being accessible to any routine
+or program, the state could be set to both, neither or some other odd
+value. </a></p>
+<p><a name="N400080"> Data being shared amongst other programs and
+procedures becomes unmanageable and error prone. Sharing data is a
+violation of modular programming, which requires that modules be as
+independent as possible. </a></p>
+<div class="figure">
+<p><a name="N400080"><b>Figure 1.1. Data Sharing</b></a></p>
+<p><a name="N400080"><img src="figures/introduction/dataSharing.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400090">1.4.
+Information Hiding</a></h2>
+</div>
+</div>
+<p><a name="N400090"> Modularizing data along with the methods is an OO
+solution to the shared data problem. Hiding details of an object or
+method is Information Hiding, a powerful programming technique that
+reduces complexity. Programmers can concentrate on the entire project
+by accessing the method interfaces and not be hampered by details. </a></p>
+<p><a name="N400090"> Information hiding provides greater system
+security, reduces complexity, avoids unintended data corruption and
+prevents data from being changed either intentionally or
+unintentionally. The following example illustrates Information Hiding. </a></p>
+<div class="figure">
+<p><a name="N400090"><b>Figure 1.2. Information Hiding</b></a></p>
+<p><a name="N400090"><img
+ src="figures/introduction/informationHiding.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40009F">1.5. Previous
+Models</a></h2>
+</div>
+</div>
+<div class="itemizedlist">
+<ul>
+  <li style="">
+    <p><a name="N40009F"> Hierarchical Model, below illustrates an
+example of the Lightweight Directory Access Protocol (LDAP) database
+hierarchical model first developed in 1984 by the University of
+Michigan. LDAP primarily provides directory and naming services by
+traversing down a hierarchical tree. </a></p>
+    <p><a name="N40009F"> LDAP starts with an initial context in our
+example the context starts under the country (c) United States. Then
+traversing through the hierarchy the next level organization in this
+example is either cv64.org or milagrosoft.com. The organization unit
+(ou) eventually reaching the end nodes. The LDAP model uses the
+Key/Value data model. </a></p>
+    <p><a name="N40009F"> File systems are also hierarchical. A Unix
+system's initial context is root (/) and the hierarchy is formed with
+the (/) character. Using the LDAP example /us/cv64.org/java/jdk1.3
+would map to the same location as LDAP c=us,o=cv64.org,ou=java,t=jdk1.3
+    </a></p>
+    <div class="figure">
+    <p><a name="N40009F"><b>Figure 1.3. Hierarchical Model</b></a></p>
+    <p><a name="N40009F"><img
+ src="figures/introduction/hierarchicalModel.jpg"></a></p>
+    </div>
+  </li>
+  <li style="">
+    <p><a name="N40009F"> Relational Model, below illustrates a
+Relational Database. Several Software Query Language (SQL) databases
+are Relational. A Relational Database is a collection of items
+organized in specific tables with metadata also called schema. Computer
+programs then use pointers through the tables and retrieve information
+or are mapped from tables to other tables. The Relational Database was
+invented in 1970 by E.F. Codd from IBM. </a></p>
+    <p><a name="N40009F"> The example below illustrates that Bob's
+email address is bob@cv64.org and has experience with Java and XML.
+Eric's email address is eric@milagrosoft.com and has experience with
+Java and XML. </a></p>
+    <div class="figure">
+    <p><a name="N40009F"><b>Figure 1.4. Relational Model</b></a></p>
+    <p><a name="N40009F"><img
+ src="figures/introduction/relationalModel.jpg"></a></p>
+    </div>
+  </li>
+</ul>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4000C0">1.6. Object
+Model</a></h2>
+</div>
+</div>
+<div class="itemizedlist">
+<ul>
+  <li style="">
+    <p><a name="N4000C0"> Simula (First OO Language) 1962 - 1967 </a></p>
+    <p><a name="N4000C0"> The Simula programming language was designed
+and built by Ole-Johan Dahl and Kristen Nygaard at the Norwegian
+Computing Centre (NCC) in Oslo between 1962 and 1967. Simula introduced
+important object-oriented programming concepts like classes, objects
+and inheritance. Simula was based on physical objects and was
+originally created to support computer simulations of real world
+processes. Physical objects consist of behavior (methods, functions)
+and state (attributes, variables). A revolutionary concept that changed
+the rules in computer program development. </a></p>
+    <p><a name="N4000C0"> OOP is organized around objects, attributes
+and behavior (logic) rather than logic alone. Historically, a program
+has been viewed as a logical procedure that receives data, processes
+the data and outputs data. </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000C0"> Smalltalk was the next popular OO language
+beginning in 1972 by Alan Kay (who had built and designed the first OO
+based personal computer called Flex in 1967) with members from Xerox
+Parc. Smalltalk 80 was the first commercial release available to the
+market in 1980. Smalltalk was the language that had the most influence
+of the two most popular OO languages, C++ and Java. </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000C0"> C++ was implemented later in the 1980's at
+AT&amp;T Bell Labs, where the Unix Operating System (OS) was created.
+C++ is a superset of the SP language C. C++ is a hybrid OOP language. </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000C0"> Java is the latest of the OOP languages
+created by James Gosling of Sun Microsystems in 1995. Java was built on
+features both from Smalltalk and primarily from C/C++. The Java
+programming language will be further discussed in Chapter 2. </a></p>
+  </li>
+</ul>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4000D5">1.7.
+Definitions</a></h2>
+</div>
+</div>
+<div class="itemizedlist">
+<ul>
+  <li style="">
+    <p><a name="N4000D5"> Class </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000D5"> Object </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000D5"> Method </a></p>
+  </li>
+  <li style="">
+    <p><a name="N4000D5"> Attribute </a></p>
+  </li>
+</ul>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4000E6">1.8. Class
+Anatomy</a></h2>
+</div>
+</div>
+<p><a name="N4000E6"> The Class is a framework that encapsulates
+attributes and methods. The Class defines how an object is to be
+managed on a system, e.g. Class Vehicle. </a></p>
+<p><a name="N4000E6"> A class is a blueprint for defining the methods
+and attributes for a particular type of object. All objects of a given
+class are identical in form and behavior but contain different data in
+their attributes. The class defines all common properties of different
+objects that are instances of the class. </a></p>
+<p><a name="N4000E6"> Objects are an instance of a class which
+encapsulate state and behavior using Information Hiding, e.g. Object
+Geo Metro is an instance of Vehicle. The example illustrates that all
+data attributes are hidden from all outside programs. </a></p>
+<p><a name="N4000E6"> Objects are units of code that are eventually
+derived from the process. An object is a software packet containing a
+collection of related data in the form of attributes and methods for
+operating on that data. Objects are created with Constructors. </a></p>
+<p><a name="N4000E6"> Methods are the behavior that occur within a
+class. Methods can receive zero to many arguments as input and return
+zero to one result as output. They encapsulate and hide the internals
+of the operation from the caller. There are accessor methods which get
+information and usually start with get or is (boolean return value) and
+only return information. Mutator methods set information and start with
+set, passing in information and returning no value. </a></p>
+<p><a name="N4000E6"> A method is programmed logic that is defined as
+part of a class and included in any object of that class. Communication
+between objects take place between methods. </a></p>
+<p><a name="N4000E6"> Attributes are the state of data, e.g. the light
+bulb is either on or off. With OOP the attributes are hidden while SP
+left attributes vulnerable to being changed from outside references.
+Attributes can be built-in data types, such as a number or date, or
+reference another object. </a></p>
+<p><a name="N4000E6"> Below is an example of the Class Anatomy. The
+large C shape symbolizes the Class. Both public and private
+accessibility are defined. Public allows any internal or external
+access and private allows access only within the class or object. The
+method and attribute bubbles illustrate a method or an attribute in the
+class. </a></p>
+<p><a name="N4000E6"> Coding standards have classes that begin with
+uppercase. Objects, methods and attributes begin with lowercase and
+methods have the () symbol by default. </a></p>
+<div class="figure">
+<p><a name="N4000E6"><b>Figure 1.5. Class Anatomy</b></a></p>
+<p><a name="N4000E6"><img src="figures/introduction/classAnatomy.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400103">1.9.
+Encapsulation</a></h2>
+</div>
+</div>
+<p><a name="N400103"> The mechanism for encapsulation is the object.
+Encapsulation combines all state and behavior into an entity usually an
+object. An object which wraps all methods and attributes into one
+single unit (entity) is an example of encapsulation. </a></p>
+<p><a name="N400103"> Encapsulation eases development, encourages
+componentization and promotes information hiding. The object interfaces
+are published and never disclose the actual implementation details.
+Encapsulation is a technique in which attributes are packaged together
+with its corresponding methods. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40010A">1.10. Super
+and Sub Classes (Class Hierarchy &amp; Inheritance)</a></h2>
+</div>
+</div>
+<p><a name="N40010A"> Class Hierarchy is a tree structure representing
+the relationships among a set of classes. Class hierarchies always have
+one top node and can have any number of levels and number of classes at
+each level. </a></p>
+<p><a name="N40010A"> Inheritance is the concept that a class higher in
+the hierarchy (super class) passes on attributes and methods to a lower
+class (subclass). Inheritance speeds up development through reuse.
+Inheritance is a mechanism where classes can make use of the methods
+and attributes previously defined in all classes higher in the class
+hierarchy. </a></p>
+<p><a name="N40010A"> Object-Oriented programming allows a Hierarchy of
+classes not to be confused with a Hierarchy of data like the Hierarchy
+Model. Classes that are derived from other Classes or superseded are
+called super classes. Classes that extend from other classes are
+subclasses. </a></p>
+<p><a name="N40010A"> The illustration below shows that Vehicle is the
+super class to Aircraft, Automobiles, Ships, Car, Truck and Van. A
+Automobile is a super class to Dodge, Ford and GM. Car, Truck and Van
+are subclasses to Automobile. All the classes are subclasses to
+Vehicle. </a></p>
+<div class="figure">
+<p><a name="N40010A"><b>Figure 1.6. Class Hierarchy</b></a></p>
+<p><a name="N40010A"><img src="figures/introduction/classHierarchy.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40011D">1.11.
+Abstraction</a></h2>
+</div>
+</div>
+<p><a name="N40011D"> Abstraction is the process of generalizing
+(abstracting) common features of classes. Abstract classes have no
+instances and are created only for the purpose of organizing a class
+hierarchy or defining methods and attributes that will apply to
+subclasses. Abstract classes usually have a general implementation
+leaving the subclasses with the goal of specific implementation.
+Abstract classes can have methods with implementation and attribute
+declarations. </a></p>
+<p><a name="N40011D"> Abstraction illustrated below illustrates the
+super class Shape. Shape defines general methods and attributes,
+however, Shape can't be instantiated. The subclasses Circle, Rectangle
+and Triangle build upon the super class Shape. The subclasses then
+specifically define how to build the object. </a></p>
+<p><a name="N40011D"> To conceptualize abstraction think of Shape as a
+thing. The Shape class has getArea(), getPerimeter() and getName()
+methods. How could you make an instance of Shape? The answer is you
+can't! The getArea() and getPerimeter() methods be could defined in the
+implementation of the subclasses, thus an object instance is possible.
+However the getArea() and getPerimeter() methods can't be defined
+because Shape is abstract and we don't know what is the exact Shape.
+Additional examples of abstraction would be Vehicle (Aircraft,
+Automobile, Ship) and Entertainment (Television, Movie, Theatre). </a></p>
+<div class="figure">
+<p><a name="N40011D"><b>Figure 1.7. Abstraction</b></a></p>
+<p><a name="N40011D"><img src="figures/introduction/abstraction.jpg"></a></p>
+</div>
+</div>
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40012D">1.12.
+Interfaces</a></h2>
+</div>
+</div>
+<p><a name="N40012D"> An interface defines a protocol of behavior that
+can be implemented by any class anywhere in the class hierarchy. An
+interface defines a set of methods with no implementation. A class that
+implements the interface agrees to implement all the methods defined in
+the interface, thereby agreeing to certain behavior. </a></p>
+<p><a name="N40012D"> Interfaces are a variation of Abstraction. All
+methods in an interface have no implementation, another words only the
+signature of the method is defined. Interfaces can have attributes but
+they must be a constant value. </a></p>
+<p><a name="N40012D"> Java allows only single inheritance, however,
+Interfaces are used to bypass this concept. A class can only extend one
+class and zero to many interfaces. </a></p>
+<p><a name="N40012D"><b>Figure 1.8. Interface Illustration</b></a></p>
+</body>
+</html>

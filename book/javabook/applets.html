@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>figures/applets</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N4005FF">Chapter 10. figures/applets</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N4005FF"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N4005FF">10.1. </a><a href="N400607">figures/applets</a></dt>
+  <dt>10.2. <a href="N400643">Java
+Tools</a></dt>
+  <dd>
+    <dl>
+      <dt>10.2.1. <a href="N40064A">Appletviewer</a></dt>
+      <dt>10.2.2. <a href="N400666">Java
+Archive (JAR)</a></dt>
+      <dt>10.2.3. <a href="N40066B">Policy
+Tool</a></dt>
+    </dl>
+  </dd>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400607">10.1.
+figures/applets</a></h2>
+</div>
+</div>
+<p><a name="N400607"> Java is an improved syntatical C++ programming
+language. Many of the features were to simplify programming while at
+the same time produce portable code. This was one of the main reasons
+Java has become a very popular programming language. </a></p>
+<p><a name="N400607"> The main reason Java has become so popular was
+due to the Applet. figures/applets are Java Application programs that
+could be
+downloaded from a Server and executed on a Client system. Since Java is
+flexible and portable on any system executing the Java Virtual Machine,
+most browsers if not all, have the JVM executables installed so that
+they can execute the Java Application as an Applet. Java
+figures/applets can
+perform interactive animations, immediate calculations, or other simple
+tasks without having to send a user request back to the server. </a></p>
+<div class="figure">
+<p><a name="N400607"><b>Figure 10.1. Client / Server Architecture</b></a></p>
+<p><a name="N400607"><img src="figures/applets/clientServer.jpg"></a></p>
+</div>
+<div class="figure">
+<p><a name="N400607"><b>Figure 10.2. figures/applets</b></a></p>
+<p><a name="N400607"><img src="figures/applets/applet.jpg"></a></p>
+</div>
+<p><a name="N400607"> The Java Plug-in software provides client
+browsers with a Java 2 Runtime Environment (JRE) instead of the web
+browser's default virtual machine. To view your plugins in Netscape
+just click on Help and then select About Plug-ins. This will display
+all the browser plugins. The figure below shows the Java plugins. The
+following link is how to set up your HTML file for Java
+figures/applets.
+http://java.sun.com/products/plugin/1.3/docs/tags.html </a></p>
+<div class="figure">
+<p><a name="N400607"><b>Figure 10.3. Client / Server Architecture</b></a></p>
+<p><a name="N400607"><img src="figures/applets/aboutPlugins.jpg"></a></p>
+</div>
+<pre class="programlisting"><a name="N400607">&lt;!-- Internet Explorer Browser --&gt;<br>&lt;object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"<br>  width="200" height="200" align="baseline"<br>  codebase="http://java.sun.com/products/plugin/1.3/jinstall-13-win32.cab#Version=1"&gt;<br><br>  &lt;param name="code" value="HelloWorldApplet.class"&gt;<br>  &lt;param name="codebase" value="."&gt;<br>  &lt;param name="type" value="application/x-java-applet;version=1.3"&gt;<br>  &lt;param name="scriptable" value="false"&gt;<br><br>  &lt;comment&gt;<br><br>    &lt;!-- Netscape Browser --&gt;<br>    &lt;embed type="application/x-java-applet;version=1.3"<br>       width="200" height="200" align="baseline"<br>       code="HelloWorldApplet.class" codebase="."<br>       pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"&gt;<br>    &lt;noembed&gt;<br>  &lt;/comment&gt;<br>    <br>    No Java 2 SDK, Standard Edition v1.3 support for APPLET!!<br>  &lt;/noembed&gt;<br>  &lt;/embed&gt;<br>&lt;/object&gt;<br></a></pre>
+<p><a name="N400607"> classid (class identifier) for the Java Plug-in.
+The class identifier should be the same in every HTML page. The browser
+will load the Java Plug-in using the particular class identifier. </a></p>
+<p><a name="N400607"> The attributes width, height and align set up the
+Applet accordingly. The code parameter defines the class or jar file
+where to find the executable. The codebase parameter defines the path
+to the class or jar file. The type parameter defines which executable
+to implement. </a></p>
+<p><a name="N400607"> There are four main methods in an Applet's
+lifecycle, init(), start(), stop() and destroy(). The init() method is
+executed only once when an applet is initialized. If you wish
+initialization or Java statements to execute only once then place all
+this information in the init() method. The start() method is executed
+immediately after the init() method. The start() method is then only
+executed when brought back into focus when focus has been lost. The
+stop() method is executed when a client moves off the Applet page (out
+of focus). The destroy() method is called when the Applet should be
+garbage collected. This occurs when the browser shuts down. The stop()
+method is called immediately before the destroy() method is called. </a></p>
+<div class="figure">
+<p><a name="N400607"><b>Figure 10.4. Client / Server Architecture</b></a></p>
+<p><a name="N400607"><img src="figures/applets/appletLifecycle.jpg"></a></p>
+</div>
+<p><a name="N400607"> Security, figures/applets are designed to be
+loaded from
+a remote server and then executed on a local client system. With this
+architecture security is a major concern. Prior to Java 2, all
+figures/applets
+followed the sandbox philosophy. This meant that when an applet was
+loaded on your system, only a portion of memory was accessible to
+perform work. </a></p>
+<p><a name="N400607"> The following are a short list of how
+figures/applets
+execute in the sandbox model: 1) figures/applets couldn't execute local
+programs. 2) figures/applets can't communicate with other systems than
+the
+originating host, the system who supplied the applet. 3)
+figures/applets can't
+do I/O with the local system. 4) figures/applets can only retrieve
+basic and
+non-personal information from your system. </a></p>
+<p><a name="N400607"> With the emergence of Java 2, Java Development
+Kit (JDK 1.2), figures/applets have policies that allow trusted hosts
+to
+perform more operations than the sandbox Applet. Policies and the
+policy tool are out of the scope of this chapter. </a></p>
+<pre class="programlisting"><a name="N400607">import java.applet.Applet;<br>import java.awt.Container;<br>import java.awt.Graphics;<br>import javax.swing.JApplet;<br><br>public class HelloWorldApplet extends JApplet {<br><br>  public void init() {<br>//    Container contentPane = getContentPane();<br>//    contentPane.add(new HelloWorldPanel());<br>  }<br><br>  public void paint(Graphics graphics) {<br>    graphics.drawString("Sound Example", 25, 25);<br>    play(getDocumentBase(), "flush.au");<br>  }<br>}<br></a></pre>
+<p><a name="N400607"> The following is an example of both an Applet and
+Application. To execute as an Applet open through a web browser and the
+HTML file. To execute as an application just use the java command. </a></p>
+<pre class="programlisting"><a name="N400607">import javax.swing.JApplet;<br>import javax.swing.JFrame;<br>import java.awt.*;<br>import java.awt.event.*;<br><br>public class Both extends JApplet {<br><br>  public void init() {}<br>  public void start() {}<br>  public void stop() {}<br>  public void destroy() {<br>    System.exit(0);<br>  }<br><br>  public void paint(Graphics graphics) {<br>    graphics.drawString("Both Applet and Application", 25, 25);<br>  }<br><br>  public static void main(String[] args) {<br>    JFrame frame = new JFrame("Java Application");<br>    Both both = new Both();<br><br>    frame.getContentPane().add(both);<br>    frame.setSize(200, 100);<br>    frame.setVisible(true);<br>    frame.validate();<br><br>    frame.addWindowListener(new WindowAdapter() {<br>      public void windowClosing(WindowEvent event) {<br>        System.exit(0);<br>      }<br>    });<br><br>    both.init();<br>    both.start();<br>  }<br>}<br></a></pre>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400643">10.2. Java
+Tools</a></h2>
+</div>
+</div>
+<p><a name="N400643"> This section talks about the Java Tools that help
+with development and implementation of Java figures/applets. The
+Appletviewer
+program enables developers to visualize their work without having to
+worry about plug-ins or browser conformance. The Java Archive (JAR)
+tool encapsulates and compresses several files into one file. The
+Policy Tool enables Java figures/applets more flexability and loosens
+up
+security of the Java Sandbox. </a></p>
+<p><a name="N400643"> All the Java Tools are in the Java bin directory.
+Make sure that the Java bin directory is in your path, e.g. set
+PATH=%PATH%;c:\jdk1.3\bin This will ensure that all you need to execute
+the tools is with a single command and not the entire path name. </a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40064A">10.2.1. Appletviewer</a></h3>
+</div>
+</div>
+<p><a name="N40064A"> Appletviewer is an executable program that was
+available with the initial release of the JDK. This tools enables
+developers to visualize and execute Java figures/applets without the
+worrying
+about Browser shortcomings or plug-in requirements. Appletviewer also
+bypasses all the security rules so that you can see functionally how
+your program works without having to worry about annoyances of the
+Security Manager. I am not saying that Security should be avoided but
+in a development context, functionality and innovation is the goal and
+the security phase is one of the last tasks. </a></p>
+<p><a name="N40064A"> To start up the Appletviewer program is simple.
+Just type appleviewer, the appleviewer program will as follows: </a></p>
+<div class="figure">
+<p><a name="N40064A"><b>Figure 10.5. AppletViewer</b></a></p>
+<p><a name="N40064A"><img
+ src="figures/applets/appletViewer/appletViewer1.jpg"></a></p>
+</div>
+<p><a name="N40064A"> Appletviewer commands are as follows: </a></p>
+<p><a name="N40064A"> Usage: appletviewer &lt;options&gt; url(s) </a></p>
+<p><a name="N40064A"> where &lt;options&gt; include: </a></p>
+<p><a name="N40064A"> -debug Start the applet viewer in the Java
+debugger </a></p>
+<p><a name="N40064A"> -encoding &lt;encoding&gt; Specify character
+encoding used by HTML files </a></p>
+<p><a name="N40064A"> -J&lt;runtime flag&gt; Pass argument to the java
+interpreter </a></p>
+<p><a name="N40064A"> The -J option is non-standard and subject to
+change without notice. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400666">10.2.2. Java Archive (JAR)</a></h3>
+</div>
+</div>
+<p><a name="N400666"> Usage: jar {ctxu}[vfm0M] [jar-file]
+[manifest-file] [-C dir] files ...
+Options: -c create new archive -t list table of contents for archive -x
+extract named (or all) files from archive -u update existing archive -v
+generate verbose output on standard output -f specify archive file name
+-m include manifest information from specified manifest file -0 store
+only; use no ZIP compression -M do not create a manifest file for the
+entries -i generate index information for the specified jar files -C
+change to the specified directory and include the following file
+If any file is a directory then it is processed recursively.
+The manifest file name and the archive file name needs to be specified
+in the same order the 'm' and 'f' flags are specified.
+Example 1: to archive two class files into an archive called
+classes.jar: jar cvf classes.jar Foo.class Bar.class
+Example 2: use an existing manifest file 'mymanifest' and archive all
+the files in the foo/ directory into 'classes.jar': jar cvfm
+classes.jar mymanifest -C foo/ . </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40066B">10.2.3. Policy Tool</a></h3>
+</div>
+</div>
+<p><a name="N40066B"> The Java Developer Kit versions 1.2 and later
+(Java 2) was modified with new security schemes to provide restricted
+access to system resources. The new tool in Java 2 is the Java Policy
+Tool. The following paragraphs and illistrations are how to interact
+with the tool. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.6. Policy Tool Startup</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool1.jpg"></a></p>
+</div>
+<p><a name="N40066B"> To start up the Policy Tool, just type
+policytool. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.7. Policy File Warning</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool2.jpg"></a></p>
+</div>
+<p><a name="N40066B"> You might get a warning stating that the policy
+file isn't set. This only means that there is no default file set. Just
+press the OK button and we will fix this in a couple minutes. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.8. Policy Tool</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool3.jpg"></a></p>
+</div>
+<p><a name="N40066B"> This screen is the policy tool. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.9. Opening a Policy File</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool4.jpg"></a></p>
+</div>
+<p><a name="N40066B"> Click on the File button and select Open. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.10. Policy File Selection</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool5.jpg"></a></p>
+</div>
+<p><a name="N40066B"> You have a choice to either go with the default
+policy file or your own policy file. For educational purposes we will
+go with the system default policy file. The system default policy file
+is located where you placed the JVM under the jre/lib/security
+directory and is named java.policy. So our example the JVM was placed
+in the directory c:\jdk1.3, so the default policy file is located at
+c:\jdk1.3\jre\lib\security\java.policy. Once the file has been loaded
+the policy file will fill in the information as illistrated above. The
+policy tool also displays the current policies in effect in the
+textarea at the bottom of the tool. </a></p>
+<p><a name="N40066B"> The policy file for which you wish to perform
+signed figures/applets or open up the Java Applet Sandbox is now open
+and set.
+To make modifications to the policies, modifications are made through
+the policy tool as described next. </a></p>
+<p><a name="N40066B"> The are three buttons on the policy tool. Add,
+Edit or Remove. These are the policies that will be instanciated when
+Applet Security outside the Sandbox is performed. We are going to add a
+policy in this discussion. Edit allows you to edit previously defined
+policies and Remove removes any previous policies. To add a policy
+press the Add Policy Entry button. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.11. Policy Entry</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool6.jpg"></a></p>
+</div>
+<p><a name="N40066B"> The policy entry screen is now displayed. We are
+going to add a new permissionso press the Add Permission button. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.12. Permissions</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool7.jpg"></a></p>
+</div>
+<p><a name="N40066B"> This is the Permissions screen. This is where you
+actually define the different permissions, accesses, etc. For this
+discussion we are going to open up the Java Sandbox to before anything
+it wishes. Click on the Permission pulldown and select AllPermission. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.13. Policy Tool</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool8.jpg"></a></p>
+</div>
+<p><a name="N40066B"> We are adding the AllPermission policy so that
+security will be lax for demo purposes. The text field to the right
+will now display java.security.AllPermission. Now press OK which will
+activate our new AllPermission policy. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.14. Policy Tool Startup</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool9.jpg"></a></p>
+</div>
+<p><a name="N40066B"> The Policy Entry screen reappears and displays
+our policy and permission selections. Press the Done button if
+everything is correct. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.15. Policy Tool Startup</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool10.jpg"></a></p>
+</div>
+<p><a name="N40066B"> The policy tool main screen now redisplays and
+shows that there were some modifications. In our cases CodeBase
+&lt;ALL&gt; shows up twice. This is because we gave AllPermission to
+everything. Press the File menu item and select Save. We want to save
+the new policy and permissions. </a></p>
+<div class="figure">
+<p><a name="N40066B"><b>Figure 10.16. Policy Tool Startup</b></a></p>
+<p><a name="N40066B"><img
+ src="figures/applets/policyTool/policyTool11.jpg"></a></p>
+</div>
+<p><a name="N40066B"> This is the last screen notifying you that the
+policies were saved. </a></p>
+</div>
+</div>
+</div>
+</body>
+</html>

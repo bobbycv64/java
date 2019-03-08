@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Class Hierarchy and Inheritance</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N400442">Chapter 5. Class Hierarchy and
+Inheritance</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N400442"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N400442">5.1. </a><a
+ href="#N40045A">Inheritance</a></dt>
+  <dt>5.2. <a
+ href="#N40046D">Java
+Code illustrating Class Inheritance</a></dt>
+  <dt>5.3. <a
+ href="#N4004CC">Abstract
+Classes</a></dt>
+  <dt>5.4. <a
+ href="#N4004D5">Wrapper
+Classes</a></dt>
+  <dt>5.5. <a
+ href="#N4004DA">Packages
+and Importing</a></dt>
+  <dt>5.6. <a
+ href="#N4004F5">Reflection</a></dt>
+  <dt>5.7. <a
+ href="#N4004FC">Protected
+Access</a></dt>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40045A">5.1.
+Inheritance</a></h2>
+</div>
+</div>
+<p><a name="N40045A"> Recall from chapter 1 the class hierarchy and
+inheritance. Class Hierarchy is a tree structure representing the
+relationships among a set of classes. Class hierarchies always have one
+top node and have any number of levels and number of classes at each
+level. </a></p>
+<p><a name="N40045A"> Inheritance is the concept that a class higher in
+the hierarchy (super class) passes on attributes and methods to a lower
+class (subclass). Inheritance speeds up development through reuse.
+Inheritance is a mechanism where classes can make use of the methods
+and attributes previously defined in all classes higher in the class
+hierarchy. </a></p>
+<p><a name="N40045A"> Object-Oriented programming allows a Hierarchy of
+classes not to be confused with a Hierarchy of data like the Hierarchy
+Model. Classes that are derived from other Classes or superseded are
+called super classes. Classes that extend from other classes are
+subclasses. </a></p>
+<p><a name="N40045A"> The illustration below shows that Vehicle is the
+super class to Aircraft, Automobiles, Ships, Car, Truck and Van. A
+Automobile is a super class to Dodge, Ford and GM. Car, Truck and Van
+are subclasses to Automobile. All the classes are subclasses to
+Vehicle. </a></p>
+<div class="figure">
+<p><a name="N40045A"><b>Figure 5.1. Class Hierarchy</b></a></p>
+<p><a name="N40045A"><img
+ src="figures/introduction/classHierarchy.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40046D">5.2. Java Code
+illustrating Class Inheritance</a></h2>
+</div>
+</div>
+<p><a name="N40046D"> Now that we have a basic idea of how Inheritance
+/ Class Hierarchy is illustrated let's look at Java code. Let's look at
+the main program Inheritance and the top level Vehicle class, the
+superclass of all the classes in our hierarchy tree. These programs are
+the same as we have seen before and there are no code changes. Since
+the Inheritance is a standard main program and Vehicle class is the
+root of the other classes nothing special needs to be done. </a></p>
+<div class="figure">
+<p><a name="N40046D"><b>Figure 5.2. Inheritance</b></a></p>
+<pre class="programlisting"><a name="N40046D"><tt>figures/hierarchy/Inheritance.java</tt><br>          <br><br>//Inheritance Main Program<br><br>public class Inheritance {<br><br><br><br>  public static void main(String[] args) {<br><br><br><br>    // Initializing objects<br><br>    Automobile geo = new Automobile("Geo", 1993,"Metro");<br><br>    Aircraft f14 = new Aircraft("F14", 1972,"F14-D",60000);<br><br>    Ship cv64  = new Ship("CV64", 1961,"cva",90000);<br><br><br><br>    // Prints out all the current values of the objects<br><br>    // using both the actual class and superclass methods<br><br>    System.out.println(geo.toString());<br><br>    System.out.println(f14.toString());<br><br>    System.out.println(cv64.toString());<br><br><br><br>    // Setting various attributes<br><br>    geo.setHorsePower(60);<br><br>    cv64.setModel("cv");<br><br><br><br>    // Using the Vehicle class defined getName method<br><br>    System.out.println("\nGeo Name: " + geo.getName());<br><br><br><br>    // Prints out all the current values of the objects<br><br>    // using both the actual class and superclass methods<br><br>    System.out.println(geo.toString());<br><br>    System.out.println(f14.toString());<br><br>    System.out.println(cv64.toString());<br><br>  }<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N40046D"><b>Figure 5.3. Vehicle (Superclass)</b></a></p>
+<pre class="programlisting"><a name="N40046D"><tt>figures/hierarchy/Vehicle.java</tt><br>          <br><br>//Superclass to Aircraft, Automobile, Ship<br><br>public abstract class Vehicle {<br><br>  <br><br>  // Three Argument Constructor<br><br>  public Vehicle(String name, int year, String model) {<br><br>    name_ = name;<br><br>    year_ = year;<br><br>    model_ = model;<br><br>  }<br><br><br><br>  // Zero Argument Constructor<br><br>  public Vehicle() { this("", 0, ""); }<br><br><br><br>  // Accessor Methods<br><br>  public String getModel() { return model_; }<br><br>  public String getName()  { return name_; }<br><br>  public int getYear()     { return year_; }<br><br><br><br>  // Mutator Methods<br><br>  public void setModel(String model) { model_ = model; }<br><br>  public void setName(String name)   { name_ = name; }<br><br>  public void setYear(int year)      { year_ = year; }<br><br><br><br>  public String toString() {<br><br>    return("Name : " + name_ + " Year: " + year_ + " Model: " + model_);<br><br>  }<br><br><br><br>  // Attributes<br><br>  private String name_  = "";<br><br>  private String model_ = "";<br><br>  private int year_     = 0;<br><br>}<br>        </a></pre>
+</div>
+<p><a name="N40046D"> Let's now look at the subclasses Car, Truck and
+Ship. These classes look slightly different because they all inherit
+from the Vehicle class. There are two new keywords being introduced,
+extends and super. </a></p>
+<div class="figure">
+<p><a name="N40046D"><b>Figure 5.4. Aircraft (Subclass)</b></a></p>
+<pre class="programlisting"><a name="N40046D"><tt>figures/hierarchy/Aircraft.java</tt><br>          <br><br>// Subclass Aircraft extending Superclass Vehicle<br><br>public class Aircraft extends Vehicle {<br><br>  <br><br>  // Four Argument Constructor calling super class<br><br>  public Aircraft(String name, int year, String model, int thrust) {<br><br>    super(name, year, model);<br><br>    thrust_ = thrust;<br><br>  }<br><br><br><br>  // Zero Argument Constructor<br><br>  public Aircraft() { this("", 0, "", 0); }<br><br><br><br>  // Accessor Methods<br><br>  public int getThrust() { return thrust_; }<br><br><br><br>  // Mutator Methods<br><br>  public void setThrust(int thrust) {<br><br>    thrust_ = thrust;<br><br>  }<br><br><br><br>  public String toString() {<br><br>    return(super.toString() + " Thrust: " + thrust_);<br><br>  }<br><br><br><br>  // Attributes<br><br>  private int thrust_ = 0;<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N40046D"><b>Figure 5.5. Automobile (Subclass)</b></a></p>
+<pre class="programlisting"><a name="N40046D"><tt>figures/hierarchy/Automobile.java</tt><br>          <br><br>// Subclass Automobile extending Superclass Vehicle<br><br>public class Automobile extends Vehicle {<br><br>  <br><br>  // Four Argument Constructor calling super class<br><br>  public Automobile(String name, int year, String model, int horsePower) {<br><br>    super(name, year, model);<br><br>    horsePower_ = horsePower;<br><br>  }<br><br><br><br>  // Three Argument Constructor using this<br><br>  public Automobile(String name, int year, String model) {<br><br>    this(name, year, model, 0);<br><br>  }<br><br><br><br>  // Zero Argument Constructor<br><br>  public Automobile() { this("", 0, "", 0); }<br><br><br><br>  // Accessor Method<br><br>  public int getHorsePower() { return horsePower_; }<br><br><br><br>  // Mutator Methods<br><br>  public void setHorsePower(int horsePower) {<br><br>    horsePower_ = horsePower;<br><br>  }<br><br><br><br>  public String toString() {<br><br>    return(super.toString() + " Horse Power: " + horsePower_);<br><br>  }<br><br><br><br>  // Attributes<br><br>  private int horsePower_ = 0;<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N40046D"><b>Figure 5.6. Ship (Subclass)</b></a></p>
+<pre class="programlisting"><a name="N40046D"><tt>figures/hierarchy/Ship.java</tt><br>          <br><br>// Subclass Ship extending Superclass Vehicle<br><br>public class Ship extends Vehicle {<br><br>  <br><br>  // Four Argument Constructor calling super class<br><br>  public Ship(String name, int year, String model, int displacement) {<br><br>    super(name, year, model);<br><br>    displacement_ = displacement;<br><br>  }<br><br><br><br>  // Zero Argument Constructor<br><br>  public Ship() { this("", 0, "", 0); }<br><br><br><br>  // Accessor Method<br><br>  public int getDisplacement() { return displacement_; }<br><br><br><br>  // Mutator Methods<br><br>  public void setDisplacement(int displacement) {<br><br>    displacement_ = displacement;<br><br>  }<br><br><br><br>  public String toString() {<br><br>    return(super.toString() + " Displacement: " + displacement_);<br><br>  }<br><br><br><br>  // Attributes<br><br>  private int displacement_ = 0;<br><br>}<br>        </a></pre>
+</div>
+<p><a name="N40046D"> Extends means that the class is extending or a
+subclass of the class that is being extended. Another words in the
+Automobile class the statement, public class Automobile extends Vehicle
+is saying that the class Automobile is extending (inheriting)
+attributes and methods from the Vehicle class. Remember that all
+classes extend from java.lang.Object by default and only extend from
+another class with the extends keyword. </a></p>
+<p><a name="N40046D"> The super keyword means that the call is going to
+the superclass and not the extended class. For example, super(name,
+year, model); in the Automobile class is passing the attributes (name,
+year, model) to the superclass, in this case Vehicle's constructor. In
+Automobile's method toString the statement, super.toString() is calling
+the superclass's toString() method. You can also reference Vehicles
+attributes directly if they are publicly or protected (we will discuss
+later) accessible. </a></p>
+<p><a name="N40046D"> If you want to prevent a class from being
+extended declare the class as final. Classes can also be casted just
+like the primitive types we did earlier. The classes in our example
+could be casted as follows, Automobile automobile =
+(Automobile)vehicle; You can only cast from a superclass to a subclass.
+Our case above the vehicle object which is of type Vehicle is being
+casted to a Car subclass. </a></p>
+<p><a name="N40046D"> There is also an instanceof keyword that can be
+used to check for the type of object. You can use the instanceof in an
+if statement as follows, if (vehicle instanceof Vehicle), this will
+return true only if the vehicle's object is of Vehicle class. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4004CC">5.3. Abstract
+Classes</a></h2>
+</div>
+</div>
+<p><a name="N4004CC"> Abstraction is the process of generalizing
+(abstracting) common features of classes. Abstract classes have no
+instances and are created only for the purpose of organizing a class
+hierarchy or defining methods and attributes that will apply to
+subclasses. Abstract classes usually have a general implementation
+leaving the subclasses with the goal of specific implementation.
+Abstract classes can have methods with implementation and attribute
+declarations. </a></p>
+<p><a name="N4004CC"> For our purpose the Class Vehicle is abstract.
+What exactly is a vehicle? Yes, there are some attributes and methods
+that are so general that we can implement them in the Class Vehicle.
+Using a specifically defined class would be much easier to program
+because there are implementations that have already been defined and
+written. Again, the main reason for abstract classes is hierarchy and
+conceptualizing the problem. The Vehicle class is the superclass to
+several other classes and is abstract. </a></p>
+<p><a name="N4004CC"> To declare an abstract class just add the
+abstract keyword in the class definition, e.g. public abstract class
+Vehicle {}. This definition declares that there is at least one method
+that is abstract. Both attributes and methods can be either abstract or
+non-abstract in an abstract method. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4004D5">5.4. Wrapper
+Classes</a></h2>
+</div>
+</div>
+<p><a name="N4004D5"> Wrapper classes are basically converting
+primitive (non-object) types to Objects. We are familiar with the
+primitive types int, float, boolean, etc. However remember these are
+not objects, they are primitives. One way of looking at which
+attributes are objects is looking for the new keyword. All objects are
+created with the new keyword, primitives are not. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4004DA">5.5. Packages
+and Importing</a></h2>
+</div>
+</div>
+<p><a name="N4004DA"> Packages are how Java manages a set of classes.
+These classes are organized by directory hierarchy and can be concrete,
+abstract or part of an inheritance tree. Java uses the package keyword
+to place a class in a package. The convention of packages are just like
+the Internet addressing but in reverse. </a></p>
+<p><a name="N4004DA"> Usually a organization (org), company (com), etc.
+is the suffix to a web address. However with packages they are
+prefixes. The following illustration shows two packages one beginning
+with org the other com. Packages represent directory hierarchical
+trees. </a></p>
+<p><a name="N4004DA"> Lets say that the Java program Program1 is in the
+bin directory of the org branch the package name would be
+org.cv64.product.bin. Another example would be a Java program Program2
+in the Milagrosoft lib directory. The package would be
+com.milagrosoft.product.lib. </a></p>
+<div class="figure">
+<p><a name="N4004DA"><b>Figure 5.7. packages</b></a></p>
+<p><a name="N4004DA"><img
+ src="figures/hierarchy/directoryHierarchy.jpg"></a></p>
+</div>
+<p><a name="N4004DA"> An example of our Inheritance classes could be
+placed in one package, e.g. org.cv64.product1. The package keyword must
+be the first executable line in the program, only comments can go
+first. The classpath environment variable sets the root of packages. </a></p>
+<p><a name="N4004DA"> The following illustration gives additional
+detail. The classpath environment variable is set to the following: set
+CLASSPATH=c:\myjava;. This is stating that the Java classes root is in
+the c:\myjava or current (., \u00) directory. If a program is compiled
+in either directory the code can be executed in either directory. </a></p>
+<p><a name="N4004DA"> Now our package example, org.cv64.product1 would
+mean that in either the current directory or c:\myjava directory there
+must be an org directory. Within the org directory there must be a cv64
+directory. Within the cv64 directory there must be a product directory.
+Within the product directory the class file must exist to execute. To
+execute the class you must including the package name, e.g. java
+org.cv64.product1.bin.Program1 </a></p>
+<p><a name="N4004DA"> Since we have a few examples of packages we must
+be able to access other classes from other packages. Java allows access
+with the import keyword. If there is a class that is needed outside the
+current package then the package must be included in the program
+seeking access. </a></p>
+<p><a name="N4004DA"> Going back to our example let's say that our main
+program is Program1 and we need to access Program2. The import
+statement would be in Program1 as follows, import
+com.milagrosoft.product1.lib.Program2; This statement is saying that
+Program2 has been imported into Program1. Java allows wildcards with
+packages only on the last section, e.g. import
+com.milagrosoft.product1.lib.*; This statement is including all of the
+classes in the lib directory. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4004F5">5.6. Reflection</a></h2>
+</div>
+</div>
+<p><a name="N4004F5"> Java uses the concept of reflection to analyze
+itself. The foundation class of reflection is java.lang.Class. Java
+used reflection at a minimum but when Javabeans (Component Build Tools)
+were developed reflection became a must in rapid prototyping. </a></p>
+<p><a name="N4004F5"> Reflection allows any class to describe itself to
+other classes. The accessor and mutator methods that have been
+discussed before are some of the basic foundation rules of reflection.
+Javabean tools always look for get, is and set method names and then
+receive or set the fields to build property values. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4004FC">5.7. Protected
+Access</a></h2>
+</div>
+</div>
+<p><a name="N4004FC"> Protected is a modifier that allows access to the
+same class, classes that are part of the same package and subclasses
+that that extend the class but in a different package. Protected is the
+third access modifier of five that we have studied. </a></p>
+</div>
+</div>
+</body>
+</html>

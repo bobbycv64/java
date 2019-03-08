@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Design Goals and APIs</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N40012D">Chapter 2. Java's 11 Design Goals
+and APIs</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N40012D"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N40012D">2.1. </a><a
+ href="#N400140">Java's
+11 Design Goals</a></dt>
+  <dd>
+    <dl>
+      <dt>2.1.1. <a
+ href="#N400143">Simple</a></dt>
+      <dt>2.1.2. <a
+ href="#N40014A">Object
+Oriented (OO)</a></dt>
+      <dt>2.1.3. <a
+ href="#N40014F">Distributed</a></dt>
+      <dt>2.1.4. <a
+ href="#N400154">Robust</a></dt>
+      <dt>2.1.5. <a
+ href="#N400159">Secure</a></dt>
+      <dt>2.1.6. <a
+ href="#N40015E">Architecture
+Neutral</a></dt>
+      <dt>2.1.7. <a
+ href="#N400163">Portable</a></dt>
+      <dt>2.1.8. <a
+ href="#N400168">Interpreted</a></dt>
+      <dt>2.1.9. <a
+ href="#N40016D">High
+Performance</a></dt>
+      <dt>2.1.10. <a
+ href="#N400172">Multithreaded</a></dt>
+      <dt>2.1.11. <a
+ href="#N400177">Dynamic</a></dt>
+    </dl>
+  </dd>
+  <dt>2.2. <a
+ href="#N40017C">Application
+Program Interfaces (APIs)</a></dt>
+  <dd>
+    <dl>
+      <dt>2.2.1. <a
+ href="#N40017F">Enterprise
+JavaBeans (EJBs)</a></dt>
+      <dt>2.2.2. <a
+ href="#N400184">Java
+Database Connectivity (JDBC)</a></dt>
+      <dt>2.2.3. <a
+ href="#N400189">Java
+Naming and Directory Interface (JNDI)</a></dt>
+      <dt>2.2.4. <a
+ href="#N40018E">JavaServer
+Pages (JSP)</a></dt>
+      <dt>2.2.5. <a
+ href="#N400193">Remote
+Method Invocation (RMI)</a></dt>
+      <dt>2.2.6. <a
+ href="#N40019C">Java
+2 Enterprise Edition (J2EE)</a></dt>
+      <dt>2.2.7. <a
+ href="#N4001A1">Swing</a></dt>
+      <dt>2.2.8. <a
+ href="#N4001A6">eXtensible
+Markup Language (XML)</a></dt>
+    </dl>
+  </dd>
+  <dt>2.3. <a
+ href="#N4001AB">Miscellaneous</a></dt>
+  <dd>
+    <dl>
+      <dt>2.3.1. <a
+ href="#N4001AE">Java
+Directories</a></dt>
+      <dt>2.3.2. <a
+ href="#N4001B3">Environment
+Variables PATH and CLASSPATH</a></dt>
+      <dt>2.3.3. <a
+ href="#N4001BA">javac
+- Java Compiler</a></dt>
+      <dt>2.3.4. <a
+ href="#N4001BF">java
+- Java Interpreter</a></dt>
+      <dt>2.3.5. <a
+ href="#N4001C4">Java
+Virtual Machine (JVM)</a></dt>
+      <dt>2.3.6. <a
+ href="#N4001D1">Garbage
+Collection</a></dt>
+    </dl>
+  </dd>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400140">2.1. Java's 11
+Design Goals</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400143">2.1.1. Simple</a></h3>
+</div>
+</div>
+<p><a name="N400143"> C++ was the latest Object-Oriented (OO)
+programming language prior to 1995. C++ with the structured heritage
+contained pointers, memory management, rarely used, poorly understood,
+confusing features that outweighed the benefits. Java was built so that
+programming was easy without having to completely relearn a programming
+language and without the flaws of C++ language. </a></p>
+<p><a name="N400143"> Some Java concepts that make the language easier
+is no more header files. These were files that were inconsistent with
+the C++ program files. The preprocessor directive was removed.
+Compiling is as simple as javac *.java, no more complicated make files.
+The largest contribution that makes Java simple was the removal of the
+pointer. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40014A">2.1.2. Object Oriented (OO)</a></h3>
+</div>
+</div>
+<p><a name="N40014A"> Object-Oriented Design (OOD) focuses on
+encapsulating data, information hiding and providing access only
+through interfaces. OO enables systems engineers, developers and
+clients to think in real world terms. OO also enables development to
+occur faster through reuse and easily solve the problem instead of
+being the problem. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40014F">2.1.3. Distributed</a></h3>
+</div>
+</div>
+<p><a name="N40014F"> Java has an extensive library of network classes,
+primarily in the java.net package. These classes make programming
+TCP/IP protocols (HTTP, FTP) and creating network sockets easily
+possible. Java's own network protocol is the Remote Method Invocation
+(RMI) Application Programming Interface and can use open standards like
+the Common Object Request Broker Architecture (CORBA) to distribute or
+use distributed object. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400154">2.1.4. Robust</a></h3>
+</div>
+</div>
+<p><a name="N400154"> Java was written so that programs are reliable,
+flexible and the issues and problems of other languages were
+eliminated. C++ has pointers, implicit declarations and structured
+programming hooks. Java adds a layer of abstraction to make these hard
+to conceptualize ideas into a flexible architecture. Pointers mentioned
+before have been removed from the developer but having access to memory
+or objects are easily obtained. Java is not the total answer to writing
+bug free code but enables development in the right direction. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400159">2.1.5. Secure</a></h3>
+</div>
+</div>
+<p><a name="N400159"> Java was developed for the networked/distributed
+environment, thus the programming language has to be secure. Java
+provides several layers of security that protect against malicious code
+and viruses while at the same time enabling clients to perform
+operations. Java Applets, Servlets or Enterprise programs enable
+developers to write code that executes on client systems without
+allowing access to client resources. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40015E">2.1.6. Architecture Neutral</a></h3>
+</div>
+</div>
+<p><a name="N40015E"> The Java Virtual Machine (JVM) is an architecture
+specific program that interprets Java Compiled code. The Java Compiler
+(javac) generates an architecture neutral object file format called
+bytecode which has the extension "class". The class file can be
+executed on any platform with the JVM performing the interpretation.
+This enables software developers to write code on any given platform
+and execute on all platforms. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400163">2.1.7. Portable</a></h3>
+</div>
+</div>
+<p><a name="N400163"> Java sets specific sizes of primitive data types.
+Other programming languages can define a primitive data type according
+to the hardware, e.g. an integer could be 2, 4 or 8 bytes, compared to
+Java which is consistently 4 bytes. Java also specifically specifies
+how operations are handled. With strict standards followed and the JVM,
+Java programs are portable. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400168">2.1.8. Interpreted</a></h3>
+</div>
+</div>
+<p><a name="N400168"> The JVM interpreter executes Java bytecode on any
+platform of which the JVM was ported. This is Java's strength because
+this provides the portability of the language. This is also believed by
+many to be a drawback to Java. Interpreted languages are much slower
+than compiled languages. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40016D">2.1.9. High Performance</a></h3>
+</div>
+</div>
+<p><a name="N40016D"> Interpreted bytecode is usually adequate for most
+clients. However with all the great fundamental pluses that Java gave
+to the computing community, performance was being demanded from both
+developers and clients. Java now has the Just In Time Compiler (JIT)
+which increases performance by translating bytecode at run time into
+machine code for a particular platform. Java also includes thread
+technology that is easily usually to use for parallel processing. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400172">2.1.10. Multithreaded</a></h3>
+</div>
+</div>
+<p><a name="N400172"> Multithreading (lightweight processes) enable a
+single program to perform multiple operations at the same time causing
+better interactive responsive and realtime behavior. Java specific
+implementations are available in the language, java.lang.Thread.
+Threads are also easy to set up compared to other languages. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400177">2.1.11. Dynamic</a></h3>
+</div>
+</div>
+<p><a name="N400177"> Java is very dynamic compared to several
+programming languages in the industry. A Java class can be downloaded
+as an Applet in any browser and execute. A Java class can also be
+executed on any platform that is executing the JVM. The Java class file
+can dynamically loaded and examined at runtime using Java's Reflection
+API. </a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40017C">2.2.
+Application Program Interfaces (APIs)</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40017F">2.2.1. Enterprise JavaBeans (EJBs)</a></h3>
+</div>
+</div>
+<p><a name="N40017F"> Enterprise JavaBeans (EJBs) technology a
+definition and sold as a unique product enables platform providers and
+enterprise developers of middleware components that are transactional,
+scalable and portable. Enterprise JavaBeans servers reduce the
+complexity of developing middleware by providing automated tools
+through Graphical User Interfaces (GUIs) so that enterprise systems can
+be configured. Some features of EJBs are transaction databases,
+database connectivity, security and more. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400184">2.2.2. Java Database Connectivity
+(JDBC)</a></h3>
+</div>
+</div>
+<p><a name="N400184"> JDBC technology is an API that enables Java
+applications accessibility to most tabular data sources including
+Software Query Language (SQL) Relational Databases, spreadsheets or
+flat files. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400189">2.2.3. Java Naming and Directory
+Interface (JNDI)</a></h3>
+</div>
+</div>
+<p><a name="N400189"> JNDI provides Java applications with a unified
+interface to multiple naming and directory services in the enterprise.
+Lightweight Directory Access Protocol (LDAP), Common Object Request
+Broker Architecture (CORBA), Remote Method Invocation (RMI), file
+systems are just a few technologies that are available through JNDI. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40018E">2.2.4. JavaServer Pages (JSP)</a></h3>
+</div>
+</div>
+<p><a name="N40018E"> JavaServer Pages (JSP) allow web developers and
+designers to rapidly develop dynamic front end web pages. JSP separates
+the user interface from content generation enabling designers to change
+the overall page layout without altering the underlying dynamic
+content. JSP uses XML tags and scriptlets (Java code within an HTML
+file) that encapsulate the logic, generating the content for the page.
+JSP is an extension of Java Servlet technology. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N400193">2.2.5. Remote Method Invocation
+(RMI)</a></h3>
+</div>
+</div>
+<p><a name="N400193"> Remote Method Invocation (RMI) enables the
+programmer to create distributed Java technology-based applications, in
+which the methods of remote Java objects can be invoked from other Java
+virtual machines on different hosts. A Java technology-based program
+can make a call on a remote object once it obtains a reference to the
+remote object, either by looking up the remote object in the bootstrap
+naming service provided by RMI or by receiving the reference as an
+argument or a return value. </a></p>
+<p><a name="N400193"> A client can call a remote object on a server,
+and that server can also be a client of other remote objects. RMI uses
+object serialization to marshal and unmarshal parameters and does not
+truncate types, supporting true object-oriented polymorphism. </a></p>
+<p><a name="N400193"> Remote Method Invocation (RMI) over the Internet
+Inter-Orb Protocol (IIOP) delivers Common Object Request Broker
+Architecture (CORBA) distributed computing capabilities. RMI over IIOP
+combines the best features of RMI and CORBA. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40019C">2.2.6. Java 2 Enterprise Edition
+(J2EE)</a></h3>
+</div>
+</div>
+<p><a name="N40019C"> Java 2 Enterprise Edition (J2EE) is a standard
+for developing and deploying enterprise applications. J2EE encapsulates
+several Java technologies into one coherent architectures. J2EE
+contains Enterprise JavaBeans (EJB), JavaServer Pages (JSP), Java
+Servlets, J2EE Connector Architecture, Java API for XML Parsing (JAXP),
+Java Authentication and Authorization Service (JAAS) API, Java Message
+Service (JMS) API and Java Naming and Directory Server (JNDI) and much
+more. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001A1">2.2.7. Swing</a></h3>
+</div>
+</div>
+<p><a name="N4001A1"> Swing is one set of program components of the
+Java Foundation Classes (JFC) which contains additional Graphical User
+Interface (GUI) tools. The first release of Java used the Abstract
+Windowing Toolkit (AWT) which had native code for the GUI. Swing
+components are written in pure Java. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001A6">2.2.8. eXtensible Markup Language
+(XML)</a></h3>
+</div>
+</div>
+<p><a name="N4001A6"> eXtensible Markup Language (XML) is the World
+Wide Webs (W3C) open architecture for formatting and validating data.
+XML itself is the framework of which other technologies build upon. XML
+has several different technologies, eXtensible Stylesheet Language
+(XSL/XSLT), Scalar Vector Graphics (SVG), Document Object Model (DOM)
+to name a few. XML is the preferred technology in many
+information-transfer scenarios because information is easy to read,
+process, generate, adheres to strict standards, open source and free. </a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4001AB">2.3.
+Miscellaneous</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001AE">2.3.1. Java Directories</a></h3>
+</div>
+</div>
+<p><a name="N4001AE"> Java's Software Development Kit (JDK) has a
+default directory structure. The bin directory contains all the
+executables, e.g. java, javac, javadoc. The demo directory contains
+demonstration programs. The docs directory is where you should unload
+the JDK documentation (javadoc). The jre (Java Runtime Environment)
+directory contains the files to execute Java. The lib directory
+contains any Java Archives (jar files) or library files. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001B3">2.3.2. Environment Variables PATH
+and CLASSPATH</a></h3>
+</div>
+</div>
+<p><a name="N4001B3"> The environment variables PATH and CLASSPATH need
+to be defined before executing your Java programs. PATH should set up
+the path to the executables. CLASSPATH should set up the path to the
+class files. </a></p>
+<p><a name="N4001B3"> set PATH=%PATH%;c:\jdk1.3\bin;. set
+CLASSPATH=%CLASSPATH%;c:\java\programming;. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001BA">2.3.3. javac - Java Compiler</a></h3>
+</div>
+</div>
+<p><a name="N4001BA"> The javac (Java Compiler) command compiles Java
+source code into Java bytecode. Java source code has the extension
+"java" and java bytecode have the extension "class". The following
+example is how to compile the Helloworld source code, e.g. javac
+Helloworld.java, note that the extension .java has to follow the class
+name. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001BF">2.3.4. java - Java Interpreter</a></h3>
+</div>
+</div>
+<p><a name="N4001BF"> The java (Java Interpreter) command executes Java
+bytecode created by the Java compiler (javac). The java command expects
+the bytecode for the class to be in a file called ClassName.class. All
+bytecode have the extension "class". The following example is how to
+execute the Helloworld program, e.g. java Helloworld, note that the
+extension "class" is not included. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001C4">2.3.5. Java Virtual Machine (JVM)</a></h3>
+</div>
+</div>
+<p><a name="N4001C4"> The Java Virtual Machine (JVM) interprets the
+bytecode that was created when compiled with the javac (java compiler).
+The JVM is an abstract layer of code between the operating system and
+java byte code so that developers only need to be concern with the Java
+program and not the operating system. This abstract layer is specific
+to the hardware. </a></p>
+<div class="figure">
+<p><a name="N4001C4"><b>Figure 2.1. Java Virtual Machine</b></a></p>
+<p><a name="N4001C4"><img
+ src="figures/java/jvm.jpg"></a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4001D1">2.3.6. Garbage Collection</a></h3>
+</div>
+</div>
+<p><a name="N4001D1"> The Java programming language allows developers
+to create objects with constructors just like other OO programming
+languages. However the destructor like in C++ language is not in Java
+and the developers don't have to worry about managing memory. The C++
+language you were responsible both constructing and destructing
+objects. The Garbage Collection (GC) mechanism automatically detects
+objects that are no longer referenced and removes them from memory. </a></p>
+</div>
+</div>
+</div>
+</body>
+</html>

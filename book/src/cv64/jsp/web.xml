@@ -1,0 +1,22 @@
+<!-- cv64 -->
+
+<web-app>
+	<servlet-mapping url-pattern='/servlet/ECommerce' servlet-name='ECommerce'/>
+	<servlet servlet-name='ECommerce' servlet-class='com.cv64.servlets.ECommerce'/>
+
+	<servlet-mapping url-pattern='/servlet/CatalogSearch' servlet-name='CatalogSearch'/>
+	<servlet servlet-name='CatalogSearch' servlet-class='com.cv64.servlets.database.CatalogSearch'>
+		<init-param host='127.0.0.1'/>
+		<init-param servletPort='8080'/>
+		<init-param databaseName='netvnusa'/>
+	</servlet>
+
+	<servlet-mapping url-pattern='/servlet/CatalogOrder' servlet-name='CatalogOrder'/>
+	<servlet servlet-name='CatalogOrder' servlet-class='com.cv64.servlets.database.CatalogOrder'/>	
+
+	<servlet-mapping url-pattern='/servlet/OrderServlet' servlet-name='OrderServlet'/>
+	<servlet servlet-name='OrderServlet' servlet-class='com.cv64.servlets.order.OrderServlet'/>	
+
+	<taglib taglib-uri='/cv64' taglib-location='j:\cv64\taglib\cv64.tlb'/>
+
+</web-app>

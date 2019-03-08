@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>JOGL</title>
+</head>
+<body>
+<div
+ style="text-align: center; font-family: helvetica,arial,sans-serif;"><big
+ style="color: rgb(51, 102, 102);"><big><span style="font-weight: bold;">Java
+Open Graphics Language (JOGL)</span></big></big><br>
+</div>
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Home Page:&nbsp; </span></span><a
+ style="font-family: helvetica,arial,sans-serif;"
+ href="https://jogl.dev.java.net/">https://jogl.dev.java.net/</a><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;"><br>
+</span><span style="font-weight: bold;"></span></span>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Download the software</span>:&nbsp; </span><a
+ style="font-family: helvetica,arial,sans-serif;"
+ href="http://jogl.dev.java.net/servlets/ProjectDocumentList"
+ target="_blank">Precompiled binaries and documentation</a><br
+ style="font-family: helvetica,arial,sans-serif;">
+<ul style="font-family: helvetica,arial,sans-serif;">
+  <li>Here are the latest releases:&nbsp; <a
+ href="https://jogl.dev.java.net/servlets/ProjectDocumentList"><span
+ style="text-decoration: underline;">https://jogl.dev.java.net/servlets/ProjectDocumentList</span></a><span
+ style="text-decoration: underline;"></span>, click on the release you
+wish to obtain.<a
+ href="https://jogl.dev.java.net/servlets/ProjectDocumentList"></a></li>
+  <li>You must download both<small> </small><span
+ style="font-weight: bold;">jogl.jar</span>
+and which platform you wish to execute, e.g<small>. </small><span
+ style="font-weight: bold;"> jogl-natives-win32.jar</span></li>
+</ul>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Installation
+Notes (Windows)</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Sometimes there
+are issues with the libraries, do the following and you will not run
+into problems.&nbsp; There are two dll
+files required for the Windows operating system.&nbsp; This is easily
+fixed by copying two dll files to the windows32 directory, e.g.:</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span
+ style="color: rgb(51, 102, 102); font-weight: bold; font-family: helvetica,arial,sans-serif;">copy
+&lt;location of jdk&gt;\jre\bin\awt.dll&nbsp;&nbsp;
+C:\WINDOWS\system32\awt.dll</span><br
+ style="color: rgb(51, 102, 102); font-weight: bold; font-family: helvetica,arial,sans-serif;">
+<span
+ style="color: rgb(51, 102, 102); font-weight: bold; font-family: helvetica,arial,sans-serif;">copy
+&lt;location of jdk&gt;\jre\bin\jawt.dll&nbsp;
+C:\WINDOWS\system32\jawt.dll</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">Copy the
+two jar files, e.g. <span style="font-weight: bold;">jogl.jar,
+jogl-natives-win32.jar</span>
+and supporting jar files as suggested by the installation notes to the <span
+ style="font-weight: bold;">C:\WINDOWS\system32\ </span>directory.<br>
+<br>
+<br>
+Extract the <span style="font-weight: bold;">jogl.dll</span> and <span
+ style="font-weight: bold;">jogl_cg.dll</span> files from the <span
+ style="font-weight: bold;">jogl-natives-win32.jar</span> and place in
+the <span style="font-weight: bold;">C:\WINDOWS\system32\ </span>directory.</span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Classpath
+Settings</span><br style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;">set
+classpath=.;%classpath%;C:\WINDOWS\system32\jogl.jar&nbsp;&nbsp; &lt;-
+don't forget the ".", very important.<br>
+<br>
+Import the
+following code to make sure that JOGL has been installed and
+implemented correctly:<span style="font-weight: bold;"></span><br>
+</span>
+<table
+ style="text-align: left; width: 582px; height: 347px; font-family: helvetica,arial,sans-serif;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span
+ style="color: rgb(51, 102, 102);">import net.java.games.jogl.*;</span><br
+ style="color: rgb(51, 102, 102);">
+      <br style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">public class HelloJOGL {</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp; public static void
+main (String args[]) {</span><br style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp; try {</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.loadLibrary("jogl");</span><br style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Hello JOGL! (The native libraries are
+installed.)");</span><br style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+GLCapabilities caps = new GLCapabilities();</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println("Hello JOGL! (The jar appears to be available.)");</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp; }
+catch (Exception exception) {</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(exception.getMessage());</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(exception);</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp;&nbsp;&nbsp; }</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">&nbsp; }</span><br
+ style="color: rgb(51, 102, 102);">
+      <span style="color: rgb(51, 102, 102);">}</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">HelloWorld.java
+- JOGL Check
+Program</span><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-family: helvetica,arial,sans-serif;"></span><br
+ style="font-family: helvetica,arial,sans-serif;">
+<span style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;"></span></span>
+<hr
+ style="width: 100%; height: 2px; font-family: helvetica,arial,sans-serif;"><span
+ style="font-family: helvetica,arial,sans-serif;"><span
+ style="font-weight: bold;">Coding examples</span>&nbsp;
+</span><a style="font-family: helvetica,arial,sans-serif;"
+ href="http://www.genedavissoftware.com/books/jogl/">http://www.genedavissoftware.com/books/jogl/</a><br
+ style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<span
+ style="font-weight: bold; font-family: helvetica,arial,sans-serif;">Other
+Links</span><br style="font-family: helvetica,arial,sans-serif;">
+<br style="font-family: helvetica,arial,sans-serif;">
+<a style="font-family: helvetica,arial,sans-serif;"
+ href="http://today.java.net/pub/a/today/2003/09/11/jogl2d.html">http://today.java.net/pub/a/today/2003/09/11/jogl2d.html</a><br
+ style="font-family: helvetica,arial,sans-serif;">
+</body>
+</html>

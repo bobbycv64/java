@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Graphical User Interface (GUI) Programming</title>
+</head>
+<body>
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N400592">Chapter 7. Graphical User Interface
+(GUI) Programming</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N400592"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N400592">7.1. </a><a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N40059A">Abstract
+Window Toolkit (AWT)</a></dt>
+  <dd>
+    <dl>
+      <dt>7.1.1. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N40059F">Frames</a></dt>
+    </dl>
+  </dd>
+  <dt>7.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005B1">Fun
+Stuff</a></dt>
+  <dd>
+    <dl>
+      <dt>7.2.1. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005B4">Text,
+Fonts and Colors</a></dt>
+      <dt>7.2.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005BC">Drawing
+and Filling</a></dt>
+    </dl>
+  </dd>
+  <dt>7.3. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005C6">Miscellaneous</a></dt>
+  <dd>
+    <dl>
+      <dt>7.3.1. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005C9">Images</a></dt>
+      <dt>7.3.2. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005D3">Update
+and Paint</a></dt>
+      <dt>7.3.3. <a
+ href="file:///C:/estey/www/computing/java/book/javabook/javabook.html#N4005E1">Buffering</a></dt>
+    </dl>
+  </dd>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40059A">7.1. Abstract
+Window Toolkit (AWT)</a></h2>
+</div>
+</div>
+<p><a name="N40059A"> Java has a package of predefined classes that
+provide GUI programming called the Abstract Window Toolkit (AWT). These
+classes are called by developers to produce forms, input screens or
+output reports. The AWT is not the Java Foundation Classes (Swing). The
+AWT sits on top of the Java Virtual Machine (JVM) and renders the
+different types of widgets (GUI components, Buttons, Windows, Tables,
+etc.) or graphics on a graphics screen. </a></p>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N40059F">7.1.1. Frames</a></h3>
+</div>
+</div>
+<p><a name="N40059F"> Java has the concept of a GUI container call a
+Frame. Frames contain other widgets are resizeable and can be placed
+anywhere on the graphics terminal. The defaults for a frame are upper
+left corner, 0 pixel width and height and displaying the frame title. </a></p>
+<p><a name="N40059F"> The example below extends a java.awt.Frame. The
+constructor executes several steps. The first step sets the frame to be
+visible. The next step sets up the screen being displayed. The
+setScreen method calls a Toolkit class which returns information about
+the particular hardware. </a></p>
+<pre class="programlisting"><a name="N40059F">import java.awt.Color;<br>import java.awt.Dimension;<br>import java.awt.Frame;<br>import java.awt.Graphics;<br>import java.awt.Toolkit;<br>import java.awt.Menu;<br>import java.awt.MenuBar;<br>import java.awt.MenuItem;<br>import java.awt.PrintJob;<br>import java.awt.event.ActionEvent;<br>import java.awt.event.ActionListener;<br>import java.awt.event.WindowAdapter;<br>import java.awt.event.WindowEvent;<br><br>public class FrameExample extends Frame {<br><br>  public FrameExample() {<br>      setVisible(true);<br>      setScreen();<br>      setMenu();<br>  }<br><br>  public void paint(Graphics graphics) {<br>    graphics.drawString("Hello Frames", 100, 100);<br>  }<br><br>  public void print() {<br>    PrintJob printJob = getToolkit().getPrintJob(this, "Print", null);<br><br>    if (printJob != null) {<br>      Graphics graphics = printJob.getGraphics();<br>      <br>      if (graphics != null) {<br>        paint(graphics);<br>        graphics.dispose();<br>      }<br>      printJob.end();<br>    }<br>  }<br><br>  public void setMenu() {<br>    MenuBar menuBar = new MenuBar();<br>    Menu menu = new Menu("File");<br>    MenuItem printItem = new MenuItem("Print");<br>    MenuItem exitItem = new MenuItem("Exit");<br><br>    printItem.addActionListener(new ActionListener() {<br>      public void actionPerformed(ActionEvent event) {<br>        print();<br>      }<br>    });<br><br>    exitItem.addActionListener(new ActionListener() {<br>      public void actionPerformed(ActionEvent event) {<br>        System.exit(0);<br>      }<br>    });<br><br>    addWindowListener(new WindowAdapter() {<br>      public void windowClosing(WindowEvent event) {<br>        System.exit(0);<br>      }<br>    });<br><br>    menu.add(printItem);<br>    menu.add(exitItem);<br>    menuBar.add(menu);<br>    setMenuBar(menuBar);<br>  }<br><br>  public void setScreen() {<br>    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();<br><br>    int screenHeight = dimension.height;<br>    int screenWidth = dimension.width;<br><br>    setSize(screenWidth / 2, screenHeight / 2);<br>    setLocation(screenWidth / 4, screenHeight / 4);<br><br>    String title = "Frame Coordinates: (" +<br>      screenWidth / 4 + " x, " + screenHeight / 4 +<br>      " y) Screen size: (" + <br>      screenWidth / 2 + " pixels wide, " + screenHeight / 2 + <br>      " pixel high)";<br><br>    setTitle(title);<br>  }<br><br>  public static void main(String[] args) {<br><br>    FrameExample frameExample = new FrameExample();<br>  }<br>}<br><br></a></pre>
+<p><a name="N40059F"> We are interested in the screen dimensions. Once
+the screen dimensions are know we can calculate the center of the
+screen and set our frame to those coordinates (location) with the
+setLocation method. Remember all the methods that have not been defined
+in the class are from the extended class java.awt.Frame. The frame's
+title is set with the setTitle method of java.awt.Frame. </a></p>
+<p><a name="N40059F"> Events are how GUI systems interact with clients.
+We will discuss events with detail in the next chapter. Don't worry
+about events in the setMenu method right now. I have added a menu bar,
+menu items and event handlers in the method setMenu. The setMenu method
+sets up a menu bar with a print or exit events. </a></p>
+<p><a name="N40059F"> Once the frame has been all set up the paint
+method is called. The paint method is where you place information that
+you wish to be displayed in the graphics context. The drawString
+method, graphics.drawString("Hello Frames", 100, 100); draws the string
+Hello Frames at the 100 x and 100 y coordinates. </a></p>
+<p><a name="N40059F"> The frame example has a lot going on but is
+generic enough that we can build upon the frame class. We will see in
+the following examples the ease of writting graphical objects with
+Java's Abstract Windowing Toolkit (AWT). </a></p>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4005B1">7.2. Fun Stuff</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4005B4">7.2.1. Text, Fonts and Colors</a></h3>
+</div>
+</div>
+<p><a name="N4005B4"> We will now discuss how you can make your text
+look better with text, fonts and color using simple Object-Oriented
+calls. The following code example uses the three methods drawString
+(text), setFont (font) and setColor (color). These method calls are
+obvious and are easily set so that you can produce graphical output. </a></p>
+<pre class="programlisting"><a name="N4005B4">import java.awt.Color;<br>import java.awt.Font;<br>import java.awt.Graphics;<br><br>public class TextFontColor extends FrameExample {<br><br>  public TextFontColor() {<br>    super();<br>  }<br><br>  public void paint(Graphics graphics) {<br>    <br>    Font font;<br><br>    // set font to class defaults and color to RED<br>    font = new Font(fontName_, fontStyle_, fontSize_);<br>    graphics.setFont(font);<br>    graphics.setColor(Color.red);<br>    graphics.drawString("Plain and Red", 100, 100);<br><br>    // set font to BOLD and color to WHITE<br>    font = new Font(fontName_, Font.BOLD, fontSize_);<br>    graphics.setFont(font);<br>    graphics.setColor(Color.white);<br>    graphics.drawString("Bold and White", 125, 125);<br><br>    // set font to BOLD and ITALIC, color to BLUE<br>    font = new Font(fontName_, Font.BOLD + Font.ITALIC, fontSize_);<br>    graphics.setFont(font);<br>    // could implement graphics.setColor(color.blue);<br>    graphics.setColor(new Color(0, 0, 255));<br>    graphics.drawString("Bold, Italic and Blue", 150, 150);<br>  }<br><br>  public static void main(String[] args) {<br><br>    TextFontColor textFontColor = new TextFontColor();<br>    textFontColor.setBackground(Color.black);<br>  }<br><br>  private String fontName_ = "Arial";<br>  private int fontStyle_ = Font.PLAIN;<br>  private int fontSize_ = 14;<br>}<br><br></a></pre>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4005BC">7.2.2. Drawing and Filling</a></h3>
+</div>
+</div>
+<p><a name="N4005BC"> Drawing and filling shapes are very easy to
+perform also. Drawing lines, circles rectanges any shape the method
+will begin with draw. Executing a draw method will draw the shape the
+author desires. </a></p>
+<p><a name="N4005BC"> Filling shapes are also performed by calling any
+of the fill methods. The example uses fillOval that draws an oval shape
+that is filled. </a></p>
+<pre class="programlisting"><a name="N4005BC">import java.awt.Color;<br>import java.awt.Graphics;<br><br>public class DrawingFilling extends FrameExample {<br><br>  public DrawingFilling() {<br>    super();<br>  }<br><br>  public void paint(Graphics graphics) {<br><br>    graphics.setColor(Color.red);<br>    graphics.drawLine(50, 50, 250, 50);<br>    graphics.drawLine(250, 50, 50, 100);<br>    graphics.drawArc(75, 60, 20, 20, 0, 360);<br>    graphics.drawRoundRect(100, 100, 150, 150, 25, 25);<br>    graphics.fillOval(130, 130, 25, 25);<br>    graphics.fillOval(200, 200, 25, 25);<br>  }<br><br>  public static void main(String[] args) {<br><br>    DrawingFilling drawingFilling = new DrawingFilling();<br>    drawingFilling.setBackground(Color.black);<br>  }<br>}<br><br></a></pre>
+</div>
+</div>
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4005C6">7.3.
+Miscellaneous</a></h2>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4005C9">7.3.1. Images</a></h3>
+</div>
+</div>
+<p><a name="N4005C9"> Including images is a three step procedure. First
+you must define the location of the image, using the
+Toolkit.getDefaultToolkit().getIMage(filename); command. This command
+returns an image object. </a></p>
+<p><a name="N4005C9"> Once the image object has been set, the image is
+set to the location on the frame, in our case translated to 100 x and
+100 y. You can also scale, rotate or shear an image by calling any of
+the methods that are part of the Graphics class. Once the image has
+been set for drawing you can draw the image using the drawImage method.
+</a></p>
+<pre class="programlisting"><a name="N4005C9">import java.awt.Color;<br>import java.awt.Graphics;<br>import java.awt.Image;<br>import java.awt.Toolkit;<br><br>public class Images extends FrameExample {<br><br>  public Images() {<br>    super();<br>  }<br><br>  public Image getImage() {<br>    return Toolkit.getDefaultToolkit().getImage("cv64logo.gif");<br>  }<br><br>  public void paint(Graphics graphics) {<br>    graphics.drawImage(getImage(), 100, 100, this);<br>  }<br><br>  public static void main(String[] args) {<br><br>    Images images = new Images();<br>    images.setBackground(Color.white);<br>  }<br>}<br><br></a></pre>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4005D3">7.3.2. Update and Paint</a></h3>
+</div>
+</div>
+<p><a name="N4005D3"> Java has three methods that control how the
+graphics context is updated. The paint method only updates the screen
+and uses a bounding box to update only the section of the screen that
+needs repair. Repair is due to other windows overlapping the current
+screen. </a></p>
+<p><a name="N4005D3"> The repaint method calls the update method,
+that's it. The update method clears the screen contents then calls the
+paint method. If your concerned about performance you should override
+the update method to call only the paint method. </a></p>
+<div class="figure">
+<p><a name="N4005D3"><b>Figure 7.1. Update and Paint</b></a></p>
+<p><a name="N4005D3"><img
+ src="file:///C:/estey/www/computing/java/book/javabook/figures/awt/updatePaint.jpg"></a></p>
+</div>
+</div>
+<div class="titlepage">
+<div>
+<h3 class="title"><a name="N4005E1">7.3.3. Buffering</a></h3>
+</div>
+</div>
+<p><a name="N4005E1"> When graphics performance starts to degrade, most
+of the time the graphics context is at fault. Java provides a memory
+location called a buffer which can store graphics information, perform
+computations before displaying the information. Once the frame has been
+loaded with the information to display the buffer is sent to the
+graphics context. The following program shows how to use buffering
+versus the paint method. </a></p>
+<pre class="programlisting"><a name="N4005E1">import java.awt.Color;<br>import java.awt.Graphics;<br>import java.awt.Image;<br>import java.awt.Toolkit;<br><br>public class Performance extends FrameExample {<br><br>  public Performance() {<br>    super();<br>  }<br><br>  public Image getImage() {<br>    return Toolkit.getDefaultToolkit().getImage("cv64logo.gif");<br>  }<br><br>  // override update method to not clear screen before painting.<br>  public void update(Graphics graphics) {<br>    paint(graphics);<br>  }<br><br>  public void paint(Graphics graphics) {<br><br>    if (compute_) {<br>      System.out.println("width: " + getSize().width + <br>        " height: " + getSize().height);<br><br>      bufferedImage = createImage(getSize().width, getSize().height);<br>      Graphics bufferedGraphics = bufferedImage.getGraphics();<br>      bufferedGraphics.drawImage(getImage(), 100, 100, this);<br>      bufferedGraphics.dispose();<br>      compute_ = false;<br>    }<br>    graphics.drawImage(bufferedImage, 0, 0, null);<br>  }<br><br>  public static void main(String[] args) {<br><br>    Images images = new Images();<br>    images.setBackground(Color.white);<br>  }<br><br>  private Image bufferedImage;<br>  private boolean compute_ = true;<br>}</a></pre>
+</body>
+</html>

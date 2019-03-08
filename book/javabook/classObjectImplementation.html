@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Class and Object Implementation</title>
+</head>
+<body>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<h2 class="title"><a name="N400335">Chapter 4. Class and Object
+Implementation</a></h2>
+</div>
+</div>
+<div class="toc">
+<p><a name="N400335"><b>Table of Contents</b></a></p>
+<dl>
+  <dt><a name="N400335">4.1. </a><a
+ href="#N40034D">Review</a></dt>
+  <dt>4.2. <a
+ href="#N400371">new
+Keyword</a></dt>
+  <dt>4.3. <a
+ href="#N400395">Object
+Creation</a></dt>
+  <dt>4.4. <a
+ href="#N4003F0">What's
+this all about?</a></dt>
+  <dt>4.5. <a
+ href="#N40042D">Accessibility</a></dt>
+  <dt>4.6. <a
+ href="#N400442">static
+Keyword</a></dt>
+</dl>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40034D">4.1. Review</a></h2>
+</div>
+</div>
+<p><a name="N40034D"> Recall Chapter 1 our discussion of Classes,
+Objects, Methods and Attributes. The Class is a framework that
+encapsulates attributes and methods. The Class defines how an object is
+to be managed on a system, e.g. Class Vehicle. A class is a blueprint
+for defining the methods and attributes for a particular type of
+object. All objects of a given class are identical in form and behavior
+but contain different data in their attributes. The class defines all
+common properties of different objects that are instances of the class.
+</a></p>
+<div class="figure">
+<p><a name="N40034D"><b>Figure 4.1. new keyword</b></a></p>
+<p><a name="N40034D"><img
+ src="figures/introduction/classAnatomy.jpg"></a></p>
+</div>
+<p><a name="N40034D"> Objects are an instance of a class which
+encapsulate state and behavior using Information Hiding, e.g. Object
+Geo Metro is an instance of Vehicle. The example illustrates that all
+data attributes are hidden from all outside programs. </a></p>
+<p><a name="N40034D"> Objects are units of code that are eventually
+derived from the process. An object is a software packet containing a
+collection of related data in the form of attributes and methods for
+operating on that data. Objects are created with Constructors. </a></p>
+<div class="figure">
+<p><a name="N40034D"><b>Figure 4.2. Object Anatomy</b></a></p>
+<p><a name="N40034D"><img
+ src="figures/introduction/objectAnatomy.jpg"></a></p>
+</div>
+<p><a name="N40034D"> Methods are the behavior that occur within a
+class. Methods can receive zero to many arguments as input and return
+zero to one result as output. They encapsulate and hide the internals
+of the operation from the caller. There are accessor methods which get
+information and usually start with get or is (boolean return value) and
+only return information. Mutator methods set information and start with
+set, passing in information and returning no value. </a></p>
+<p><a name="N40034D"> A method is programmed logic that is defined as
+part of a class and included in any object of that class. Communication
+between objects take place between methods. </a></p>
+<div class="figure">
+<p><a name="N40034D"><b>Figure 4.3. Method Types</b></a></p>
+<p><a name="N40034D"><img
+ src="figures/classObject/methodTypes.jpg"></a></p>
+</div>
+<p><a name="N40034D"> Attributes are the state of data, e.g. the light
+bulb is either on or off. With OOP the attributes are hidden while SP
+left attributes vulnerable to being changed from outside references.
+Attributes can be built-in data types, such as a number or date, or
+reference another object. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400371">4.2. new
+Keyword</a></h2>
+</div>
+</div>
+<p><a name="N400371"> Recall Chapter 3 on data types. Objects are types
+and are defined by the class they represent. For example the following
+statement Book book; States that the object book is an instance of Book
+the class. Book the class is a type and book the object is a type of
+Book. </a></p>
+<p><a name="N400371"> Now that you understand what Classes and Objects
+are how do you create and use them. The answer is just like
+initializing primitive types in chapter 3. You must declare the object
+and give the object definition. </a></p>
+<p><a name="N400371"> To declare an object just put the class type in
+front of the object name, e.g. Book book; This defines that the object
+book will be of type Book. The object book is only defined but not
+created. </a></p>
+<p><a name="N400371"> The process of creating an object is called
+construction. To construct objects you either have to define your own
+constructors or the default constructor will create the object for you.
+To construct an object you must use the keyword, new. </a></p>
+<div class="figure">
+<p><a name="N400371"><b>Figure 4.4. New Keyword</b></a></p>
+<pre class="programlisting"><a name="N400371"><tt>figures/classObject/New.java</tt><br>          <br><br>public class New {<br><br>  <br><br>  public static void main(String[] args) {<br><br><br><br>    int int1;					// declare the primative integer type<br><br>    String string1;				// declare the object string of class String<br><br><br><br>    int1 = 10;					// assign 10 to the primative integer i<br><br>    string1 = new String("message");	// assign message to the object string of class String<br><br><br><br>    int int2 = 10;				// declare and assign to the primative integer j<br><br>    String string2 = new String("message");// declare and assign to the object string<br><br><br><br>    String string3 = null;			// declare and point to no object<br><br><br><br>    System.out.println("Integer1: " + int1);<br><br>    System.out.println("Integer2: " + int2);<br><br>    System.out.println("String1:  " + string1);<br><br>    System.out.println("String2:  " + string2);<br><br>    System.out.println("String3:  " + string3);<br><br>  }<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400371"><b>Figure 4.5. Constructor</b></a></p>
+<p><a name="N400371"><img
+ src="figures/introduction/constructor.jpg"></a></p>
+</div>
+<p><a name="N400371"> The Java language uses a similar concept as the
+C++ language. You can always create objects and allocate memory with
+Java and never be concerned about memory management. However with C++
+you must also execute the keyword (delete) to release memory. Recall
+that the Java garbage collector automatically performs this task for
+you. </a></p>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400395">4.3. Object
+Creation</a></h2>
+</div>
+</div>
+<p><a name="N400395"> Now we are going to start creating classes of our
+own. With object-oriented programming we think in real world terms with
+information hiding and encapsulation. Our first example will be about a
+library. Libraries contain books and books contain chapters. We will
+start with three classes Library, Book and Chapter. </a></p>
+<div class="figure">
+<p><a name="N400395"><b>Figure 4.6. New Keyword</b></a></p>
+<pre class="programlisting"><a name="N400395"><tt>figures/classObject/New.java</tt><br>          <br><br>public class New {<br><br>  <br><br>  public static void main(String[] args) {<br><br><br><br>    int int1;					// declare the primative integer type<br><br>    String string1;				// declare the object string of class String<br><br><br><br>    int1 = 10;					// assign 10 to the primative integer i<br><br>    string1 = new String("message");	// assign message to the object string of class String<br><br><br><br>    int int2 = 10;				// declare and assign to the primative integer j<br><br>    String string2 = new String("message");// declare and assign to the object string<br><br><br><br>    String string3 = null;			// declare and point to no object<br><br><br><br>    System.out.println("Integer1: " + int1);<br><br>    System.out.println("Integer2: " + int2);<br><br>    System.out.println("String1:  " + string1);<br><br>    System.out.println("String2:  " + string2);<br><br>    System.out.println("String3:  " + string3);<br><br>  }<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400395"><b>Figure 4.7. Library Class</b></a></p>
+<pre class="programlisting"><a name="N400395"><tt>figures/classObject/Library.java</tt><br>          <br><br>public class Library {<br><br><br><br>  // Constructor<br><br>  public Library() {}<br><br><br><br>  // Accessor Methods<br><br>  public int getNumberOfBooks() { return numberOfBooks_; }<br><br>  public String getCategory()      { return category_; }<br><br>  public boolean checkedOut()      { return checkedOut_; }<br><br><br><br>  // Mutator Methods<br><br>  public void addBook(String category) { <br><br>    numberOfBooks_++;<br><br>    category_ = category;<br><br>  }<br><br>  <br><br>  public void setCategory(String category)    { category_ = category; }<br><br>  public void setCheckOut(boolean checkedOut) { checkedOut_ = checkedOut; }<br><br><br><br>  // Attributes<br><br>  private static int numberOfBooks_ = 0;<br><br>  private String category_ = "";<br><br>  private boolean checkedOut_ = false;<br><br>}<br>        </a></pre>
+</div>
+<p><a name="N400395"> Looking at the Library class some items are new.
+Let's go line by line and figure out how to develop our own classes.
+The first line is the class declaration. The statement, "public class
+Library", states that a class named Library which must be in a file
+call Library.java is publicly accessible to all programs. </a></p>
+<p><a name="N400395"> The next section is the Constructor stated as
+public Library() {}. Constructors create objects, instances of the
+class. When creating an object you must perform the operation through a
+constructor. In the C++ language you must also use destructors but with
+Java the Garbage Collector does this for you. </a></p>
+<p><a name="N400395"> Java does have an option to alert the JVM you
+wish an object to be garbage collected using the finalize() method.
+This doesn't mean that the statements in the method occur immediately,
+only to alert the garbage collector to release memory. </a></p>
+<p><a name="N400395"> The most basic constructor you can create
+contains no input attributes or implementation. The constructor
+statement is saying, "The Library class is accessible to any program,
+takes no arguments hence () has no implementation {} and constructors
+never return values. Constructors are a type of method with no return
+value. Remember the most important thing to remember is constructors
+construct objects, that is their sole purpose. We will learn more about
+constructors and complexities later. </a></p>
+<p><a name="N400395"> The next section are the accessor methods,
+methods that return information. Accesor methods begin with get or is
+(boolean). This is a common programming standard but not required with
+the exception of Javabeans. All accessor methods return values and are
+public. </a></p>
+<p><a name="N400395"> The first accessor getBook() states, "This method
+is publicly available, returns a String type and the value that is
+returned is the variable book_. A note. The class variables (this
+variables) all end with the underscore character (_, \u0000). I
+recommend others to use the underscore pattern instead of the
+this.variable. We will learn about "this" later because the discussion
+will require a section alone. </a></p>
+<p><a name="N400395"> The next section are the mutator methods, methods
+that receive information. All the mutator methods begin with set. This
+is a common programming standard but not required with the exception of
+Javabeans. All mutator methods return nothing (void) and are public. </a></p>
+<p><a name="N400395"> The first mutator method setBook(), states, "This
+method is publicly available, returns nothing (void) accepts a String
+and will declare the string as book. Notice that between the
+parenthesis ({}, \u0000\u0000) this is a block implementation. The
+method's implementation is saying take the value that was passed into
+the method and assign to the classes variable book_. </a></p>
+<p><a name="N400395"> The last section are the attributes. The Library
+class has three attributes: book_, category_ and checkedOut_. These are
+internal to the class and only to the class because they all begin with
+the private reserved word. Recall chapter 1 with information hiding.
+All of the attributes for the Library class are hidden from outside
+interference because they are all private. </a></p>
+<p><a name="N400395"> Finally, all the constructors, methods and
+attributes are encapsulated within the Library class. Before continuing
+you must understand the basic Object-Oriented concepts from Chapter 1
+and what was just discussed. </a></p>
+<p><a name="N400395"> The following classes Book and Chapter illustrate
+more detail. </a></p>
+<div class="figure">
+<p><a name="N400395"><b>Figure 4.8. Book Class</b></a></p>
+<pre class="programlisting"><a name="N400395"><tt>figures/classObject/Book.java</tt><br>          <br><br>public class Book {<br><br>  <br><br>  // 4 argument Constructor<br><br>  public Book(String author, String name, String isbn, float price) {<br><br>    author_ = author;<br><br>    name_ = name;<br><br>    isbn_ = isbn;<br><br>    price_ = price;<br><br>  }<br><br><br><br>  // 2 argument Constructor<br><br>  public Book(String author, String book) {<br><br>    this(author, book, "", 0.0f);<br><br>  }<br><br><br><br>  // no argument Constructor<br><br>  public Book() {<br><br>    this("", "");<br><br>  }<br><br><br><br>  // Accessor Methods<br><br>  public String getAuthor() { return author_; }<br><br>  public String getName()   { return name_; }<br><br>  public String getISBN()   { return isbn_; }<br><br>  public float  getPrice()  { return price_; }<br><br>  public Chapter getChapter(int chapter) {<br><br>    return chapter_[--chapter];<br><br>  }<br><br><br><br>  public String toString() {<br><br>    return(author_ + "\n" + name_ + "\n" + isbn_ + "\n" + price_);<br><br>  }<br><br><br><br>  // Mutator Methods<br><br>  public void setAuthor(String author) { author_ = author; }<br><br>  public void setName(String name)     { name_ = name; }<br><br>  public void setISBN(String isbn)     { isbn_ = isbn; }<br><br>  public void setPrice(int price)      { price_ = price; }<br><br><br><br>  public void addChapter(Chapter chapter) { chapter_[i_++] = chapter; }<br><br><br><br>  // Attributes<br><br>  private Chapter[] chapter_ = new Chapter[20]; // max chapters is 20<br><br>  private int i_ = 0;            // set ints to 0<br><br>  private String author_ = "";   // set strings to blank<br><br>  private String name_   = "";   // set strings to blank<br><br>  private String isbn_   = "";   // set strings to blank<br><br>  private float  price_  = 0.0f; // set floats to 0.0<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N400395"><b>Figure 4.9. Chapter Class</b></a></p>
+<pre class="programlisting"><a name="N400395"><tt>figures/classObject/Chapter.java</tt><br>          <br><br>public class Chapter {<br><br>  <br><br>  // Constructor<br><br>  public Chapter() {}<br><br><br><br>  // Accessor Methods<br><br>  public int getNumber()  { return number_; }<br><br>  public String getTitle() { return title_; }<br><br><br><br>  // Mutator Methods<br><br>  public void setNumber(int number)   { number_ = number; }<br><br>  public void setTitle(String title) { title_ = title; }<br><br><br><br>  // Attributes<br><br>  private int number_ = 0;<br><br>  private String title_ = "";<br><br>}<br>        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N4003F0">4.4. What's
+this all about?</a></h2>
+</div>
+</div>
+<p><a name="N4003F0"> Java and C++ both have the concept and reference
+called, this. This means simply this object, the object itself. The
+this reference is implicitly known when an instance of an object is
+created and is used both for methods and constructors. </a></p>
+<p><a name="N4003F0"> To simplify what this is all about I use a
+concept of the underscore at the end of a variable. The variable with
+the underscore is also this, for example: book_ could also be written
+as this.book_. </a></p>
+<p><a name="N4003F0"> Many books written on the Java language will have
+the methods look like the first illustration below, using the this
+keyword or not at all, both are legal. I however like the ClearerThis
+example because you explicitly know which variable you are working
+with, a passive variable or a this variable, the variable with the
+underscore (_, \u00). </a></p>
+<div class="figure">
+<p><a name="N4003F0"><b>Figure 4.10. Standard This</b></a></p>
+<pre class="programlisting"><a name="N4003F0"><tt>figures/classObject/StandardThis.java</tt><br>          <br><br>public class StandardThis {<br><br>  <br><br>  // Accessor Methods<br><br>  public String getName() {<br><br>    return name;<br><br>  //return this.name; // alternate syntax<br><br>  }<br><br>  public String getAddress() {<br><br>    return address;<br><br>    //return this.address; // alternate syntax<br><br>  }<br><br><br><br>  public int getZipCode() {<br><br>    return zipCode;<br><br>  //return this.zipCode; // alternate syntax<br><br>  }<br><br><br><br>  // Mutator Methods<br><br>  public void setName(String name) {<br><br>    name = name;<br><br>  //this.name = name;  // alternate syntax<br><br>  }<br><br><br><br>  public void setAddress(String address) {<br><br>    address = address;<br><br>  //this.address = address;  // alternate syntax<br><br>  }<br><br><br><br>  public void setZipCode(int zipCode) {<br><br>    zipCode = zipCode;<br><br>  //this.zipCode = zipCode;  // alternate syntax<br><br>  }<br><br><br><br>  // Attributes<br><br>  private String name = "";<br><br>  private String address = "";<br><br>  private int zipCode = 0;<br><br>}<br>        </a></pre>
+</div>
+<div class="figure">
+<p><a name="N4003F0"><b>Figure 4.11. Clearer This</b></a></p>
+<pre class="programlisting"><a name="N4003F0"><tt>figures/classObject/ClearerThis.java</tt><br>          <br><br>public class ClearerThis {<br><br>  <br><br>  // Accessor Methods<br><br>  public String getName() {<br><br>    return name_;<br><br>  }<br><br>  public String getAddress() {<br><br>    return address_;<br><br>  }<br><br><br><br>  public int getZipCode() {<br><br>    return zipCode_;<br><br>  }<br><br><br><br>  // Mutator Methods<br><br>  public void setName(String name) {<br><br>    name_ = name;<br><br>  }<br><br><br><br>  public void setAddress(String address) {<br><br>    address_ = address;<br><br>  }<br><br><br><br>  public void setZipCode(int zipCode) {<br><br>    zipCode_ = zipCode;<br><br>  }<br><br><br><br>  // Attributes<br><br>  private String name_ = "";<br><br>  private String address_ = "";<br><br>  private int zipCode_ = 0;<br><br>}<br>        </a></pre>
+</div>
+<p><a name="N4003F0"> Remember constructors are like methods and can
+have this references. The following example shows a standard no
+argument constructor calling a two argument constructor which calls a
+four argument constructor. To read how the constructors work look at
+the no argument constructor and work your way up to the four argument
+constructor. </a></p>
+<p><a name="N4003F0"> The no argument constructor if called just passes
+blank strings to the two argument constructor. If the two argument
+constructor is called either directly or indirectly by the no argument
+constructor. The two argument constructor then calls the four argument
+constructor either with blank strings or actual author and book names
+with integer and float values of zero. </a></p>
+<div class="figure">
+<p><a name="N4003F0"><b>Figure 4.12. Multiple Constructors</b></a></p>
+<pre class="programlisting"><a name="N4003F0"><tt>figures/classObject/Book.java</tt><br>          <br><br>public class Book {<br><br>  <br><br>  // 4 argument Constructor<br><br>  public Book(String author, String name, String isbn, float price) {<br><br>    author_ = author;<br><br>    name_ = name;<br><br>    isbn_ = isbn;<br><br>    price_ = price;<br><br>  }<br><br><br><br>  // 2 argument Constructor<br><br>  public Book(String author, String book) {<br><br>    this(author, book, "", 0.0f);<br><br>  }<br><br><br><br>  // no argument Constructor<br><br>  public Book() {<br><br>    this("", "");<br><br>  }<br><br><br><br>  // Accessor Methods<br><br>  public String getAuthor() { return author_; }<br><br>  public String getName()   { return name_; }<br><br>  public String getISBN()   { return isbn_; }<br><br>  public float  getPrice()  { return price_; }<br><br>  public Chapter getChapter(int chapter) {<br><br>    return chapter_[--chapter];<br><br>  }<br><br><br><br>  public String toString() {<br><br>    return(author_ + "\n" + name_ + "\n" + isbn_ + "\n" + price_);<br><br>  }<br><br><br><br>  // Mutator Methods<br><br>  public void setAuthor(String author) { author_ = author; }<br><br>  public void setName(String name)     { name_ = name; }<br><br>  public void setISBN(String isbn)     { isbn_ = isbn; }<br><br>  public void setPrice(int price)      { price_ = price; }<br><br><br><br>  public void addChapter(Chapter chapter) { chapter_[i_++] = chapter; }<br><br><br><br>  // Attributes<br><br>  private Chapter[] chapter_ = new Chapter[20]; // max chapters is 20<br><br>  private int i_ = 0;            // set ints to 0<br><br>  private String author_ = "";   // set strings to blank<br><br>  private String name_   = "";   // set strings to blank<br><br>  private String isbn_   = "";   // set strings to blank<br><br>  private float  price_  = 0.0f; // set floats to 0.0<br><br>}<br>        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N40042D">4.5.
+Accessibility</a></h2>
+</div>
+</div>
+<p><a name="N40042D"> Java has five different approaches to
+accessibility. We will only mention two at this time. The public
+keyword for classes, methods and attributes means that any object can
+access that item. The private keyword for classes, methods and
+attributes means that only the class that defines each of these items
+can access that particular item. The following code illustrates public
+and private accessibility. </a></p>
+<div class="figure">
+<p><a name="N40042D"><b>Figure 4.13. Constructor This</b></a></p>
+<pre class="programlisting"><a name="N40042D"><tt>figures/classObject/Accessibility.java</tt><br>          <br><br>public class Accessibility {<br><br><br><br>  // Anyone can access these items  <br><br>  public Accessibility() {}<br><br>  public void anyoneCanUseMe() {}<br><br>  public int anyoneCanUseMe_ = 0;<br><br><br><br>  // Only the object of this type can access these items<br><br>  private Accessibility(int someInteger) {}<br><br>  private void onlyAccessibilityCanUseMe() {}<br><br>  private int onlyAccessibilityCanUseMe_ = 0;<br><br>}<br>        </a></pre>
+</div>
+</div>
+<div class="section">
+<div class="titlepage">
+<div>
+<h2 class="title" style="clear: both;"><a name="N400442">4.6. static
+Keyword</a></h2>
+</div>
+</div>
+<p><a name="N400442"> The static keyword is simply a class attribute or
+method and can never be an object (instance) attribute or method. The
+following example shows how you could use the static attribute to keep
+count of how many instances were created. Every time the class gets
+instantiated, another words new Static() the numberOfInstances_
+attribute will increment. The instantiated objects then can get the
+total number of instances. </a></p>
+<div class="figure">
+<p><a name="N400442"><b>Figure 4.14. Static Keyword</b></a></p>
+<pre class="programlisting"><a name="N400442"><tt>figures/classObject/Static.java</tt><br>          <br><br>public class Static {<br><br><br><br>  public Static() {<br><br>    numberOfInstances_++;<br><br>  }<br><br><br><br>  public static int getNumberOfInstances() {<br><br>    return numberOfInstances_;<br><br>  }<br><br><br><br>  private static int numberOfInstances_ = 0;<br><br>}<br>        </a></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

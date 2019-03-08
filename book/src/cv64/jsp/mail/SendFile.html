@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class cv64.jsp.mail.SendFile</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">cv64.jsp.mail</FONT>
+<BR>Class SendFile</H2>
+<DL>
+<DT>public class <B>SendFile</B>
+</DL>
+<DL><DD><code>SendFile</code> sets up a Multitype MIME Mail Message. There are 5 methods required to be called initially. 1) init initializes mail properties, sets up the default Session and the MIME message object, e.g. init("mail.earthlink.net", true); 2) setFrom sets the from string in the mail message, e.g. setFrom("estey@cv64.com"); 3) setTo sets the to string in the mail message, e.g. setTo("estey@cv64.com"); 4) setSubjectText sets the subject text in the mail message, e.g. setSubjectText("some subject text"); 5) sendEnclosure sets up body text and encloses a file and sends the contents as a MIME multipart object to the receipient, e.g. sendEnclosure("body text", "filename");<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Field Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>session_</H3>
+<PRE>
+private Session <B>session_</B></PRE>
+<DL><DD>A mail session that collects properties and defaults used by the mail API's<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+<H3>message_</H3>
+<PRE>
+private MimeMessage <B>message_</B></PRE>
+<DL><DD>Represents a MIME style email message<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>init</H3>
+<PRE>
+public void <B>init</B>(String&nbsp;mailHost,
+                 boolean&nbsp;debug)</PRE>
+<DL><DD>Method init initializes mail properties, sets up the default Session and the MIME message object<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>mailHost</CODE> - sets the SMTP mailing system that is providing the SMTP deamon, e.g. mail.earthlink.net</DD>
+<DD><CODE>debug</CODE> - true - if show debugging information false - no debugging information</DD>
+</DL>
+<HR>
+
+<H3>sendEnclosure</H3>
+<PRE>
+public void <B>sendEnclosure</B>(String&nbsp;bodyText,
+                          String&nbsp;fileName)</PRE>
+<DL><DD>Method send enclosure sets up body text and encloses a file and sends the contents as a MIME multipart object to the receipient<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>bodyText</CODE> - text that is writting to the body of the mail message</DD>
+<DD><CODE>filename</CODE> - name of file to send to the to email address, e.g. somefile.txt</DD>
+<DT><B>Throws:</B><DD><CODE>Exception</CODE> - mail body text or filename invalid</DD>
+</DL>
+<HR>
+
+<H3>setFrom</H3>
+<PRE>
+public void <B>setFrom</B>(String&nbsp;from)</PRE>
+<DL><DD>Mutator method that sets the from string in the mail message<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>from</CODE> - email address coming from, e.g. estey@cv64.com</DD>
+<DT><B>Throws:</B><DD><CODE>Exception</CODE> - Internet address coming from is invalid</DD>
+</DL>
+<HR>
+
+<H3>setSubjectText</H3>
+<PRE>
+public void <B>setSubjectText</B>(String&nbsp;subjectText)</PRE>
+<DL><DD>Mutator method that sets the subject text in the mail message<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>subjectText</CODE> - subject text in the mail message</DD>
+<DT><B>Throws:</B><DD><CODE>Exception</CODE> - subject text is invalid</DD>
+</DL>
+<HR>
+
+<H3>setTo</H3>
+<PRE>
+public void <B>setTo</B>(String[]&nbsp;to)</PRE>
+<DL><DD>Mutator method that sets the to string in the mail message<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>to</CODE> - email address going to, e.g. estey@cv64.com</DD>
+<DT><B>Throws:</B><DD><CODE>Exception</CODE> - Internet address being sent to is invalid</DD>
+</DL>
+<HR>
+
+</BODY>
+</HTML>
