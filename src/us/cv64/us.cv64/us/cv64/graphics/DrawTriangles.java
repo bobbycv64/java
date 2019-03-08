@@ -1,15 +1,15 @@
-package us.cv64.graphics.graphicsShapes;
+package us.cv64.graphics;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DrawCircle extends JFrame implements MouseListener { 
+public class DrawTriangles extends JFrame implements MouseListener { 
 
   private int x=50;   // leftmost pixel in circle has this x-coordinate
   private int y=50;   // topmost  pixel in circle has this y-coordinate
 
-  public DrawCircle() {
+  public DrawTriangles() {
     setSize(800,800);
     setLocation(100,100);
     addMouseListener(this); 
@@ -19,8 +19,10 @@ public class DrawCircle extends JFrame implements MouseListener {
   // paint is called automatically when program begins, when window is
   //   refreshed and  when repaint() is invoked 
   public void paint(Graphics g) {
-    g.setColor(Color.RED);
-    g.fillOval(x,y,100,100);
+    g.setColor(Color.ORANGE);
+    g.fillRect(x, y, 100, 100);
+
+    //g.fillOval(x,y,100,100);
 
 }
 
@@ -37,6 +39,6 @@ public class DrawCircle extends JFrame implements MouseListener {
   }
 
   public static void main(String argv[]) {
-    DrawCircle c = new DrawCircle();
+	  DrawTriangles drawTriangles = new DrawTriangles();
   }
 }
