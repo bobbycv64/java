@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=ThN8IXr0n_k
-package enumeration;
+package us.cv64.fundamentals.enumeration;
 
 /**
  * don't need to put public static final because declared in interface *
