@@ -1,5 +1,7 @@
 # ignore directories
 bin/
 
-# ignore all .class files
+# ignore all following files
 *.class
+.classpath
+.project
