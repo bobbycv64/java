@@ -1,4 +1,0 @@
-This is a line of text.
-We are reading each line with a Reader.
-Buffered reads line by line and non-buffered char by char.
-This is the last line!!!
