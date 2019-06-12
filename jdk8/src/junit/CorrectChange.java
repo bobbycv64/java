@@ -21,30 +21,30 @@ public class CorrectChange {
 	public int getDollars() {
 		return (int) (cents / 100);
 	}
-	
+
 	public void printCorrectChange() {
 		System.out.println("Your change is: " + getDollars() + " dollars and " + getCents() + " cents.");
 	}
-	
+
 	public String toString(int cnts) {
-		
+
 		String string = "";
 		int quarters, dimes, nickels, pennies = 0;
-		
+
 		quarters = cnts / 25;
 		cnts = (cnts % 25);
-		
+
 		dimes = cnts / 10;
 		cnts = (cnts % 10);
-		
+
 		nickels = cnts / 5;
 		cnts = (cnts % 5);
-		
+
 		pennies = cnts;
-		
-		System.out.println("Your change is: " + getDollars() + " dollar(s), " + quarters + " quarters(s), " + dimes + " dime(s), " + 
-		nickels + " nickel(s), " + pennies + " cents");
-		
+
+		System.out.println("Your change is: " + getDollars() + " dollar(s), " + quarters + " quarters(s), " + dimes
+				+ " dime(s), " + nickels + " nickel(s), " + pennies + " cents");
+
 		return string;
 	}
 
