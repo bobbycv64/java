@@ -10,23 +10,11 @@ public class BasicAnnotationTest {
 		System.out.println("@BeforeClass - runOnceBeforeClass");
 	}
 
-	// Run once, e.g close connection, cleanup
-	@AfterClass
-	public static void runOnceAfterClass() {
-		System.out.println("@AfterClass - runOnceAfterClass");
-	}
-
 	// Should rename to @BeforeTestMethod
 	// e.g. Creating an similar object and share for all @Test
 	@Before
 	public void runBeforeTestMethod() {
 		System.out.println("@Before - runBeforeTestMethod");
-	}
-
-	// Should rename to @AfterTestMethod
-	@After
-	public void runAfterTestMethod() {
-		System.out.println("@After - runAfterTestMethod");
 	}
 
 	@Test
@@ -37,6 +25,18 @@ public class BasicAnnotationTest {
 	@Test
 	public void test_method_2() {
 		System.out.println("@Test - test_method_2");
+	}
+
+	// Should rename to @AfterTestMethod
+	@After
+	public void runAfterTestMethod() {
+		System.out.println("@After - runAfterTestMethod");
+	}
+
+	// Run once, e.g close connection, cleanup
+	@AfterClass
+	public static void runOnceAfterClass() {
+		System.out.println("@AfterClass - runOnceAfterClass");
 	}
 
 }
