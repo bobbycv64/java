@@ -1,20 +1,24 @@
 package fundamentals.ooo;
 
 public class Example {
-  public static void main( String[] args ) {
 
-    Vehicle car = new Vehicle();
-    Truck ram = new Truck();
-    Truck dakota = new Truck();
+	// main method - instructs the Java Virtual Machine (JVM) where to start
+	public static void main(String[] args) {
 
-    car.setSpeed( 50 );
-    ram.setSpeed( 100 );
-    ram.setTorque( 5000 );
-    dakota.setSpeed( 70 );
+		Vehicle car = new Vehicle();
+		Vehicle geo = new Vehicle(40);
+		Truck ram = new Truck();
+		Truck dakota = new Truck();
 
-    System.out.println( "Car speed:    " + car.getSpeed() );
-    System.out.println( "Ram speed:    " + ram.getSpeed() );
-    System.out.println( "Ram Torque:   " + ram.getTorque() );
-    System.out.println( "Dakota speed: " + dakota.getSpeed() );
-  }
+		car.setSpeed(50);
+		ram.setSpeed(100);
+		ram.setTorque(5000);
+		dakota.setSpeed(70);
+
+		System.out.println("Car speed:    " + car.getSpeed() + ":" + car.getWeight());
+		System.out.println("Geo speed:    " + geo.getSpeed() + ":" + geo.getWeight());
+		System.out.println("Ram speed:    " + ram.getSpeed() + ":" + ram.getWeight());
+		System.out.println("Ram Torque:   " + ram.getTorque() + ":" + ram.getWeight());
+		System.out.println("Dakota speed: " + dakota.getSpeed() + ":" + dakota.getWeight());
+	}
 }

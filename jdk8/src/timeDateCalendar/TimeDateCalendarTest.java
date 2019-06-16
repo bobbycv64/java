@@ -1,6 +1,5 @@
 package timeDateCalendar;
 
-import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -17,26 +16,6 @@ public class TimeDateCalendarTest {
 	private Date fromDate = calendar.getTime();
 	private String fromTimeZone = "America/Chicago";
 	private String toTimeZone = "Pacific/Auckland";
-
-	@Test
-	public void convertTimeZone() {
-	}
-
-	@Test
-	public void convertTimeZone1() {
-	}
-
-	@Test
-	public void convertandFormatTimeZone() {
-	}
-
-	@Test
-	public void convertTimeZoneToAnother() {
-	}
-
-	@Test
-	public void convert_CST_To_GMT() {
-	}
 
 	@Test
 	public void ConvertTimeZone2AnotherTimeZone() {

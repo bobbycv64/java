@@ -3,73 +3,91 @@ package timeDateCalendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.threeten.bp.Clock;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.zone.ZoneRulesException;
 
 public class TimeDateCalendar {
 
-	public TimeDateCalendar() {
+    public static final String CST_310 = "America/Chicago";
 
-	}
+    public TimeDateCalendar() {
 
-	public Date ConvertTimeZone2AnotherTimeZone(String fromTimeZone, String toTimeZone, Date fromDate,
-			DateTimeFormatter dateTimeFormatter) {
+    }
 
-		Clock clock = provideClock(fromDate, fromTimeZone);
-		LocalDateTime localDateTime = LocalDateTime.now(clock);
+    public Date ConvertTimeZone2AnotherTimeZone(String fromTimeZone, String toTimeZone,
+                                    Date fromDate, DateTimeFormatter dateTimeFormatter) {
 
-		System.out.println("localTime\t\t\t: " + dateTimeFormatter.format(localDateTime));
+        Clock clock = provideClock(fromDate, fromTimeZone);
+        LocalDateTime localDateTime = LocalDateTime.now(clock);
 
-		// set From Time
-		ZonedDateTime fromTime = localDateTime.atZone(ZoneId.of(fromTimeZone));
+        System.out.println("localTime\t\t\t: " + dateTimeFormatter.format(localDateTime));
 
-		// compute To Time
-		ZonedDateTime toTime = fromTime.withZoneSameInstant(ZoneId.of(toTimeZone));
+        // set From Time
+        ZonedDateTime fromTime = localDateTime.atZone(ZoneId.of(fromTimeZone));
 
-		System.out.println("fromTime\t\t\t: " + fromTime);
-		System.out.println("toTime\t\t\t\t: " + toTime);
+        // compute To Time
+        ZonedDateTime toTime = fromTime.withZoneSameInstant(ZoneId.of(toTimeZone));
 
-		// return the toDate
-		return toJavaUtilDateFromString(toTime.toString());
-		// return toJavaUtilDateFromZonedDateTime(toTime);
-	}
+        System.out.println("fromTime\t\t\t: " + fromTime);
+        System.out.println("toTime\t\t\t\t: " + toTime);
 
-	public Clock provideClock(Date date, String timeZone) {
-		Instant instant = Instant.ofEpochMilli(date.getTime());
-		ZoneId zoneId = ZoneId.of(timeZone);
-		return Clock.fixed(instant, zoneId);
-	}
+        // return the toDate
+        // return toJavaUtilDateFromString(toTime.toString());
+        return toJavaUtilDateFromZonedDateTime(toTime);
+    }
 
-	private Date toJavaUtilDateFromString(String dateString) {
+    public Clock provideClock(Date date, String timeZone) {
+        Instant instant = null;
+        ZoneId zoneId = null;
+        try {
+            instant = Instant.ofEpochMilli(date.getTime());
+            zoneId = ZoneId.of(timeZone);
+        } catch (ZoneRulesException e) {
+            zoneId = ZoneId.of(CST_310);
+        } finally {
+            return Clock.fixed(instant, zoneId);
+        }
+    }
 
-		Date date = new Date();
-		try {
-			date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		System.out.println("toJavaUtilDateFromString\t: " + date);
-		return date;
-	}
+    private Date toJavaUtilDateFromString(String dateString) {
 
-	private Date toJavaUtilDateFromZonedDateTime(ZonedDateTime zonedDateTime) {
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println("toJavaUtilDateFromString\t: " + date);
+        return date;
+    }
+    
+    /**
+     * @param zonedDateTime
+     * @return
+     */
+    private Date toJavaUtilDateFromZonedDateTime(ZonedDateTime zonedDateTime) {
 
-		Date date = new Date();
-		Instant instant = zonedDateTime.toInstant();
+        Date date = new Date();
 
-		Instant instantTruncatedToMilliseconds = Instant.ofEpochMilli(instant.toEpochMilli());
-		String millisecondsString = instantTruncatedToMilliseconds.toString(); // Example: 2015-08-18T06:36:40.321Z
-		System.out.println("millisecondsString\t: " + millisecondsString);
-		long milliseconds = instantTruncatedToMilliseconds.toEpochMilli();
+        // compute To Time
+        ZonedDateTime toTime = zonedDateTime.withZoneSameInstant(ZoneId.of("America/Chicago"));
+        
+        Instant instant = zonedDateTime.toInstant();
 
-		// java.util.Date date = java.util.Date.from(instant);
-		date.setTime(milliseconds);
+        Instant instantTruncatedToMilliseconds = Instant.ofEpochMilli(instant.toEpochMilli());
+        String millisecondsString = instantTruncatedToMilliseconds.toString(); // Example:
+                                                                               // 2015-08-18T06:36:40.321Z
+        System.out.println("millisecondsString\t: " + millisecondsString);
+        long milliseconds = instantTruncatedToMilliseconds.toEpochMilli();
 
-		return date;
-	}
+        // java.util.Date date = java.util.Date.from(instant);
+        date.setTime(milliseconds);
+
+        return date;
+    }
 }
