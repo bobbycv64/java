@@ -1,8 +1,18 @@
 package fundamentals.ooo;
 
+/**
+ * This is an example of a general familiarization of Object Oriented Computing Program
+ * javadoc -sourcepath * -d javadoc
+ * 
+ * @author rwe001
+ *
+ */
 public class Example {
 
-	// main method - instructs the Java Virtual Machine (JVM) where to start
+	/**
+	 * main method - instructs the Java Virtual Machine (JVM) where to start
+	 * @param args - command line arguments
+	 */
 	public static void main(String[] args) {
 
 		Vehicle car = new Vehicle();
