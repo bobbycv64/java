@@ -39,6 +39,7 @@ public class DrawTriangles extends JFrame implements MouseListener {
   }
 
   public static void main(String argv[]) {
-	  DrawTriangles drawTriangles = new DrawTriangles();
+	  new DrawTriangles();
+	  new DrawCircle();
   }
 }

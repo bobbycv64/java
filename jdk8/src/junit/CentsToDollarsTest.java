@@ -20,13 +20,13 @@ public class CentsToDollarsTest {
 		System.out.println("getCents: " + centsToDollars.getCents());
 	}
 
-	@Test
+	@Ignore
 	public void getDollars() throws Exception {
 		centsToDollars.setCents(5344);
 		System.out.println("getDollars: " + centsToDollars.getDollars());
 	}
 
-	@Ignore
+	@Test
 	public void printResults() throws Exception {
 		centsToDollars.setCents(327);
 		centsToDollars.printResults();

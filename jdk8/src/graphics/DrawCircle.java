@@ -10,8 +10,8 @@ public class DrawCircle extends JFrame implements MouseListener {
   private int y=50;   // topmost  pixel in circle has this y-coordinate
 
   public DrawCircle() {
-    setSize(800,800);
-    setLocation(100,100);
+    setSize(400,400);
+    setLocation(200,200);
     addMouseListener(this); 
     setVisible(true);
   }
@@ -19,9 +19,8 @@ public class DrawCircle extends JFrame implements MouseListener {
   // paint is called automatically when program begins, when window is
   //   refreshed and  when repaint() is invoked 
   public void paint(Graphics g) {
-    g.setColor(Color.RED);
-    g.fillOval(x,y,100,100);
-
+    g.setColor(Color.BLUE);
+    g.fillOval(x,y,50,50);
 }
 
   // The next 4 methods must be defined, but you won't use them.
@@ -34,9 +33,5 @@ public class DrawCircle extends JFrame implements MouseListener {
     x = e.getX();   // x-coordinate of the mouse click
     y = e.getY();   // y-coordinate of the mouse click
     repaint();    //calls paint()
-  }
-
-  public static void main(String argv[]) {
-    DrawCircle c = new DrawCircle();
   }
 }
