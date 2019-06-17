@@ -2,7 +2,7 @@ package fundamentals;
 
 import java.util.Properties;
 
-public class Env {
+public class Environment {
 
 	public static void main(String[] args) {
 		Properties properties = System.getProperties();

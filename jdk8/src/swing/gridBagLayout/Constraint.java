@@ -8,7 +8,7 @@ import java.awt.Insets;
 /**
  *  The <code>Constraint</code> class sets up GridBayLayout constraints.
  *
- *  @author     Robert Estey
+ *  @author     rwe
  *
  *  @version    19991221      Thised this class to death.
  *  @version    19990511      Wrote a basic constraints class.

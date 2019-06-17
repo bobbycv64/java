@@ -10,6 +10,9 @@ public class Driver {
 	public static void singleTypeParameter() {
 		// create an Integer Type with value 64
 		Integer setInteger = new Integer(64);
+		
+		// create a String Type with value Constellation
+		String setString = new String("Constellation");
 
 		// call Box Constructor and and define the Box type as Integer
 		Box<Integer> integerBox = new Box<>(64);
@@ -21,7 +24,13 @@ public class Driver {
 		Integer getInteger = integerBox.get();
 
 		// print the Integer type
-		System.out.println("Driver:  " + getInteger);
+		System.out.println("Driver - getInteger:  " + getInteger);
+		
+		// same Box Type but using a String Type
+		Box<String> stringBox = new Box<>("Connie");
+		stringBox.set(setString);
+		String getString = stringBox.get();
+		System.out.println("Driver - getString: " + getString);
 	}
 
 	public static void multipleTypeParameters() {
