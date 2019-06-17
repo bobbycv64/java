@@ -58,7 +58,7 @@ import java.awt.event.WindowEvent;
  *  where there are hard coded variables and the code could be far more
  *  modular and other classes could be added.
  *
- *  @author     Robert Estey      - RE
+ *  @author     RWE			      - RE
  *  @author     Dan Mazzola       - DM
  *
  *  @version    19991221RE - now an applet

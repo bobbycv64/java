@@ -82,7 +82,7 @@ public class TimeDateCalendar {
         Instant instantTruncatedToMilliseconds = Instant.ofEpochMilli(instant.toEpochMilli());
         String millisecondsString = instantTruncatedToMilliseconds.toString(); // Example:
                                                                                // 2015-08-18T06:36:40.321Z
-        System.out.println("millisecondsString\t: " + millisecondsString);
+        System.out.println("millisecondsString\t\t: " + millisecondsString);
         long milliseconds = instantTruncatedToMilliseconds.toEpochMilli();
 
         // java.util.Date date = java.util.Date.from(instant);

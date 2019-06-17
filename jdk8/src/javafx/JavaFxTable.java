@@ -86,8 +86,8 @@ public class JavaFxTable extends Application {
 
 	public ObservableList<Item> getItems() {
 		ObservableList<Item> items = FXCollections.observableArrayList();
-		items.add(new Item(1, "Bobby", "Estey"));
-		items.add(new Item(2, "Ester", "Estey"));
+		items.add(new Item(1, "Bobby", "Student"));
+		items.add(new Item(2, "Ester", "Student"));
 		return items;
 	}
 
