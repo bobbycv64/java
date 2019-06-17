@@ -3,8 +3,8 @@ package fundamentals.ooo;
 /**
  * This is an example of a general familiarization of Object Oriented Computing Program
  * 
- * cd ~/git/cv64/website/bobbyU/computing/java/jdk8/src
- * javadoc -sourcepath * -d ../javadoc -verbose -author -private
+ * cd ~/git/cv64/website/bobbyU/computing/java/jdk8/src/fundamentals/ooo
+ * javadoc -sourcepath * -d javadoc -verbose -author -private
  * 
  * @author rwe001
  *
