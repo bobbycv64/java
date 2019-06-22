@@ -7,6 +7,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * database example program
+ * 
+ * @author RWE001
+ *
+ */
 public class JDBCExample {
 
 	// private static final String DATABASE = "jdbc:mysql://localhost:3306/mysql";
@@ -14,44 +20,88 @@ public class JDBCExample {
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 
-	public static void main(String[] argv) {
+	private Connection connection = null;
+	private String sql = "show tables";
 
-		System.out.println("-------- MySQL JDBC Connection Testing ------------");
+	public JDBCExample() {
+		System.out.println("-------- JDBC Example ------------");
+		getConnection();
+		getResults();
+		closeConnection();
+	}
 
-		try {
-			// Class.forName("com.mysql.jdbc.Driver");
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Where is your MySQL JDBC Driver?");
-			e.printStackTrace();
-			return;
-		}
-
-		System.out.println("MySQL JDBC Driver Registered!");
-		Connection connection = null;
-		String sql = "select user from user";
+	/**
+	 * gets the database connection
+	 */
+	private void getConnection() {
 
 		try {
+			Class.forName("org.mariadb.jdbc.Driver"); // Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("JDBC Driver Registered");
+
 			connection = DriverManager.getConnection(DATABASE, USERNAME, PASSWORD);
-			Statement statement = connection.createStatement();
+			System.out.println("Connection Successful");
 
-			ResultSet resultSet = statement.executeQuery(sql);
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBC Driver Missing");
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+			System.err.println("JDBCExample.getConnection: Connection Failed");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * uses the connection to access the database, creates a database statement and
+	 * gets the results of the statement
+	 */
+	private void getResults() {
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			statement = connection.createStatement();
+
+			resultSet = statement.executeQuery(sql);
+
 			while (resultSet.next()) {
-
-				String username = resultSet.getString("User");
-				System.out.println("Username: " + username);
-			}
-
-			if (connection != null) {
-				System.out.println("You made it, take control your database now!");
-			} else {
-				System.out.println("Failed to make connection!");
+				String column1 = resultSet.getString(1);
+				System.out.println("Column1: " + column1);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Connection Failed! Check output console");
+			System.err.println("JDBCExample.getResults: Statement / ResultSet Failed");
 			e.printStackTrace();
-			return;
+
+			// final clean up of resultSet and statement
+		} finally {
+			if (resultSet != null) {
+				resultSet = null;
+			}
+
+			if (statement != null) {
+				statement = null;
+			}
 		}
+	}
+
+	/**
+	 * closes the database connection
+	 */
+	private void closeConnection() {
+		if (connection != null) {
+			connection = null;
+		}
+	}
+
+	/**
+	 * start the JDBC Example program and calls the no argument Constructor
+	 * 
+	 * @param argc
+	 */
+	public static void main(String[] argc) {
+
+		new JDBCExample();
 	}
 }
