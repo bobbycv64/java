@@ -10,35 +10,43 @@ public class Truck extends Vehicle {
 	}
 
 	/**
-	 *  fwd - four wheel drive
+	 *  fourWheelDrive - four wheel drive attribute
 	 */
-	private boolean fwd;
+	private boolean fourWheelDrive;
 	
 	/**
-	 * torque of a Truck
+	 * torque - torque rating of a Truck
 	 */
 	private int torque;
 
 	/**
-	 * isFourWheel returns if Truck is Four Wheel Drive
-	 * @return fwd - true or false if the vehicle is Four Wheel Drive 
+	 * isFourWheel method returns if the Truck is Four Wheel Drive
+	 * @return
 	 */
 	public boolean isFourWheel() {
-		return fwd;
+		return fourWheelDrive;
 	}
 
 	/**
-	 * 
+	 * getTorque method returns the torque rating of a Truck
 	 * @return
 	 */
 	public int getTorque() {
 		return torque;
 	}
 
-	public void setFourWheel(boolean fwd) {
-		this.fwd = fwd;
+	/**
+	 * setFourWheel method sets true if truck is four wheel drive otherwise false
+	 * @param fourWheelDrive
+	 */
+	public void setFourWheel(boolean fourWheelDrive) {
+		this.fourWheelDrive = fourWheelDrive;
 	}
 
+	/**
+	 * setTorque method sets the torque rating of a Truck
+	 * @param torque
+	 */
 	public void setTorque(int torque) {
 		this.torque = torque;
 	}
