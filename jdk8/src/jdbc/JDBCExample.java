@@ -15,8 +15,8 @@ import java.sql.Statement;
  */
 public class JDBCExample {
 
-	// private static final String DATABASE = "jdbc:mysql://localhost:3306/mysql";
-	private static final String DATABASE = "jdbc:mariadb://localhost:3306/mysql";
+	//private static final String DATABASE = "jdbc:mysql://localhost:3306/mysql";  // if using mysql uncomment
+	private static final String DATABASE = "jdbc:mariadb://localhost:3306/mysql";  // in using mariadb uncomment
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 
