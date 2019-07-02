@@ -9,24 +9,24 @@ import java.sql.Statement;
 
 /**
  * database example program
- * 
- * @author RWE001
- *
  */
 public class JDBCExample {
 
-	//private static final String DATABASE = "jdbc:mysql://localhost:3306/mysql";  // if using mysql uncomment
-	private static final String DATABASE = "jdbc:mariadb://localhost:3306/mysql";  // in using mariadb uncomment
+	// if using mysql uncomment
+	// private static final String DATABASE = "jdbc:mysql://localhost:3306/mysql";
+
+	// if using mariadb uncomment
+	private static final String DATABASE = "jdbc:mariadb://localhost:3306/mysql";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
 
 	private Connection connection = null;
-	private String sql = "show tables";
 
 	public JDBCExample() {
 		System.out.println("JDBCExample()");
 		getConnection();
-		getResults();
+		executeQueryExample();
+		executeUpdateExample();
 		closeConnection();
 	}
 
@@ -53,39 +53,76 @@ public class JDBCExample {
 	}
 
 	/**
-	 * uses the connection to access the database, creates a database statement and
-	 * gets the results of the statement
+	 * READONLY - SELECT This examples performs the executeQuery method which is
+	 * (select) statement Uses the connection to access the database, creates a
+	 * database statement and gets the results of the statement.
 	 */
-	private void getResults() {
+	private void executeQueryExample() {
 		Statement statement = null;
 		ResultSet resultSet = null;
+		String sql = "select * from example.table1";
 
 		try {
 			statement = connection.createStatement();
 
-			System.out.println("JDBCExample.getResults(): SQL: " + sql);
+			System.out.println("JDBCExample.executeQueryExample(): SQL: " + sql);
 			resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {
 				String column1 = resultSet.getString(1);
-				System.out.println("JDBCExample.getResults(): Column1: " + column1);
+				System.out.println("JDBCExample.executeQueryExample(): Column1: " + column1);
 			}
 
 		} catch (SQLException e) {
-			System.err.println("JDBCExample.getResults(): Statement / ResultSet Failed");
+			System.err.println("JDBCExample.executeQueryExample(): Statement / ResultSet Failed");
 			e.printStackTrace();
 
 			// final clean up of resultSet and statement
 		} finally {
-			System.out.println("JDBCExample.getResults(): finally");
+			System.out.println("JDBCExample.executeQueryExample(): finally");
 			if (resultSet != null) {
 				resultSet = null;
-				System.out.println("JDBCExample.getResults(): resultSet closed");
+				System.out.println("JDBCExample.executeQueryExample(): resultSet closed");
 			}
 
 			if (statement != null) {
 				statement = null;
-				System.out.println("JDBCExample.getResults(): statement closed");
+				System.out.println("JDBCExample.executeQueryExample(): statement closed");
+			}
+		}
+	}
+
+	/**
+	 * WRITE - INSERT INTO, UPDATE, DELETE This examples performs the executeUpdate
+	 * method which are (insert, update, delete) statements Uses the connection to
+	 * access the database, creates a database statement and gets the results of the
+	 * statement.
+	 */
+	private void executeUpdateExample() {
+		Statement statement = null;
+		String sql = "insert into example.table1 values "
+				+ "(4, 'steve', '1313 Mockingbird Lane', 'Mockingbird Heights', 'AZ', 00000)";
+		int rows = 0;
+
+		try {
+			statement = connection.createStatement();
+
+			System.out.println("JDBCExample.executeUpdateExample(): SQL: " + sql);
+			rows = statement.executeUpdate(sql);
+
+			System.out.println("JDBCExample.executeUpdateExample(): rows updated: " + rows);
+
+		} catch (SQLException e) {
+			System.err.println("JDBCExample.executeUpdateExample(): Statement / ResultSet Failed");
+			e.printStackTrace();
+
+			// final clean up of resultSet and statement
+		} finally {
+			System.out.println("JDBCExample.executeUpdateExample(): finally");
+
+			if (statement != null) {
+				statement = null;
+				System.out.println("JDBCExample.executeUpdateExample(): statement closed");
 			}
 		}
 	}
